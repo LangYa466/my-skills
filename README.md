@@ -52,5 +52,6 @@ GITHUB_TOKEN=$(gh auth token) bun run sync
 
 ## 來源與授權
 
+- 致謝：`code-styleguide` 的思路與結構（上游 guide 轉 Markdown、每份附行號索引、`sources.json` 記錄版本、CI 自動同步）來自 [Alice39s/agent-stash 的 `code-styleguide`](https://github.com/Alice39s/agent-stash/blob/main/skills/code-styleguide/SKILL.md)（Apache-2.0，見 [`skills/code-styleguide/agent-stash.LICENSE`](skills/code-styleguide/agent-stash.LICENSE)）。本 repo 的 `SKILL.md`、`sources.json` 衍生自該專案；`scripts/sync-code-styleguide.ts` 與 workflow 為重新實作。
 - `code-styleguide`：[google/styleguide](https://github.com/google/styleguide)（CC-BY-3.0）、[angular/angular](https://github.com/angular/angular)（CC-BY-4.0）、[developer.android.com](https://developer.android.com/kotlin/style-guide)（Apache-2.0）。各檔版權歸原作者。
 - `i-have-adhd`：[ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd)（MIT，見 [`rules/i-have-adhd.LICENSE`](rules/i-have-adhd.LICENSE)）。
