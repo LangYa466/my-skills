@@ -24,7 +24,7 @@ Source: <https://google.github.io/styleguide/xmlguide.html> · google/styleguide
 
 ---
 
-Version 1.0\
+Version 1.0 \
 Copyright Google 2008
 
 ## Introduction
@@ -225,9 +225,9 @@ When designing XML formats, take a few minutes to look at other formats and dete
 
 Break _ANY OR ALL_ of these rules (yes, even the ones that say MUST) rather than create a crude, arbitrary, disgusting mess of a design if that's what following them slavishly would give you. In particular, random mixtures of attributes and child elements are hard to follow and hard to use, though it often makes good sense to use both when the data clearly fall into two different groups such as simple/complex or metadata/data.
 
-> Newbies always ask:\
->     "Elements or attributes?\
-> Which will serve me best?"\
->     Those who know roar like lions;\
->     Wise hackers smile like tigers.\
+> Newbies always ask: \
+>     "Elements or attributes? \
+> Which will serve me best?" \
+>     Those who know roar like lions; \
+>     Wise hackers smile like tigers. \
 >             --a [tanka](https://en.wikipedia.org/wiki/Waka_%28poetry%29#Forms_of_waka), or extended haiku

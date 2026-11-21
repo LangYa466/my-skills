@@ -11,7 +11,7 @@
       "updated": "2026-11-05",
       "license": "CC-BY-3.0",
       "indexEnd": 55,
-      "lines": 1215
+      "lines": 1161
     },
     {
       "file": "references/google/cppguide.md",
@@ -24,7 +24,7 @@
       "updated": "2026-11-09",
       "license": "CC-BY-3.0",
       "indexEnd": 119,
-      "lines": 3658
+      "lines": 3665
     },
     {
       "file": "references/google/csharpguide.md",
@@ -37,7 +37,7 @@
       "updated": "2026-10-23",
       "license": "CC-BY-3.0",
       "indexEnd": 37,
-      "lines": 493
+      "lines": 467
     },
     {
       "file": "references/google/go/index.md",
@@ -76,7 +76,7 @@
       "updated": "2026-11-06",
       "license": "CC-BY-3.0",
       "indexEnd": 77,
-      "lines": 2629
+      "lines": 2619
     },
     {
       "file": "references/google/go/guide.md",
@@ -98,11 +98,11 @@
       "url": "https://google.github.io/styleguide/haskellguide.html",
       "repository": "google/styleguide",
       "path": "haskellguide.md",
-      "revision": "577f395ca4c30868313a6b234e582129d88d68f8",
-      "updated": "2026-10-23",
+      "revision": "a9c5f82b19811f1552d73df384a9f9d7c75ca16e",
+      "updated": "2026-11-13",
       "license": "CC-BY-3.0",
       "indexEnd": 41,
-      "lines": 702
+      "lines": 701
     },
     {
       "file": "references/google/htmlcssguide.md",
@@ -115,7 +115,7 @@
       "updated": "2026-11-06",
       "license": "CC-BY-3.0",
       "indexEnd": 19,
-      "lines": 907
+      "lines": 1015
     },
     {
       "file": "references/google/jsguide.md",
@@ -128,7 +128,7 @@
       "updated": "2026-11-11",
       "license": "CC-BY-3.0",
       "indexEnd": 70,
-      "lines": 3134
+      "lines": 3118
     },
     {
       "file": "references/google/javaguide.md",
@@ -154,7 +154,7 @@
       "updated": "2026-10-23",
       "license": "CC-BY-3.0",
       "indexEnd": 77,
-      "lines": 1316
+      "lines": 1310
     },
     {
       "file": "references/google/docguide/style.md",
@@ -163,11 +163,11 @@
       "url": "https://google.github.io/styleguide/docguide/style.html",
       "repository": "google/styleguide",
       "path": "docguide/style.md",
-      "revision": "780190ace581367cf0c8a2e0f9f74ec00b5349c3",
-      "updated": "2026-11-03",
+      "revision": "8bdadbb0732b387aaa26f553dd9033484d1a2071",
+      "updated": "2026-11-19",
       "license": "CC-BY-3.0",
-      "indexEnd": 37,
-      "lines": 716
+      "indexEnd": 40,
+      "lines": 784
     },
     {
       "file": "references/google/objcguide.md",
@@ -180,7 +180,7 @@
       "updated": "2026-11-11",
       "license": "CC-BY-3.0",
       "indexEnd": 77,
-      "lines": 1735
+      "lines": 1737
     },
     {
       "file": "references/google/pyguide.md",
@@ -189,11 +189,11 @@
       "url": "https://google.github.io/styleguide/pyguide.html",
       "repository": "google/styleguide",
       "path": "pyguide.md",
-      "revision": "f8e2b0f7c8b0456b8c199166b13640d3eb36df87",
-      "updated": "2026-11-03",
+      "revision": "6288a45d3fdce24235c57e6edbe3b22bc2e68d70",
+      "updated": "2026-11-12",
       "license": "CC-BY-3.0",
       "indexEnd": 48,
-      "lines": 2399
+      "lines": 2459
     },
     {
       "file": "references/google/Rguide.md",
@@ -219,7 +219,7 @@
       "updated": "2026-11-06",
       "license": "CC-BY-3.0",
       "indexEnd": 85,
-      "lines": 1243
+      "lines": 1284
     },
     {
       "file": "references/google/shellguide.md",
@@ -241,11 +241,11 @@
       "url": "https://google.github.io/styleguide/tsguide.html",
       "repository": "google/styleguide",
       "path": "tsguide.md",
-      "revision": "d5c987a7133aab84efc0f374de9015a2b48bf9fd",
-      "updated": "2026-11-11",
+      "revision": "52f2e7406a802778e44b92694d4aead252b09091",
+      "updated": "2026-11-13",
       "license": "CC-BY-3.0",
-      "indexEnd": 64,
-      "lines": 3205
+      "indexEnd": 63,
+      "lines": 3538
     },
     {
       "file": "references/google/verilogguide.md",
@@ -258,7 +258,7 @@
       "updated": "2026-10-30",
       "license": "CC-BY-3.0",
       "indexEnd": 126,
-      "lines": 4222
+      "lines": 4217
     },
     {
       "file": "references/google/vimscriptguide.md",
@@ -267,8 +267,8 @@
       "url": "https://google.github.io/styleguide/vimscriptguide.html",
       "repository": "google/styleguide",
       "path": "vimscriptguide.md",
-      "revision": "24cfcced577a82c4c455909515fa05682c8d2fa8",
-      "updated": "2026-10-17",
+      "revision": "47cbd91d1c65a447f233c3fd5379dc800b2ecd7a",
+      "updated": "2026-11-17",
       "license": "CC-BY-3.0",
       "indexEnd": 29,
       "lines": 273
@@ -310,7 +310,7 @@
       "updated": "2026-11-12",
       "license": "Apache-2.0",
       "indexEnd": 16,
-      "lines": 888
+      "lines": 809
     }
   ]
 }

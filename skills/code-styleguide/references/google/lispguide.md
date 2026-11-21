@@ -12,47 +12,47 @@ Source: <https://google.github.io/styleguide/lispguide.html> · google/styleguid
   - L95 Line length
   - L101 Form length
   - L111 Indentation
-  - L178 File Header
-  - L201 Vertical white space
-  - L225 Horizontal white space
-- L297 Documentation
-  - L299 Docstrings
-  - L337 Non-Obvious Code
-  - L384 Comment semicolons
-- L429 Naming
-  - L431 Symbol guidelines
-  - L491 Global variables and constants
-  - L509 Predicate names
-  - L522 Omit library prefixes
-  - L560 Package names
-  - L592 File names
-- L605 Code structure and organization
-  - L607 Packages
-  - L655 CLOS
-- L659 Language usage guidelines
-  - L661 Mostly Functional Style
-  - L675 Special variables
-  - L691 Assignment
-  - L717 Assertions and Conditions
-  - L794 Type Checking and Declarations
-- L817 Meta-language guidelines
-  - L819 Macros
-  - L910 Read-time evaluation
-  - L926 EVAL
-  - L948 INTERN and UNINTERN
-- L971 Data Representation
-  - L973 Using NIL
-  - L991 Lists
-  - L1039 Arrays
-  - L1048 Structures and Classes
-  - L1059 Pairs
-- L1067 Proper Forms
-  - L1071 Defining Functions
-  - L1094 #'FUN vs. 'FUN
-  - L1111 Conditional Expressions
-  - L1156 Comparison Operators
-  - L1169 Iteration
-  - L1193 I/O
+  - L166 File Header
+  - L189 Vertical white space
+  - L213 Horizontal white space
+- L285 Documentation
+  - L287 Docstrings
+  - L325 Non-Obvious Code
+  - L372 Comment semicolons
+- L417 Naming
+  - L419 Symbol guidelines
+  - L479 Global variables and constants
+  - L497 Predicate names
+  - L510 Omit library prefixes
+  - L548 Package names
+  - L580 File names
+- L593 Code structure and organization
+  - L595 Packages
+  - L643 CLOS
+- L647 Language usage guidelines
+  - L649 Mostly Functional Style
+  - L663 Special variables
+  - L679 Assignment
+  - L705 Assertions and Conditions
+  - L771 Type Checking and Declarations
+- L791 Meta-language guidelines
+  - L793 Macros
+  - L872 Read-time evaluation
+  - L888 EVAL
+  - L910 INTERN and UNINTERN
+- L933 Data Representation
+  - L935 Using NIL
+  - L953 Lists
+  - L1001 Arrays
+  - L1010 Structures and Classes
+  - L1021 Pairs
+- L1029 Proper Forms
+  - L1033 Defining Functions
+  - L1053 #'FUN vs. 'FUN
+  - L1069 Conditional Expressions
+  - L1106 Comparison Operators
+  - L1119 Iteration
+  - L1139 I/O
 
 ---
 
@@ -111,34 +111,22 @@ Do not be intimidated by modifying existing code. If working with an overly long
 ### Indentation
 
 - Use spaces, not tabs, to indent code.
-
 - Binding data of a binding form should be:
-
   - indented four spaces when on a new line or
   - aligned with the first binding data form otherwise.
-
 - Bodies of a binding form should be:
-
   - indented two spaces when on a new line or
   - aligned with the first form in the body otherwise.
-
 - Parameters of a function call should be
-
   - aligned with the call itself when on a new line or
   - aligned with the first parameter otherwise.
-
 - Special parameters in function and macro declarations (`&key`, `&optional`, ...) should be:
-
   - aligned with the special parameter declaration when on a new line or
   - aligned with the first special parameter otherwise.
-
 - Prefer fitting all parameters to a function:
-
   - on a single line when possible, or
   - one parameter per line otherwise.
-
 - Arguments to a loop form (loop keywords), and their arguments in turn should be:
-
   - indented two spaces when the first argument is on a new line or
   - aligned with the first argument otherwise.
 
@@ -148,13 +136,13 @@ Ideally, use the default indentation settings provided by SLIME. If necessary, c
 
 Use indentation to make complex function applications easier to read. When an application does not fit on one line or the function takes many arguments, consider inserting newlines between the arguments so that each one is on a separate line. However, do not insert newlines in a way that makes it hard to tell how many arguments the function takes or where an argument form starts and ends.
 
-```lisp
+```lisp bad
 ;; Ow, my eyes!
 (do-something first-argument second-argument (lambda (x)
   (frob x)) fourth-argument last-argument)
 ```
 
-```lisp
+```lisp good
 ;; This looks nicer.
 (do-something first-argument
               second-argument
@@ -165,7 +153,7 @@ Use indentation to make complex function applications easier to read. When an ap
 
 The convention is that the body of a binding form is indented two spaces after the form. Any binding data before the body is usually indented four spaces. Arguments to a function call are aligned with the first argument; if the first argument is on its own line, it is aligned with the function name.
 
-```lisp
+```lisp good
 (multiple-value-bind (a b c d)
     (function-returning-four-values x y)
   (declare (ignore c))
@@ -187,7 +175,7 @@ After that description, every file should start the code itself with an `(in-pac
 
 After that `in-package` form, every file should follow with any file-specific `(declaim (optimize ...))` declaration that is not covered by an `ASDF` `:around-compile` hook. Note that file-level `(declaim (optimize ...))` declarations should be avoided in favor of declarations with smaller scope when possible.
 
-```lisp
+```lisp good
 ;;;; Variable length encoding for integers and floating point numbers.
 
 (in-package #:varint)
@@ -205,7 +193,7 @@ You should not include copyright information in individual source code files. An
 
 You should include one blank line between top-level forms, such as function definitions. Exceptionally, blank lines can be omitted between simple, closely related defining forms of the same kind, such as a group of related type declarations or constant definitions.
 
-```lisp
+```lisp good
 (defconstant +mix32+ #x12b9b0a1 "pi, an arbitrary number")
 (defconstant +mix64+ #x2b992ddfa23249d6 "more digits of pi")
 
@@ -233,7 +221,7 @@ You must not include horizontal whitespace after an open parenthesis or before a
 
 You must not place right parentheses by themselves on a line. A set of consecutive trailing parentheses must appear on the same line.
 
-```lisp
+```lisp bad
 ;; These parentheses pull more attention, hurting readability. This also isn't
 ;; conventional Lisp style.
     ( defun factorial ( limit )
@@ -245,7 +233,7 @@ You must not place right parentheses by themselves on a line. A set of consecuti
     )
 ```
 
-```lisp
+```lisp good
 ;; This is easier to read, and avoids a hanging-braces style that is not
 ;; conventionally used by Lisp programmers.
 (defun factorial (limit)
@@ -259,7 +247,7 @@ You should use only one space between forms.
 
 You should not use spaces to vertically align forms in the middle of consecutive lines. An exception is made when the code possesses an important yet otherwise not visible symmetry that you want to emphasize.
 
-```lisp
+```lisp bad
 ;; The cost of maintaining this sort of formatting and the inconsistent
 ;; horizontal spacing outweighs the readability benefit of vertical alignment.
 (let* ((low    1)
@@ -268,7 +256,7 @@ You should not use spaces to vertically align forms in the middle of consecutive
   ...)
 ```
 
-```lisp
+```lisp good
 ;; Consistent horizontal spacing is preferred.
 (let* ((low 1)
        (high 2)
@@ -278,14 +266,14 @@ You should not use spaces to vertically align forms in the middle of consecutive
 
 You must align nested forms if they occur across more than one line.
 
-```lisp
+```lisp bad
 ;; Hard to visually grasp how deeply each form is nested.
 (defun munge (a b c)
 (* (+ a b)
 c))
 ```
 
-```lisp
+```lisp good
 ;; Indentation helps the reader parse the nesting of forms.
 (defun munge (a b c)
   (* (+ a b)
@@ -311,7 +299,7 @@ Supply a documentation string when defining top-level functions, types, classes,
 
 For functions, the docstring should describe the function's contract: what the function does, what the arguments mean, what values are returned, what conditions the function can signal. It should be expressed at the appropriate level of abstraction, explaining the intended meaning rather than, say, just the syntax. In documentation strings, use uppercase for the names of Lisp symbols, such as function arguments. For example, "The value of LENGTH must be an integer."
 
-```lisp
+```lisp good
 (defun small-prime-number-p (n)
   "True if N, an integer, is a prime number."
   ...)
@@ -325,7 +313,7 @@ A long docstring may usefully begin with a short, single-sentence summary, follo
 
 When the name of a type is used, the symbol may be quoted by surrounding it with a back quote at the beginning and a single quote at the end. Emacs will highlight the type, and the highlighting serves as a cue to the reader that M-. will lead to the symbol's definition.
 
-```lisp
+```lisp good
 (defun bag-tag-expected-itinerary (bag-tag)
   "Return a list of `legacy-pnr-pax-segment' objects representing
   the expected itinerary of the `bag-tag' object, BAG-TAG."
@@ -394,7 +382,7 @@ Inside a top-level form, you should use two semicolons to begin a comment if it 
 
 You should use one semicolon if it is a parenthetical remark and occurs at the end of a line. You should use spaces to separate the comment from the code it refers to so the comment stands out. You should try to vertically align consecutive related end-of-line comments.
 
-```lisp
+```lisp good
 ;;; File-level comments or comments for large sections of code.
 
 ;;; Divisibility
@@ -445,13 +433,13 @@ Place hyphens between all the words in a symbol. If you can't easily say an iden
 
 You must not use `"/"` or `"."` instead of `"-"` unless you have a well-documented overarching reason to, and permission from other hackers who review your proposal.
 
-```lisp
+```lisp bad
 ;; Bad
 (defvar *default-contextname* "main")  ; Words run together
 (defvar *maximum-widget-cnt* 200)      ; Abbreviation to save two characters
 ```
 
-```lisp
+```lisp good
 ;; Better
 (defvar *default-context-name* "main") ; Words separated by dashes
 (defvar *maximum-widget-count* 200)    ; Uses full words
@@ -463,7 +451,7 @@ Give as descriptive a name as possible, within reason. Do not worry about saving
 
 Do not use abbreviations that are ambiguous for symbols with a wide scope; such as `defvar`s or `defun`s. For abbreviations that are unfamiliar to readers outside your project, domain-specific abbreviations, centrally document these abbreviations. For symbols of limited scope, such as those bound within a function, abbreviate freely.
 
-```lisp
+```lisp bad
 (defvar *n*)               ; Meaningless.
 (defvar *nerr*)            ; Ambiguous abbreviation.
 (defvar *n-comp-conns*)    ; Ambiguous abbreviation.
@@ -472,7 +460,7 @@ Do not use abbreviations that are ambiguous for symbols with a wide scope; such 
 (defvar *cstmr-id*)        ; Deletes internal letters.
 ```
 
-```lisp
+```lisp good
 (defvar *price-count-reader*)  ; No abbreviation.
 (defvar *num-errors*);         ; "num" is a widespread convention.
 (defvar *num-dns-connections*) ; Most people know what "DNS" stands for.
@@ -501,7 +489,7 @@ In some projects, parameters that are not meant to be usually modified or bound 
 
 Common Lisp does not have global lexical variables, so a naming convention is used to ensure that globals, which are dynamically bound, never have names that overlap with local variables. It is possible to fake global lexical variables with a differently named global variable and a `define-symbol-macro`. You should not use this trick, unless you first publish a library that abstracts it away.
 
-```lisp
+```lisp good
 (defconstant +hash-results+ #xbd49d10d10cbee50)
 (defvar *maximum-search-depth* 100)
 ```
@@ -525,7 +513,7 @@ The suggested convention for naming Boolean variables is to suffix their names e
 
 When naming a symbol (external or internal) in a package, you should not include the package name as a prefix within the name of the symbol. Naming a symbol this way makes it awkward to use from a client package accessing the symbol by qualifying it with a package prefix, where the package name then appears twice (once as a package prefix, another time as a prefix within the symbol name).
 
-```lisp
+```lisp bad
 (in-package #:varint)
 (defun varint-length64 () ... )
 
@@ -533,7 +521,7 @@ When naming a symbol (external or internal) in a package, you should not include
 (defconst +padding+ (varint:varint-length64 +end-token+))  ; varint is repeated
 ```
 
-```lisp
+```lisp good
 (in-package #:varint)
 (defun length64 () ... )
 
@@ -545,7 +533,7 @@ An exception to the above rule is to include a prefix for the names of variables
 
 Symbols that correspond to standard, idiomatic Lisp expressions and would contain the package name or a part of it in a non-prefix position are still to be written with that package name or part. This includes the following idiomatic Lisp expressions as example:
 
-```lisp
+```lisp good
 ;; Definition of the FOOBAR concept.
 (foobar:define-foobar ...)
 ;; Iterate over elements of FOOBAR.
@@ -566,26 +554,26 @@ Choose a concise, descriptive, lowercase name using hyphens (`-`) to separate wo
 
 Package prefixes should fit the names of the symbols those packages export. For example, if you have an abstraction called `fifo`, and it is in a package of the first type you'd have functions named things like `fifo-add-to` and `fifo-clear-all`. If you design a package name to be used as a prefix, you'd have names like `add-to` and `clear-all`, because the callers would be saying:
 
-```lisp
+```lisp good
 (fifo:add-to ...)
 (fifo:clear-all ...)
 ```
 
 The below shows a redundant and arguably "ugly" symbol naming schema.
 
-```lisp
+```lisp bad
 (fifo:fifo-clear-all ...)
 ```
 
 Prefer singular names for packages rather than plural:
 
-```lisp
+```lisp good
 (threadpool:schedule-task ...)
 ```
 
 The above reads better than:
 
-```lisp
+```lisp bad
 (threadpools:schedule-task ...)
 ```
 
@@ -632,7 +620,7 @@ When defining a package and accessing symbols from another package that was desi
 
 Package nicknames MUST NOT be used. Package nicknames tend to be a shorter version of the long package name, usually abbreviated as an acronym.
 
-```lisp
+```lisp bad
 (defpackage :regression-test
   (:nicknames :rtest #-foo :rt))
 ```
@@ -696,7 +684,7 @@ There are several styles for dealing with assignment and side-effects; whichever
 
 Regarding multiple assignment in a single form, there are two schools: the first style groups as many assignments as possible into a single `setf` or `psetf` form thus minimizing the number of forms with side-effects:
 
-```lisp
+```lisp good
 (setf foo bar
       baz quux)
 ```
@@ -719,28 +707,17 @@ In the spirit of a mostly pure functional style, which makes testing and mainten
 Use `assert`, `check-type`, and `etypecase` to detect internal bugs only, and use them liberally.
 
 - Prefer `etypecase` over `typecase`
-
 - Use `error` to check input from a file.
-
 - If a function signals an error, document it in its contract.
-
 - Prefer `log`ging a warning to using `warn`.
-
 - Never call `signal` directly, use `error` instead.
-
 - Prefer using `handler-bind` to `restart`.
-
 - Prefer using `restart` to `throw` and `catch`.
-
 - Avoid generically handling conditions:
-
   - Errors not related to the current code should propagate through.
   - Avoid generically handling `serious-condition`.
-
 - Never signal conditions within the clean-up of an `unwind-protect`.
-
 - Never clean up by resignaling.
-
 - Never return a condition or error value, signal it with ERROR instead.
 
 Use `assert` to detect internal bugs ONLY. Code should `assert` invariants whose failure indicates that the software is itself broken. Incorrect input should be handled properly at runtime, and must not cause an assertion violation. The audience for an `assert` failure is a developer. Do not use the data-form and argument-form in `assert` to specify a condition to signal. It's fine to use them to print out a message for debugging purposes (and since it's only for debugging, there's no issue of internationalization).
@@ -771,7 +748,7 @@ Do not signal conditions from inside the cleanup form of `unwind-protect` or oth
 
 Do not clean up by resignaling. If you do that, and the condition is not handled, the stack trace will halt at the point of the resignal, hiding the rest. And the rest is the part we really care about!
 
-```lisp
+```lisp bad
 (handler-case
   (catch 'ticket-at
     (etd-process-blocks))
@@ -780,7 +757,7 @@ Do not clean up by resignaling. If you do that, and the condition is not handled
       (error c)))  ; The origin of this error has been lost.
 ```
 
-```lisp
+```lisp good
 (unwind-protect
   (catch 'ticket-at
     (etd-process-blocks))
@@ -794,12 +771,9 @@ Signal a condition to denote an unusual outcome, rather than relying on a specia
 ### Type Checking and Declarations
 
 - Use `(declare (type ...))`:
-
   - For the contracts of non-API functions only, and
   - To perform optimization on low-level internal functions.
-
 - Use `check-type`:
-
   - On special variables used as implicit arguments,
   - On the contracts of API functions, and
   - Where it may be useful in detecting input bugs.
@@ -819,30 +793,18 @@ Use appropriate declarations in internal low-level functions where these declara
 ### Macros
 
 - Use macros to clearly express a repeated pattern.
-
 - Don't write a macro when a (possibly inlined) function would do.
-
 - Avoid writing overly complicated macros:
-
   - Macro forms should only process syntax.
   - Minimize macroexpanded code, delegating logic to an implementation function where appropriate (_call-with style_)
-
 - Macros should generally be hygienic, binding only symbols provided by the caller or generated by `gensym`.
-
 - Clearly document unhygienic aspects and side-effects of macros.
-
 - Only evaluate parameters to a macro once.
-
 - For macros with a `body` form, even if they have no parameters, include an empty `()` to allow for future enhancement without breaking callers.
-
 - Don't use regular macros to improve performance, use inlining.
-
 - Use compiler macros to improve performance as needed.
-
 - Avoid macros that define other macros. If you must use them, document carefully.
-
 - Obtain developer consensus before writing a reader macro.
-
 - Never let a reader macro leak out of the system using it.
 
 Macros make your code clearer by providing syntactic abstraction. However, this comes at a price in syntactic complexity, and macroexpanded forms are not as easy to unit-test and debug as functions.
@@ -863,7 +825,7 @@ If a form needs to be evaluated in multiple branches of the macroexpanded code, 
 
 When you write a macro with a body, such as a `with-xxx` macro, even if there aren't any parameters, you should leave space for them anyway. For example, if you define `with-lights-on`, do not structure it like this:
 
-```lisp
+```lisp bad
 (defmacro with-lights-on (&body b)
   ...)
 
@@ -874,7 +836,7 @@ When you write a macro with a body, such as a `with-xxx` macro, even if there ar
 
 Instead, add an empty arguments list before the body argument:
 
-```lisp
+```lisp good
 ;; Macro lambda list has empty parens before body argument
 (defmacro with-lights-on (() &body b)
   ...)
@@ -886,7 +848,7 @@ Instead, add an empty arguments list before the body argument:
 
 That way, you can later add optional or keyword parameters without having to change all the uses of the macro:
 
-```lisp
+```lisp good
 (defmacro with-lights-on ((&keyword install-new-bulbs-p) &body b)
   ...)
 
@@ -953,11 +915,11 @@ You must not use `intern` at runtime. Not only does it cons, it either creates a
 
 You must not `intern` a string just to compare it to a keyword; use `string=` or `string-equal`.
 
-```lisp
+```lisp bad
 (member (intern str :keyword) $keys)  ; intern has undesired side-effects
 ```
 
-```lisp
+```lisp good
   (member str $keys :test #'string-equal)
 ;; Compares without interning
 ```
@@ -1026,11 +988,11 @@ This should be rare outside of alists, since you should be using structures and 
 
 Using lists as representations of sets is a bad idea unless you know the lists will be small, because accessors are _O(n)_ instead of _O(log n)_. For arbitrarily big sets, use balanced binary trees, for instance using `lisp-interface-library`.
 
-```lisp
+```lisp bad
 (member foo (union list-1 list-2))  ; Slow O(n) best-case and creates a new list
 ```
 
-```lisp
+```lisp good
 (or (member foo list-1) (member foo list-2))  ; O(n) average-case
 ```
 
@@ -1071,11 +1033,8 @@ You must follow the proper usage regarding well-known functions, macros and spec
 ### Defining Functions
 
 - Avoid using `&aux` and `&allow-other-keys`.
-
 - Avoid using `&optional` and `&key` arguments together.
-
 - Avoid excessive nesting of binding forms in a function
-
   - Break the function apart instead.
   - Consider using a `nest` macro.
 
@@ -1094,7 +1053,6 @@ You should avoid excessive nesting of binding forms inside a function. If your f
 ### #'FUN vs. 'FUN
 
 - Refer to a function as `#'FUN` rather than `'FUN`, unless:
-
   - Accessing global function bindings or
   - Dynamic linking is desired.
 
@@ -1111,22 +1069,14 @@ You must use `(lambda ...)` without the function-quote `#'` notation. Unlike the
 ### Conditional Expressions
 
 - Use `when` and `unless` when there is one alternative.
-
 - Use `if` when there are two alternatives.
-
 - Don't use `if` when one of the clauses would be a `progn`, prefer one of the forms below.
-
 - Prefer `cond`, `case`, or its variants to nested `if` statements.
-
 - Prefer `and` and `or` when:
-
   - They lead to more concise code.
   - There are no side effects outside of an optional `error` as the last clause of an `or`.
-
 - Prefer `ecase` and `etypecase` to `case` and `typecase`.
-
 - Don't use `ccase` or `ctypecase`.
-
 - See also the [Pitfalls](https://google.github.io/styleguide/lispprogrammingguide.html#case-and-ecase) section for common pitfalls when using `case` and `ecase`.
 
 Use `when` and `unless` when there is only one alternative. Use `if` when there are two alternatives and `cond` when there are several.
@@ -1139,13 +1089,13 @@ You should prefer `and` and `or` when it leads to more concise code than using `
 
 You should use `ecase` and `etypecase` in preference to `case` and `typecase`. It is better to catch erroneous values early.
 
-```lisp
+```lisp bad
 (case x ; Bad: silently returns NIL on mismatch
   ((bar) :bar)
   ((baz) :baz))
 ```
 
-```lisp
+```lisp good
 (ecase x ; Better: will error on mismatch
   ((bar) :bar)
   ((baz) :baz))
@@ -1169,14 +1119,10 @@ You should use `zerop`, `plusp`, or `minusp`, instead of comparing a value to `0
 ### Iteration
 
 - Prefer the `dolist` or `dotimes` forms to `loop` in simple cases.
-
 - Prefer `with` within a `loop` to a `let` binding:
-
   - Unless the `let` makes the code clearer.
   - `let` may also be used to avoid a `finally (return ...)` form.
-
 - Do not set iteration variables in the body of an iteration macro.
-
 - Generally, prefer unadorned symbols for `loop` keywords unless for consistency or in macro-expansions.
 
 You should simpler forms such as `dolist` or `dotimes` instead of `loop` in simple cases when you're not going to use any of the `loop` facilities such as bindings, collection or block return.

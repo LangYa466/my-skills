@@ -90,13 +90,13 @@ When choosing the name for a function or method, consider the context in which t
 
 - For functions, do not [repeat the name of the package](https://google.github.io/styleguide/go/decisions#repetitive-with-package).
 
-  ```go
+  ```go bad
   package yamlconfig
 
   func ParseYAMLConfig(input string) (*Config, error)
   ```
 
-  ```go
+  ```go good
   package yamlconfig
 
   func Parse(input string) (*Config, error)
@@ -104,37 +104,37 @@ When choosing the name for a function or method, consider the context in which t
 
 - For methods, do not repeat the name of the method receiver.
 
-  ```go
+  ```go bad
   func (c *Config) WriteConfigTo(w io.Writer) (int64, error)
   ```
 
-  ```go
+  ```go good
   func (c *Config) WriteTo(w io.Writer) (int64, error)
   ```
 
 - Do not repeat the names of variables passed as parameters.
 
-  ```go
+  ```go bad
   func OverrideFirstWithSecond(dest, source *Config) error
   ```
 
-  ```go
+  ```go good
   func Override(dest, source *Config) error
   ```
 
 - Do not repeat the names and types of the return values.
 
-  ```go
+  ```go bad
   func TransformToJSON(input *Config) *jsonconfig.Config
   ```
 
-  ```go
+  ```go good
   func Transform(input *Config) *jsonconfig.Config
   ```
 
 When it is necessary to disambiguate functions of a similar name, it is acceptable to include extra information.
 
-```go
+```go good
 func (c *Config) WriteTextTo(w io.Writer) (int64, error)
 func (c *Config) WriteBinaryTo(w io.Writer) (int64, error)
 ```
@@ -145,25 +145,25 @@ There are some other common conventions when choosing names for functions and me
 
 - Functions that return something are given noun-like names.
 
-  ```go
+  ```go good
   func (c *Config) JobName(key string) (value string, ok bool)
   ```
 
   A corollary of this is that function and method names should [avoid the prefix `Get`](https://google.github.io/styleguide/go/decisions#getters).
 
-  ```go
+  ```go bad
   func (c *Config) GetJobName(key string) (value string, ok bool)
   ```
 
 - Functions that do something are given verb-like names.
 
-  ```go
+  ```go good
   func (c *Config) WriteDetail(w io.Writer) (int64, error)
   ```
 
 - Identical functions that differ only by the types involved include the name of the type at the end of the name.
 
-  ```go
+  ```go good
   func ParseInt(input string) (int, error)
   func ParseInt64(input string) (int64, error)
   func AppendInt(buf []byte, value int) []byte
@@ -172,7 +172,7 @@ There are some other common conventions when choosing names for functions and me
 
   If there is a clear "primary" version, the type can be omitted from the name for that version:
 
-  ```go
+  ```go good
   func (c *Config) Marshal() ([]byte, error)
   func (c *Config) MarshalText() (string, error)
   ```
@@ -218,7 +218,7 @@ Suppose you want to create a package that contains test doubles for another. We'
 
 One approach is to introduce a new Go package based on the production one for testing. A safe choice is to append the word `test` to the original package name ("creditcard" + "test"):
 
-```go
+```go good
 package creditcardtest
 ```
 
@@ -228,7 +228,7 @@ Unless stated explicitly otherwise, all examples in the sections below are in `p
 
 You want to add a set of test doubles for `Service`. Because `Card` is effectively a dumb data type, similar to a Protocol Buffer message, it needs no special treatment in tests, so no double is required. If you anticipate only test doubles for one type (like `Service`), you can take a concise approach to naming the doubles:
 
-```go
+```go good
 import (
     "path/to/creditcard"
     "path/to/money"
@@ -244,7 +244,7 @@ This is strictly preferable to a naming choice like `StubService` or the very po
 
 Finally, if the package is built with Bazel, make sure the new `go_library` rule for the package is marked as `testonly`:
 
-```build
+```build good
 go_library(
     name = "creditcardtest",
     srcs = ["creditcardtest.go"],
@@ -266,7 +266,7 @@ See also:
 
 When one kind of stub is not enough (for example, you also need one that always fails), we recommend naming the stubs according to the behavior they emulate. Here we rename `Stub` to `AlwaysCharges` and introduce a new stub called `AlwaysDeclines`:
 
-```go
+```go good
 // AlwaysCharges stubs creditcard.Service and simulates success.
 type AlwaysCharges struct{}
 
@@ -308,7 +308,7 @@ func (s *StoredValue) Credit(c *Card, amount money.Money) error { /* omitted */ 
 
 In this case, more explicit test double naming is sensible:
 
-```go
+```go good
 type StubService struct{}
 
 func (StubService) Charge(*creditcard.Card, money.Money) error { return nil }
@@ -350,7 +350,7 @@ func (p *Processor) Process(c *creditcard.Card, amount money.Money) error {
 
 In the tests, a test double called a "spy" for `CreditCard` is juxtaposed against production types, so prefixing the name may improve clarity.
 
-```go
+```go good
 package payment
 
 import "path/to/creditcardtest"
@@ -376,7 +376,7 @@ func TestProcessor(t *testing.T) {
 
 This is clearer than when the name is not prefixed.
 
-```go
+```go bad
 package payment
 
 import "path/to/creditcardtest"
@@ -407,7 +407,7 @@ func TestProcessor(t *testing.T) {
 
 Like many programming languages, Go has mutable variables: assigning to a variable changes its value.
 
-```go
+```go good
 func abs(i int) int {
     if i < 0 {
         i *= -1
@@ -418,7 +418,7 @@ func abs(i int) int {
 
 When using [short variable declarations](https://go.dev/ref/spec#Short_variable_declarations) with the `:=` operator, in some cases a new variable is not created. We can call this _stomping_. It's OK to do this when the original value is no longer needed.
 
-```go
+```go good
 // innerHandler is a helper for some request handler, which itself issues
 // requests to other backends.
 func (s *Server) innerHandler(ctx context.Context, req *pb.MyRequest) *pb.MyResponse {
@@ -438,7 +438,7 @@ func (s *Server) innerHandler(ctx context.Context, req *pb.MyRequest) *pb.MyResp
 
 Be careful using short variable declarations in a new scope, though: that introduces a new variable. We can call this _shadowing_ the original variable. Code after the end of the block refers to the original. Here is a buggy attempt to shorten the deadline conditionally:
 
-```go
+```go bad
 func (s *Server) innerHandler(ctx context.Context, req *pb.MyRequest) *pb.MyResponse {
     // Attempt to conditionally cap the deadline.
     if *shortenDeadlines {
@@ -457,7 +457,7 @@ func (s *Server) innerHandler(ctx context.Context, req *pb.MyRequest) *pb.MyResp
 
 A correct version of the code might be:
 
-```go
+```go good
 func (s *Server) innerHandler(ctx context.Context, req *pb.MyRequest) *pb.MyResponse {
     if *shortenDeadlines {
         var cancel func()
@@ -474,7 +474,7 @@ In the case we called stomping, because there's no new variable, the type being 
 
 It is not a good idea to use variables with the same name as standard packages other than very small scopes, because that renders free functions and values from that package inaccessible. Conversely, when picking a name for your package, avoid names that are likely to require [import renaming](https://google.github.io/styleguide/go/decisions#import-renaming) or cause shadowing of otherwise good variable names at the client side.
 
-```go
+```go bad
 func LongFunction() {
     url := "https://example.com/"
     // Oops, now we can't use net/url in code below.
@@ -489,7 +489,7 @@ Go package names should be [related to what the package provides](https://google
 
 Instead, consider what the callsite will look like.
 
-```go
+```go good
 db := spannertest.NewDatabaseFromFile(...)
 
 _, err := f.Seek(0, io.SeekStart)
@@ -499,7 +499,7 @@ b := elliptic.Marshal(curve, x, y)
 
 You can tell roughly what each of these do even without knowing the imports list (`cloud.google.com/go/spanner/spannertest`, `io`, and `crypto/elliptic`). With less focused names, these might read:
 
-```go
+```go bad
 db := test.NewDatabaseFromFile(...)
 
 _, err := f.Seek(0, common.SeekStart)
@@ -556,7 +556,7 @@ Proto library imports are treated differently than standard Go imports due to th
 
 Often a single word describing the package is used:
 
-```go
+```go good
 import (
     foopb "path/to/package/foo_service_go_proto"
     foogrpc "path/to/package/foo_service_go_grpc"
@@ -565,7 +565,7 @@ import (
 
 Follow the style guidance for [package names](https://google.github.io/styleguide/go/decisions#package-names). Prefer whole words. Short names are good, but avoid ambiguity. When in doubt, use the proto package name up to \_go with a pb suffix:
 
-```go
+```go good
 import (
     pushqueueservicepb "path/to/package/push_queue_service_go_proto"
 )
@@ -638,7 +638,7 @@ func process(animal Animal) error {
 
 The caller can simply compare the returned error value of the function with one of the known error values:
 
-```go
+```go good
 func handlePet(...) {
     switch err := process(an); err {
     case ErrDuplicate:
@@ -653,7 +653,7 @@ func handlePet(...) {
 
 The above uses sentinel values, where the error must be equal (in the sense of `==`) to the expected value. That is perfectly adequate in many cases. If `process` returns wrapped errors (discussed below), you can use [`errors.Is`](https://pkg.go.dev/errors#Is).
 
-```go
+```go good
 func handlePet(...) {
     switch err := process(an); {
     case errors.Is(err, ErrDuplicate):
@@ -666,7 +666,7 @@ func handlePet(...) {
 
 Do not attempt to distinguish errors based on their string form. (See [Go Tip #13: Designing Errors for Checking](https://google.github.io/styleguide/go/index.html#gotip) for more.)
 
-```go
+```go bad
 func handlePet(...) {
     err := process(an)
     if regexp.MatchString(`duplicate`, err.Error()) {...}
@@ -682,7 +682,7 @@ Other error structures can be used as appropriate, for example a project struct 
 
 When adding information to errors, avoid redundant information that the underlying error already provides. The `os` package, for instance, already includes path information in its errors.
 
-```go
+```go good
 if err := os.Open("settings.txt"); err != nil {
   return fmt.Errorf("load launch code settings: %v", err)
 }
@@ -694,7 +694,7 @@ if err := os.Open("settings.txt"); err != nil {
 
 Here, "load launch code settings" adds specific meaning to the `os.Open` error that's relevant to the current function's context, without duplicating the underlying file path information.
 
-```go
+```go bad
 if err := os.Open("settings.txt"); err != nil {
   return fmt.Errorf("could not open settings.txt: %v", err)
 }
@@ -706,13 +706,13 @@ if err := os.Open("settings.txt"); err != nil {
 
 Don't add an annotation if its sole purpose is to indicate a failure without adding new information. The presence of an error sufficiently conveys the failure to the caller.
 
-```go
+```go bad
 return fmt.Errorf("failed: %v", err) // just return err instead
 ```
 
 When wrapping, the message should encode the action that failed, with contextual information, without stop words. Stop words such as "failed to", "couldn't", or "unable to" add no useful information and lead to repetitive error chains (e.g. `failed to X: failed to Y: failed to Z: error`).
 
-```go
+```go bad
 func (s *server) setupTLS(certPath string) error {
   data, err := os.ReadFile(certPath)
   if err != nil {
@@ -730,7 +730,7 @@ func (s *server) setupTLS(certPath string) error {
 
 A single function might do multiple actions, so make it clear which one failed:
 
-```go
+```go good
 func (s *server) setupTLS(certPath string) error {
   data, err := os.ReadFile(certPath)
   if err != nil {
@@ -760,7 +760,7 @@ The [choice between `%v` and `%w` when wrapping errors](https://go.dev/blog/go1.
 
    - Creating fresh, independent errors: Sometimes it is necessary to transform an error into a new error message, thereby hiding the specifics of the original error. This practice is particularly beneficial at system boundaries, including but not limited to RPC, IPC, and storage, where we translate domain-specific errors into a canonical error space.
 
-     ```go
+     ```go good
      func (*FortuneTeller) SuggestFortune(context.Context, *pb.SuggestionRequest) (*pb.SuggestionResponse, error) {
        // ...
        if err != nil {
@@ -771,7 +771,7 @@ The [choice between `%v` and `%w` when wrapping errors](https://go.dev/blog/go1.
 
      We could also explicitly annotate RPC code `Internal` to the example above.
 
-     ```go
+     ```go good
      import (
        "google.golang.org/grpc/codes"
        "google.golang.org/grpc/status"
@@ -793,7 +793,7 @@ The [choice between `%v` and `%w` when wrapping errors](https://go.dev/blog/go1.
 
    - Adding context while preserving the original error for programmatic inspection: This is the primary use case within helpers of your application. You want to enrich an error with additional context (e.g., what operation was being performed when it failed) but still allow the caller to check if the underlying error is a specific sentinel error or type.
 
-     ```go
+     ```go good
      func (s *Server) internalFunction(ctx context.Context) error {
        // ...
        if err != nil {
@@ -839,7 +839,7 @@ Regardless of where the `%w` verb is placed, the error returned always represent
 
 Placement of the `%w` verb does, however, affect whether the error chain is printed newest to oldest, oldest to newest, or neither:
 
-```go
+```go good
 err1 := fmt.Errorf("err1")
 err2 := fmt.Errorf("err2: %w", err1)
 err3 := fmt.Errorf("err3: %w", err2)
@@ -847,7 +847,7 @@ fmt.Println(err3) // err3: err2: err1
 // err3 is a newest-to-oldest error chain, that prints newest-to-oldest.
 ```
 
-```go
+```go bad
 err1 := fmt.Errorf("err1")
 err2 := fmt.Errorf("%w: err2", err1)
 err3 := fmt.Errorf("%w: err3", err2)
@@ -855,7 +855,7 @@ fmt.Println(err3) // err1: err2: err3
 // err3 is a newest-to-oldest error chain, that prints oldest-to-newest.
 ```
 
-```go
+```go bad
 err1 := fmt.Errorf("err1")
 err2 := fmt.Errorf("err2-1 %w err2-2", err1)
 err3 := fmt.Errorf("err3-1 %w err3-2", err2)
@@ -874,7 +874,7 @@ Examples of sentinel errors include os errors (e.g., [`os.ErrInvalid`](https://p
 
 In these cases, placing the `%w` verb at the beginning of the error string can improve readability by immediately identifying the category of the error.
 
-```go
+```go good
 package parser
 
 var ErrParse = fmt.Errorf("parse error")
@@ -892,7 +892,7 @@ err := fmt.Errorf("%w: find fortune database: %v", ErrInternal, err)
 
 Placing the status at the beginning ensures that the most relevant categorical information is most prominent.
 
-```go
+```go bad
 package parser
 
 var ErrParse = fmt.Errorf("parse error")
@@ -942,7 +942,7 @@ Use verbose logging ([`log.V`](https://pkg.go.dev/github.com/golang/glog#V)) to 
 
 To minimize the cost of verbose logging, you should ensure not to accidentally call expensive functions even when `log.V` is turned off. `log.V` offers two APIs. The more convenient one carries the risk of this accidental expense. When in doubt, use the slightly more verbose style.
 
-```go
+```go good
 for _, sql := range queries {
   log.V(1).Infof("Handling %v", sql)
   if log.V(2) {
@@ -952,7 +952,7 @@ for _, sql := range queries {
 }
 ```
 
-```go
+```go bad
 // sql.Explain called even when this log is not printed.
 log.V(2).Infof("Handling %v", sql.Explain())
 ```
@@ -979,7 +979,7 @@ Another case in which panics can be useful, though uncommon, is as an internal i
 
 The key attribute of this design is that these **panics are never allowed to escape across package boundaries** and do not form part of the package's API. This is typically accomplished with a top-level deferred function that uses `recover` to translate a propagated panic into a returned error at the public API boundary. It requires the code that panics and recovers to distinguish between panics that the code raises itself and those that it doesn't:
 
-```go
+```go good
 type syntaxError struct {
   msg string
 }
@@ -1011,7 +1011,7 @@ func Parse(in string) (_ *Node, err error) {
 
 Panic is also used when the compiler cannot identify unreachable code, for example when using a function like `log.Fatal` that will not return:
 
-```go
+```go good
 func answer(i int) string {
     switch i {
     case 42:
@@ -1053,7 +1053,7 @@ Document the error-prone or non-obvious fields and parameters by saying why they
 
 In the following snippet, the highlighted commentary adds little useful information to the reader:
 
-```go
+```go bad
 // Sprintf formats according to a format specifier and returns the resulting
 // string.
 //
@@ -1063,7 +1063,7 @@ func Sprintf(format string, data ...any) string
 
 However, this snippet demonstrates a code scenario similar to the previous where the commentary instead states something non-obvious or materially helpful to the reader:
 
-```go
+```go good
 // Sprintf formats according to a format specifier and returns the resulting
 // string.
 //
@@ -1088,7 +1088,7 @@ It is implied that the cancellation of a context argument interrupts the functio
 
 This fact does not need to be restated:
 
-```go
+```go bad
 // Run executes the worker's run loop.
 //
 // The method will process work until the context is cancelled and accordingly
@@ -1098,7 +1098,7 @@ func (Worker) Run(ctx context.Context) error
 
 Because that is implied, the following is better:
 
-```go
+```go good
 // Run executes the worker's run loop.
 func (Worker) Run(ctx context.Context) error
 ```
@@ -1107,7 +1107,7 @@ Where context behavior is different or non-obvious, it should be expressly docum
 
 - The function returns an error other than `ctx.Err()` when the context is cancelled:
 
-  ```go
+  ```go good
   // Run executes the worker's run loop.
   //
   // If the context is cancelled, Run returns a nil error.
@@ -1116,7 +1116,7 @@ Where context behavior is different or non-obvious, it should be expressly docum
 
 - The function has other mechanisms that may interrupt it or affect lifetime:
 
-  ```go
+  ```go good
   // Run executes the worker's run loop.
   //
   // Run processes work until the context is cancelled or Stop is called.
@@ -1131,7 +1131,7 @@ Where context behavior is different or non-obvious, it should be expressly docum
 
 - The function has special expectations about context lifetime, lineage, or attached values:
 
-  ```go
+  ```go good
   // NewReceiver starts receiving messages sent to the specified queue.
   // The context should not have a deadline.
   func NewReceiver(ctx context.Context) *Receiver
@@ -1172,7 +1172,7 @@ Documentation is strongly encouraged if any of the following are true.
 
 - It is unclear whether the operation is read-only or mutating:
 
-  ```go
+  ```go good
   package lrucache
 
   // Lookup returns the data associated with the key from the cache.
@@ -1185,7 +1185,7 @@ Documentation is strongly encouraged if any of the following are true.
 
 - Synchronization is provided by the API:
 
-  ```go
+  ```go good
   package fortune_go_proto
 
   // NewFortuneTellerClient returns an *rpc.Client for the FortuneTeller service.
@@ -1199,7 +1199,7 @@ Documentation is strongly encouraged if any of the following are true.
 
 - The API consumes user-implemented types of interfaces, and the interface's consumer has particular concurrency requirements:
 
-  ```go
+  ```go good
   package health
 
   // A Watcher reports the health of some entity (usually a backend service).
@@ -1224,7 +1224,7 @@ Document any explicit cleanup requirements that the API has. Otherwise, callers 
 
 Call out cleanups that are up to the caller:
 
-```go
+```go good
 // NewTicker returns a new Ticker containing a channel that will send the
 // current time on the channel after each tick.
 //
@@ -1236,7 +1236,7 @@ func (*Ticker) Stop()
 
 If it is potentially unclear how to clean up the resources, explain how:
 
-```go
+```go good
 // Get issues a GET to the specified URL.
 //
 // When err is nil, resp always contains a non-nil resp.Body.
@@ -1259,7 +1259,7 @@ See also:
 
 Document significant error sentinel values or error types that your functions return to callers so that callers can anticipate what types of conditions they can handle in their code.
 
-```go
+```go good
 package os
 
 // Read reads up to len(b) bytes from the File and stores them in b. It returns
@@ -1271,7 +1271,7 @@ func (*File) Read(b []byte) (n int, err error) {
 
 When a function returns a specific error type, correctly note whether the error is a pointer receiver or not:
 
-```go
+```go good
 package os
 
 type PathError struct {
@@ -1292,7 +1292,7 @@ Documenting whether the values returned are pointer receivers enables callers to
 
 Document overall error conventions in the [package's documentation](https://google.github.io/styleguide/go/decisions#package-comments) when the behavior is applicable to most errors found in the package:
 
-```go
+```go good
 // Package os provides a platform-independent interface to operating system
 // functionality.
 //
@@ -1320,7 +1320,7 @@ Go features a [documentation server](https://pkg.go.dev/golang.org/x/pkgsite/cmd
 
 - A blank line is required to separate paragraphs:
 
-  ```go
+  ```go good
   // LoadConfig reads a configuration out of the named file.
   //
   // See some/shortlink for config file format details.
@@ -1328,7 +1328,7 @@ Go features a [documentation server](https://pkg.go.dev/golang.org/x/pkgsite/cmd
 
 - Test files can contain [runnable examples](https://google.github.io/styleguide/go/decisions#examples) that appear attached to the corresponding documentation in godoc:
 
-  ```go
+  ```go good
   func ExampleConfig_WriteTo() {
     cfg := &Config{
       Name: "example",
@@ -1345,7 +1345,7 @@ Go features a [documentation server](https://pkg.go.dev/golang.org/x/pkgsite/cmd
 
 - Indenting lines by an additional two spaces formats them verbatim:
 
-  ```go
+  ```go good
   // Update runs the function in an atomic transaction.
   //
   // This is typically used with an anonymous TransactionFunc:
@@ -1359,7 +1359,7 @@ Go features a [documentation server](https://pkg.go.dev/golang.org/x/pkgsite/cmd
 
   This verbatim formatting can be leveraged for formatting that is not native to godoc, such as lists and tables:
 
-  ```go
+  ```go good
   // LoadConfig reads a configuration out of the named file.
   //
   // LoadConfig treats the following keys in special ways:
@@ -1369,7 +1369,7 @@ Go features a [documentation server](https://pkg.go.dev/golang.org/x/pkgsite/cmd
 
 - A single line that begins with a capital letter, contains no punctuation except parentheses and commas, and is followed by another paragraph, is formatted as a header:
 
-  ```go
+  ```go good
   // The following line is formatted as a heading.
   //
   // Using headings
@@ -1381,13 +1381,13 @@ Go features a [documentation server](https://pkg.go.dev/golang.org/x/pkgsite/cmd
 
 Sometimes a line of code looks like something common, but actually isn't. One of the best examples of this is an `err == nil` check (since `err != nil` is much more common). The following two conditional checks are hard to distinguish:
 
-```go
+```go good
 if err := doSomething(); err != nil {
     // ...
 }
 ```
 
-```go
+```go bad
 if err := doSomething(); err == nil {
     // ...
 }
@@ -1395,7 +1395,7 @@ if err := doSomething(); err == nil {
 
 You can instead "boost" the signal of the conditional by adding a comment:
 
-```go
+```go good
 if err := doSomething(); err == nil { // if NO error
     // ...
 }
@@ -1409,11 +1409,11 @@ The comment draws attention to the difference in the conditional.
 
 For consistency, prefer `:=` over `var` when initializing a new variable with a non-zero value.
 
-```go
+```go good
 i := 42
 ```
 
-```go
+```go bad
 var i = 42
 ```
 
@@ -1421,7 +1421,7 @@ var i = 42
 
 The following declarations use the [zero value](https://golang.org/ref/spec#The_zero_value):
 
-```go
+```go good
 var (
     coords Point
     magic  [4]byte
@@ -1431,7 +1431,7 @@ var (
 
 You should declare values using the zero value when you want to convey an empty value that **is ready for later use**. Using composite literals with explicit initialization can be clunky:
 
-```go
+```go bad
 var (
     coords = Point{X: 0, Y: 0}
     magic  = [4]byte{0, 0, 0, 0}
@@ -1441,21 +1441,21 @@ var (
 
 A common application of zero value declaration is when using a variable as the output when unmarshalling:
 
-```go
+```go good
 var coords Point
 if err := json.Unmarshal(data, &coords); err != nil {
 ```
 
 It is also okay to use the zero value in the following form when you need a variable of a pointer type:
 
-```go
+```go good
 msg := new(pb.Bar) // or "&pb.Bar{}"
 if err := proto.Unmarshal(data, msg); err != nil {
 ```
 
 If you need a lock or other field that [must not be copied](https://google.github.io/styleguide/go/decisions#copying) in your struct, you can make it a value type to take advantage of zero value initialization. It does mean that the containing type must now be passed via a pointer and not a value. Methods on the type must take pointer receivers.
 
-```go
+```go good
 type Counter struct {
     // This field does not have to be "*sync.Mutex". However,
     // users must now pass *Counter objects between themselves, not Counter.
@@ -1469,7 +1469,7 @@ func (c *Counter) IncrementBy(name string, n int64)
 
 It's acceptable to use value types for local variables of composites (such as structs and arrays) even if they contain such uncopyable fields. However, if the composite is returned by the function, or if all accesses to it end up needing to take an address anyway, prefer declaring the variable as a pointer type at the outset. Similarly, protobuf messages should be declared as pointer types.
 
-```go
+```go good
 func NewCounter(name string) *Counter {
     c := new(Counter) // "&Counter{}" is also fine.
     registerCounter(name, c)
@@ -1481,7 +1481,7 @@ var msg = new(pb.Bar) // or "&pb.Bar{}".
 
 This is because `*pb.Something` satisfies [`proto.Message`](https://pkg.go.dev/google.golang.org/protobuf/proto#Message) while `pb.Something` does not.
 
-```go
+```go bad
 func NewCounter(name string) *Counter {
     var c Counter
     registerCounter(name, &c)
@@ -1499,7 +1499,7 @@ var msg = pb.Bar{}
 
 The following are [composite literal](https://golang.org/ref/spec#Composite_literals) declarations:
 
-```go
+```go good
 var (
     coords   = Point{X: x, Y: y}
     magic    = [4]byte{'I', 'W', 'A', 'D'}
@@ -1514,7 +1514,7 @@ In contrast, using composite literals to declare empty or memberless values can 
 
 When you need a pointer to a zero value, you have two options: empty composite literals and `new`. Both are fine, but the `new` keyword can serve to remind the reader that if a non-zero value were needed, a composite literal wouldn't work:
 
-```go
+```go good
 var (
   buf = new(bytes.Buffer) // non-empty Buffers are initialized with constructors.
   msg = new(pb.Message) // non-empty proto messages are initialized with builders or by setting fields one by one.
@@ -1525,7 +1525,7 @@ var (
 
 The following are declarations that take advantage of size hints in order to preallocate capacity:
 
-```go
+```go good
 var (
     // Preferred buffer size for target filesystem: st_blksize.
     buf = make([]byte, 131072)
@@ -1546,7 +1546,7 @@ Most code does not need a size hint or preallocation, and can allow the runtime 
 
 Specify [channel direction](https://go.dev/ref/spec#Channel_types) where possible.
 
-```go
+```go good
 // sum computes the sum of all of the values. It reads from the channel until
 // the channel is closed.
 func sum(values <-chan int) int {
@@ -1556,7 +1556,7 @@ func sum(values <-chan int) int {
 
 This prevents casual programming errors that are possible without specification:
 
-```go
+```go bad
 func sum(values chan int) (out int) {
     for v := range values {
         out += v
@@ -1597,7 +1597,7 @@ Using an option structure has a number of benefits:
 
 Here is an example of a function that could be improved:
 
-```go
+```go bad
 func EnableReplication(ctx context.Context, config *replicator.Config, primaryRegions, readonlyRegions []string, replicateExisting, overwritePolicies bool, replicationInterval time.Duration, copyWorkers int, healthWatcher health.Watcher) {
     // ...
 }
@@ -1605,7 +1605,7 @@ func EnableReplication(ctx context.Context, config *replicator.Config, primaryRe
 
 The function above could be rewritten with an option structure as follows:
 
-```go
+```go good
 type ReplicationOptions struct {
     Config              *replicator.Config
     PrimaryRegions      []string
@@ -1624,7 +1624,7 @@ func EnableReplication(ctx context.Context, opts ReplicationOptions) {
 
 The function can then be called in a different package:
 
-```go
+```go good
 func foo(ctx context.Context) {
     // Complex call:
     storage.EnableReplication(ctx, storage.ReplicationOptions{
@@ -1669,7 +1669,7 @@ Using variadic options can provide a number of benefits:
 
 Here is an example of a function that could be improved:
 
-```go
+```go bad
 func EnableReplication(ctx context.Context, config *placer.Config, primaryCells, readonlyCells []string, replicateExisting, overwritePolicies bool, replicationInterval time.Duration, copyWorkers int, healthWatcher health.Watcher) {
   ...
 }
@@ -1677,7 +1677,7 @@ func EnableReplication(ctx context.Context, config *placer.Config, primaryCells,
 
 The example above could be rewritten with variadic options as follows:
 
-```go
+```go good
 type replicationOptions struct {
     readonlyCells       []string
     replicateExisting   bool
@@ -1739,7 +1739,7 @@ func EnableReplication(ctx context.Context, config *placer.Config, primaryCells 
 
 The function can then be called in a different package:
 
-```go
+```go good
 func foo(ctx context.Context) {
     // Complex call:
     storage.EnableReplication(ctx, config, []string{"po", "is", "ea"},
@@ -1818,7 +1818,7 @@ If many separate test cases require the same validation logic, arrange the test 
 
 The design outlined in the last point maintains orthogonality. For example, [package `cmp`](https://pkg.go.dev/github.com/google/go-cmp/cmp) is not designed to fail tests, but rather to compare (and to diff) values. It therefore does not need to know about the context in which the comparison was made, since the caller can supply that. If your common testing code provides a `cmp.Transformer` for your data type, that can often be the simplest design. For other validations, consider returning an `error` value.
 
-```go
+```go good
 // polygonCmp returns a cmp.Option that equates s2 geometry objects up to
 // some small floating-point error.
 func polygonCmp() cmp.Option {
@@ -1963,7 +1963,7 @@ This technique can help you create concise, canonical validations. But do not at
 
 The final product should be in a form similar to this for end users:
 
-```go
+```go good
 package deepblue_test
 
 import (
@@ -2007,7 +2007,7 @@ However, some situations require that the test not proceed. Calling `t.Fatal` is
 
 Operations performed by a test helper sometimes fail. For example, setting up a directory with files involves I/O, which can fail. When test helpers fail, their failure often signifies that the test cannot continue, since a setup precondition failed. When this happens, prefer calling one of the `Fatal` functions in the helper:
 
-```go
+```go good
 func mustAddGameAssets(t *testing.T, dir string) {
     t.Helper()
     if err := os.WriteFile(path.Join(dir, "pak0.pak"), pak0, 0644); err != nil {
@@ -2021,7 +2021,7 @@ func mustAddGameAssets(t *testing.T, dir string) {
 
 This keeps the calling side cleaner than if the helper were to return the error to the test itself:
 
-```go
+```go bad
 func addGameAssets(t *testing.T, dir string) error {
     t.Helper()
     if err := os.WriteFile(path.Join(d, "pak0.pak"), pak0, 0644); err != nil {
@@ -2115,7 +2115,7 @@ As [documented in package testing](https://pkg.go.dev/testing#T), it is incorrec
 
 [Test helpers](#test-functions) usually don't signal failure from new goroutines, and therefore it is all right for them to use `t.Fatal`. If in doubt, call `t.Error` and return instead.
 
-```go
+```go good
 func TestRevEngine(t *testing.T) {
     engine, err := Start()
     if err != nil {
@@ -2154,7 +2154,7 @@ When all calls to the `testing` API are in the [test function](#test-functions),
 
 In table-driven tests, prefer to specify field names when initializing test case struct literals. This is helpful when the test cases cover a large amount of vertical space (e.g. more than 20-30 lines), when there are adjacent fields with the same type, and also when you wish to omit fields which have the zero value. For example:
 
-```go
+```go good
 func TestStrJoin(t *testing.T) {
     tests := []struct {
         slice     []string
@@ -2201,7 +2201,7 @@ func mustLoadDataset(t *testing.T) []byte {
 
 Call `mustLoadDataset` explicitly in test functions that need it:
 
-```go
+```go good
 func TestParseData(t *testing.T) {
     data := mustLoadDataset(t)
     parsed, err := ParseData(data)
@@ -2235,7 +2235,7 @@ func TestRegression682831(t *testing.T) {
 
 The test function `TestRegression682831` does not use the data set and therefore does not call `mustLoadDataset`, which could be slow and failure-prone:
 
-```go
+```go bad
 var dataset []byte
 
 func TestParseData(t *testing.T) {
@@ -2270,7 +2270,7 @@ If **all tests in the package** require common setup and the **setup requires te
 
 Using a custom `TestMain` **should not be your first choice** due the amount of care that should be taken for correct use. Consider first whether the solution in the [_amortizing common test setup_](#t-setup-amortization) section or an ordinary [test helper](#t-common-setup-scope) is sufficient for your needs.
 
-```go
+```go good
 var db *sql.DB
 
 func TestInsert(t *testing.T) { /* omitted */ }
@@ -2325,7 +2325,7 @@ Using a `sync.Once` may be appropriate, though not required, if all of the follo
 - It only applies to some tests.
 - It does not require teardown.
 
-```go
+```go good
 var dataset struct {
     once sync.Once
     data []byte
@@ -2349,7 +2349,7 @@ func mustLoadDataset(t *testing.T) []byte {
 
 When `mustLoadDataset` is used in multiple test functions, its cost is amortized:
 
-```go
+```go good
 func TestParseData(t *testing.T) {
     data := mustLoadDataset(t)
 
@@ -2387,7 +2387,7 @@ Though there is no one-size-fits-all rule for which to choose, the following gui
 
 Prefer using "+" when concatenating few strings. This method is syntactically the simplest and requires no import.
 
-```go
+```go good
 key := "projectid: " + p
 ```
 
@@ -2395,11 +2395,11 @@ key := "projectid: " + p
 
 Prefer using `fmt.Sprintf` when building a complex string with formatting. Using many "+" operators may obscure the end result.
 
-```go
+```go good
 str := fmt.Sprintf("%s [%s:%d]-> %s", src, qos, mtu, dst)
 ```
 
-```go
+```go bad
 bad := src.String() + " [" + qos.String() + ":" + strconv.Itoa(mtu) + "]-> " + dst.String()
 ```
 
@@ -2411,7 +2411,7 @@ When the formatting is even more complex, prefer [`text/template`](https://pkg.g
 
 Prefer using `strings.Builder` when building a string bit-by-bit. `strings.Builder` takes amortized linear time, whereas "+" and `fmt.Sprintf` take quadratic time when called sequentially to form a larger string.
 
-```go
+```go good
 b := new(strings.Builder)
 for i, d := range digitsOfPi {
     fmt.Fprintf(b, "the %d digit of pi is: %d\n", i, d)
@@ -2425,13 +2425,13 @@ str := b.String()
 
 Prefer to use backticks (\`) when constructing constant, multi-line string literals.
 
-```go
+```go good
 usage := `Usage:
 
 custom_tool [args]`
 ```
 
-```go
+```go bad
 usage := "" +
   "Usage:\n" +
   "\n" +
@@ -2446,7 +2446,7 @@ Instead, if your functionality maintains state, allow your clients to create and
 
 **Important:** While this guidance is applicable to all developers, it is most critical for infrastructure providers who offer libraries, integrations, and services to other teams.
 
-```go
+```go good
 // Package sidecar manages subprocesses that provide features for applications.
 package sidecar
 
@@ -2459,7 +2459,7 @@ func (r *Registry) Register(name string, p *Plugin) error { ... }
 
 Your users will instantiate the data they need (a `*sidecar.Registry`) and then pass it as an explicit dependency:
 
-```go
+```go good
 package main
 
 func main() {
@@ -2485,7 +2485,7 @@ See also:
 
 APIs that do not support explicit dependency passing become fragile as the number of clients increases:
 
-```go
+```go bad
 package sidecar
 
 var registry = make(map[string]*Plugin)
@@ -2495,7 +2495,7 @@ func Register(name string, p *Plugin) error { /* registers plugin in registry */
 
 Consider what happens in the case of tests exercising code that transitively relies on a sidecar for cloud logging.
 
-```go
+```go bad
 package app
 
 import (
@@ -2540,7 +2540,7 @@ Using global state poses problems that lack easy answers for you and the API's c
 
 - What happens if a client needs to use different and separately operating sets of `Plugin`s (for example, to support multiple servers) in the same process space?
 
-- What happens if a client wants to replace a registered `Plugin` with an alternative implementation in a test, like a [test double](https://abseil.io/resources/swe-book/html/ch13.html#basic_concepts)?
+- What happens if a client wants to replace a registered `Plugin` with an alternative implementation in a test, like a [test double](https://abseil.io/resources/swe-book/html/ch13.html)?
 
   What happens if a client's tests require hermeticity between instances of a `Plugin`, or between all of the plugins registered?
 
@@ -2572,7 +2572,7 @@ Several of the most common problematic API forms are enumerated below:
 
 - Top-level variables irrespective of whether they are exported.
 
-  ```go
+  ```go bad
   package logger
 
   // Sinks manages the default output sources for this package's logging API.  This
@@ -2586,7 +2586,7 @@ Several of the most common problematic API forms are enumerated below:
 
 - Registries for [callbacks](https://en.wikipedia.org/wiki/Callback_\(computer_programming\)) and similar behaviors.
 
-  ```go
+  ```go bad
   package health
 
   var unhealthyFuncs []func
@@ -2598,7 +2598,7 @@ Several of the most common problematic API forms are enumerated below:
 
 - Thick-Client singletons for things like backends, storage, data access layers, and other system resources. These often pose additional problems with service reliability.
 
-  ```go
+  ```go bad
   package useradmin
 
   var client pb.UserAdminServiceClientInterface
@@ -2621,7 +2621,7 @@ Several of the most common problematic API forms are enumerated below:
 
 - Multiple functions interact via global state when executed in the same program, despite being otherwise independent (for example, authored by different authors in vastly different directories).
 - Independent test cases interact with each other through global state.
-- Users of the API are tempted to swap or replace global state for testing purposes, particularly to replace any part of the state with a [test double](https://abseil.io/resources/swe-book/html/ch13.html#basic_concepts), like a stub, fake, spy, or mock.
+- Users of the API are tempted to swap or replace global state for testing purposes, particularly to replace any part of the state with a [test double](https://abseil.io/resources/swe-book/html/ch13.html), like a stub, fake, spy, or mock.
 - Users have to consider special ordering requirements when interacting with global state: `func init`, whether flags are parsed yet, etc.
 
 Provided the conditions above are avoided, there are a **few limited circumstances under which these APIs are safe**, namely when any of the following is true:
@@ -2638,7 +2638,7 @@ Provided the conditions above are avoided, there are a **few limited circumstanc
 An example of one of these safe situations is [`package image`](https://pkg.go.dev/image) with its [`image.RegisterFormat`](https://pkg.go.dev/image#RegisterFormat) function. Consider the litmus tests from above applied to a typical decoder, like the one for handling the [PNG](https://pkg.go.dev/image/png) format:
 
 - Multiple calls to `package image`'s APIs that use the registered decoders (for example, `image.Decode`) cannot interfere with one another, similarly for tests. The only exception is `image.RegisterFormat`, but that is mitigated by the points below.
-- It is extremely unlikely that a user would want to replace a decoder with a [test double](https://abseil.io/resources/swe-book/html/ch13.html#basic_concepts), as the PNG decoder exemplifies a case in which our codebase's preference for real objects applies. However, a user would be more likely to replace a decoder with a test double if the decoder statefully interacted with operating system resources (for example, the network).
+- It is extremely unlikely that a user would want to replace a decoder with a [test double](https://abseil.io/resources/swe-book/html/ch13.html), as the PNG decoder exemplifies a case in which our codebase's preference for real objects applies. However, a user would be more likely to replace a decoder with a test double if the decoder statefully interacted with operating system resources (for example, the network).
 - Collisions in registration are conceivable, though they are probably rare in practice.
 - The decoders are stateless, idempotent, and pure.
 
@@ -2656,7 +2656,7 @@ Follow the [litmus tests](#globals-litmus-tests) with these guidelines in such c
 
    For example, an infrastructure provider implementing a sidecar that is to be shared with other teams using the API from the top should offer an API to accommodate this:
 
-   ```go
+   ```go good
    package cloudlogger
 
    func New() *Logger { ... }
@@ -2687,7 +2687,7 @@ The most common mistake is creating an interface before a [real need](https://go
 
 2. **Reuse existing interfaces:** If an interface already exists, especially in generated code, like a RPC client or server, use it ([testing RPC](https://codelabs.developers.google.com/grpc/getting-started-grpc-go#3)). Do not wrap a generated RPC code in a new, manual interface just for the sake of abstraction or testing. [Use real transports](#use-real-transports) instead.
 
-3. **Don't define back doors only for tests:** Do not export a [test double](https://abseil.io/resources/swe-book/html/ch13.html#basic_concepts) implementation of an interface from an API that consumes it. Instead, prefer to design the API so that it can be tested using the [public API](https://abseil.io/resources/swe-book/html/ch12.html#test_via_public_apis) of the real implementation.
+3. **Don't define back doors only for tests:** Do not export a [test double](https://abseil.io/resources/swe-book/html/ch13.html) implementation of an interface from an API that consumes it. Instead, prefer to design the API so that it can be tested using the [public API](https://abseil.io/resources/swe-book/html/ch12.html#test_via_public_apis) of the real implementation.
 
    Every exported type increases the cognitive load for the reader. When you export a test double alongside the real implementation, you force the reader to understand three entities (the interface, the real implementation, and the test double) instead of one.
 
@@ -2739,7 +2739,7 @@ There are several common scenarios where returning an interface is the idiomatic
 
    Consider a `ThrottledReader` that implements `io.Reader` but also has a `Refill` method for internal bucket management. Returning the concrete `*ThrottledReader` invites the caller to manage the bucket manually, which could lead to race conditions or broken rate-limiting logic. By returning an interface, you tell the caller that your only job is to consume this reader. If you try to cast this back to a `ThrottledReader` to `Refill` the internal bucket, you are breaking the contract.
 
-   ```go
+   ```go good
    type ThrottledReader struct {
        source     io.Reader
        limit      int  // bytes per second
@@ -2773,7 +2773,7 @@ There are several common scenarios where returning an interface is the idiomatic
 
 2. **Certain patterns:** If a function is designed to return one of several different concrete types based on decisions made at runtime, it must return an interface. This is commonly true with command, chaining, factory, and [strategy](https://en.wikipedia.org/wiki/Strategy_pattern) patterns. Consider this code that selects which encoder to use based the requested format:
 
-   ```go
+   ```go good
    func NewWriter(format string) io.Writer {
        switch format {
        case "json":
@@ -2788,7 +2788,7 @@ There are several common scenarios where returning an interface is the idiomatic
 
    The following example of a chaining API demonstrates how returning an interface enables polymorphic behavior. By allowing callers to use either `client.Do(req)` or `client.WithAuth("token").Do(req)`, you can swap implementations without breaking the calling code.
 
-   ```go
+   ```go good
    type Client interface {
        WithAuth(token string) Client
        Do(req *Request) error
@@ -2797,11 +2797,11 @@ There are several common scenarios where returning an interface is the idiomatic
 
    These patterns are guidelines, not rules. Avoid forcing an interface if a single, robust concrete type can handle the abstraction internally. For example, the standard [database/sql](https://pkg.go.dev/database/sql#DB) library exports a single concrete `DB` type instead of forcing an interface to handle types like `MySQLDB` and `OracleDB`.
 
-3. **Avoiding circular dependencies:** If returning a concrete type would require importing a package that already imports your current package, you must return an interface to break the circular dependency.
+3. <span id="avoiding-circular-dependencies">**Avoiding circular dependencies:**</span> If returning a concrete type would require importing a package that already imports your current package, you must return an interface to break the circular dependency.
 
    For example:
 
-   ```go
+   ```go bad
    package app
 
    import "myproject/plugin"
@@ -2815,7 +2815,7 @@ There are several common scenarios where returning an interface is the idiomatic
    }
    ```
 
-   ```go
+   ```go bad
    package plugin
 
    import "myproject/app"  // ERROR: Import cycle!

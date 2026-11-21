@@ -73,57 +73,57 @@ Source: <https://google.github.io/styleguide/verilogguide.html> · google/styleg
   - L2511 Vector Typedefs
 - L2558 Functions and Tasks
   - L2560 Choosing Between Functions, Tasks, and Modules
-  - L2574 Templates
-  - L2604 Latches inside functions
-  - L2608 Lifetime
-  - L2616 Function Data Types
-  - L2632 Argument Types
-  - L2648 Argument Directions
-- L2664 Sequential Logic
-  - L2666 always_ff vs always
-  - L2670 Use Non-Blocking Assignments
-  - L2682 Sequential Logic (Latches)
-  - L2690 Sequential Logic (Registers)
-  - L2772 Resets
-  - L2776 Delay Modeling
-  - L2802 Finite State Machines
-- L2898 Combinational Logic
-  - L2900 Use always_comb or assign
-  - L2906 Use blocking assignments
-  - L2914 X Propagation
-  - L3006 Don't-Care Assignments
-  - L3074 Tri-State Logic
-  - L3078 Case Statements
-  - L3250 Signed Operations
-  - L3340 Bit Widths
-  - L3464 Bit Slicing
-  - L3487 Alias statement
-  - L3493 Implicitly Sized Expressions
-- L3535 Design Conventions
-  - L3537 Summary
-  - L3547 Timescale
-  - L3553 Bus Protocols
-  - L3560 Flow Control
-  - L3651 Synchronization
-  - L3706 Top-level Implementation
-  - L3724 Registered Inputs and Outputs
-- L3739 Verification
-  - L3741 Summary
-  - L3745 Assertions
-  - L3763 Unit Tests and Designer Tests
-  - L3783 Constraints
-  - L3799 Plusargs
-  - L3847 Text Formatting
-  - L3919 Loop operators
-  - L3943 Code Within Asserts
-  - L3960 Wait and Fork
-  - L3979 Void Casts
-  - L4004 Associative arrays
-  - L4020 Bind Statements
-  - L4026 Program block
-  - L4032 Simulator-specific code
-  - L4049 Forbidden System Tasks and Functions
-  - L4063 UVM
+  - L2571 Templates
+  - L2601 Latches inside functions
+  - L2605 Lifetime
+  - L2613 Function Data Types
+  - L2629 Argument Types
+  - L2645 Argument Directions
+- L2661 Sequential Logic
+  - L2663 always_ff vs always
+  - L2667 Use Non-Blocking Assignments
+  - L2679 Sequential Logic (Latches)
+  - L2687 Sequential Logic (Registers)
+  - L2769 Resets
+  - L2773 Delay Modeling
+  - L2799 Finite State Machines
+- L2895 Combinational Logic
+  - L2897 Use always_comb or assign
+  - L2903 Use blocking assignments
+  - L2911 X Propagation
+  - L3003 Don't-Care Assignments
+  - L3071 Tri-State Logic
+  - L3075 Case Statements
+  - L3247 Signed Operations
+  - L3337 Bit Widths
+  - L3462 Bit Slicing
+  - L3485 Alias statement
+  - L3491 Implicitly Sized Expressions
+- L3533 Design Conventions
+  - L3535 Summary
+  - L3545 Timescale
+  - L3551 Bus Protocols
+  - L3558 Flow Control
+  - L3649 Synchronization
+  - L3704 Top-level Implementation
+  - L3719 Registered Inputs and Outputs
+- L3734 Verification
+  - L3736 Summary
+  - L3740 Assertions
+  - L3758 Unit Tests and Designer Tests
+  - L3778 Constraints
+  - L3794 Plusargs
+  - L3842 Text Formatting
+  - L3914 Loop operators
+  - L3938 Code Within Asserts
+  - L3955 Wait and Fork
+  - L3974 Void Casts
+  - L3999 Associative arrays
+  - L4015 Bind Statements
+  - L4021 Program block
+  - L4027 Simulator-specific code
+  - L4044 Forbidden System Tasks and Functions
+  - L4058 UVM
 
 ---
 
@@ -160,7 +160,7 @@ The following Style Linter tools can be used to automatically check the code for
 
 ### Style Guide Exceptions
 
-Justify all exceptions with a comment.
+<span class="Summary">Justify all exceptions with a comment.</span>
 
 No style guide is perfect. There are times when the best path to a working design, or for working around a tool issue, is to simply cut the Gordian Knot and create code that is at variance with this style guide. It is always okay to deviate from the style guide by necessity, as long as that necessity is clearly justified by a brief comment, as well as a [Style Linter](#style-linter) waiver pragma where appropriate.
 
@@ -182,19 +182,19 @@ Common Scenarios and Preferred Approaches:
 
 ### Which Verilog to Use
 
-Prefer SystemVerilog-2017.
+<span class="Summary">Prefer SystemVerilog-2017.</span>
 
 All RTL and tests must be developed in SystemVerilog, following the [SystemVerilog-2017 standard](https://ieeexplore.ieee.org/document/8299595).
 
 ### What about VHDL?
 
-Google uses Verilog for logic design.
+<span class="Summary">Google uses Verilog for logic design.</span>
 
 Precedent has already been established that Verilog is the choice for logic design at Google.
 
 ### Reusable IP
 
-Common RTL that is intended to be used across multiple projects is referred to as reusable IP.
+<span class="Summary">Common RTL that is intended to be used across multiple projects is referred to as reusable IP.</span>
 
 ## File Conventions
 
@@ -204,7 +204,7 @@ This section covers file conventions, mostly how files are to be [named](#file-n
 
 ### File Extensions
 
-Use `.sv` and `.svh` file extensions for SystemVerilog files.
+<span class="Summary">Use `.sv` and `.svh` file extensions for SystemVerilog files.</span>
 
 File extensions have the following meanings:
 
@@ -215,7 +215,7 @@ File extensions have the following meanings:
 
 ### File Names
 
-File names must match the design element name and indicate the Verilog dialect.
+<span class="Summary">File names must match the design element name and indicate the Verilog dialect.</span>
 
 If a source file declares a design element, the file name must begin with the name of that design element. For example, a file declaring a module named `interconnect` must be named `interconnect.sv`.
 
@@ -225,7 +225,7 @@ For variants of a design element, it is permissible to insert dot-delimited stri
 
 ### Standard Design Files
 
-The following filenames are special: `[design]_top.sv`, `[design]_pkg.sv`.
+<span class="Summary">The following filenames are special: `[design]_top.sv`, `[design]_pkg.sv`. </span>
 
 Each design must have two standard files, `[design]_top.sv` and `[design]_pkg.sv`, where `[design]` is the unique name of the design.
 
@@ -238,21 +238,21 @@ A "design block" is the fundamental architecture or microarchitecture building b
 
 ### File Structure
 
-The overall structure of a SystemVerilog file must start with the [header](#header), followed by the declaration and then the implementation.
+<span class="Summary">The overall structure of a SystemVerilog file must start with the [header](#header), followed by the declaration and then the implementation.</span>
 
 #### Header Comment
 
-Every file must start with a header comment.
+<span class="Summary">Every file must start with a header comment.</span>
 
 A header comment contains a short description of the design element, explaining what problem it solves. Additional text must give an overview of any non-obvious parts of the theory of operation of this particular implementation.
 
 ### Basic Template
 
-A template that demonstrates many of the items detailed throughout the style guide.
+<span class="Summary">A template that demonstrates many of the items detailed throughout the style guide.</span>
 
 Template:
 
-```verilog
+```verilog good
 // A quick description of the design element goes here. What its intent is,
 // and a general theory of operation.
 
@@ -272,7 +272,7 @@ endmodule
 
 ### Generated Code
 
-Generated code must be accompanied by all necessary input files and scripts necessary to automatically reproduce the generated output.
+<span class="Summary">Generated code must be accompanied by all necessary input files and scripts necessary to automatically reproduce the generated output.</span>
 
 Generators include Verilog preprocessors and programs that create Verilog from other sources like Haskell, Chisel, C or C++.
 
@@ -297,17 +297,17 @@ The Aesthetics and Formatting section addresses purely aesthetic aspects of styl
 
 #### Characters
 
-Use only ASCII characters with UNIX-style line endings("\n").
+<span class="Summary">Use only ASCII characters with UNIX-style line endings("\n").</span>
 
 #### POSIX File Endings
 
-All lines on non-empty files must end with a newline ("\n").
+<span class="Summary">All lines on non-empty files must end with a newline ("\n").</span>
 
 The [POSIX standard](http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_206) mandates that lines end with a newline character. This includes the final line in every file.
 
 #### Line Length
 
-Wrap the code at 100 characters per line.
+<span class="Summary">Wrap the code at 100 characters per line.</span>
 
 The maximum line length for style-compliant Verilog code is 100 characters per line.
 
@@ -319,7 +319,7 @@ Exceptions:
 
 #### No Tabs
 
-Do not use tabs anywhere.
+<span class="Summary">Do not use tabs anywhere.</span>
 
 Use spaces to indent or align text. See [Indentation](#indentation) for rules about indentation and wrapping.
 
@@ -327,34 +327,34 @@ To convert tabs to spaces on any file, you can use the [UNIX `expand`](http://li
 
 #### No Trailing Spaces
 
-Delete trailing whitespace at the end of lines.
+<span class="Summary">Delete trailing whitespace at the end of lines.</span>
 
 #### No Redundant Semicolons
 
-Delete redundant semicolons.
+<span class="Summary">Delete redundant semicolons.</span>
 
 Semicolons may represent null statements or items in SystemVerilog. One is enough; consecutive semicolons (`;;`) are likely typos.
 
 ### Eschatology
 
-Use `begin` and `end` unless the whole statement fits on a single line.
+<span class="Summary">Use `begin` and `end` unless the whole statement fits on a single line.</span>
 
 If a whole semicolon-terminated statement fits on a single line, `begin` and `end` may be omitted, otherwise enclose it in `begin` and `end`.
 
-```verilog
+```verilog good
 // Wrapped procedural block requires begin and end.
 always @(posedge clk) begin
   q <= d;
 end
 ```
 
-```verilog
+```verilog good
 // The exception case, where begin and end may be omitted as the entire
 // structure fits on a single line.
 always @(posedge clk) q <= d;
 ```
 
-```verilog
+```verilog bad
 // Incorrect because a wrapped statement must have begin and end.
 always @(posedge clk)
   q <= d;
@@ -362,7 +362,7 @@ always @(posedge clk)
 
 Assume that any macro call could expand to multiple statements, and enclose them in `begin` and `end` where necessary (for example, inside conditional and loop blocks).
 
-```verilog
+```verilog good
 // The contents of the called macro are safely enclosed and controlled.
 if (expr) begin
   `MACRO(...);
@@ -374,7 +374,7 @@ else begin
 end
 ```
 
-```verilog
+```verilog bad
 // A multi-statement macro would have only its first statement controlled:
 if (expr) `MACRO(...);
 
@@ -384,7 +384,7 @@ else `MACRO(...);
 
 `begin` must be on the same line as the preceding keyword, and ends the line. `end` must start a new line. `end else begin` must be together on one line. The only exception is if `end` has a label, a following `else` must be on a new line.
 
-```verilog
+```verilog good
 // "end else begin" are on the same line.
 if (condition) begin
   foo = bar;
@@ -395,14 +395,14 @@ end
 
 For single-statement blocks, `begin` and `end` may be omitted if the statement fits on a single line. Both styles (including or omitting `begin` and `end`) are acceptable.
 
-```verilog
+```verilog good
 // begin/end may be omitted because each semicolon-terminated statement fits on
 // a single line (both styles are acceptable).
 if (condition) foo = bar;
 else foo = bum;
 ```
 
-```verilog
+```verilog bad
 // Incorrect because "else" must be on the same line as "end".
 if (condition) begin
   foo = bar;
@@ -412,7 +412,7 @@ else begin
 end
 ```
 
-```verilog
+```verilog good
 // An exception is made for labeled blocks.
 if (condition) begin : a
   foo = bar;
@@ -424,7 +424,7 @@ end : b
 
 The preceding style also applies to individual case items within a case statement. `begin` and `end` may be omitted if the entire case item (the case expression and the associated statement) fits on a single line. Otherwise, use the `begin` keyword on the same line as the case expression.
 
-```verilog
+```verilog good
 // Consistent use of begin and end for each case item is good.
 unique case (state)
   kIdle: begin
@@ -443,7 +443,7 @@ unique case (state)
 endcase
 ```
 
-```verilog
+```verilog good
 // Case items that fit on a single line may omit begin and end.
 unique case (state)
   kIdle: state_next = kA;
@@ -456,7 +456,7 @@ unique case (state)
 endcase
 ```
 
-```verilog
+```verilog bad
 unique case (state)
   kIdle:              // These lines are incorrect because we must not wrap
     state_next = kA;  // case items at a block boundary without using begin
@@ -474,7 +474,7 @@ endcase
 
 ### Indentation
 
-Indentation is two spaces per level.
+<span class="Summary">Indentation is two spaces per level.</span>
 
 Indentation is two spaces per level, no tabs. (Configure your editor to emit spaces when you hit the tab key.)
 
@@ -491,7 +491,7 @@ Always add an additional level of indentation to the enclosed sections of all pa
 
 Indent all members of struct, union, and enum declarations by two spaces.
 
-```verilog
+```verilog good
 typedef struct packed {
   logic bar;
 } foo_t;
@@ -501,7 +501,7 @@ typedef struct packed {
 
 When wrapping a long expression, indent the continued part of the expression by four spaces, like this:
 
-```verilog
+```verilog good
 assign zulu = enabled && (
     alpha < bravo &&
     charlie < delta);
@@ -531,7 +531,7 @@ my_module my_module (
 
 Or, if it improves readability, align the continued part of the expression with a grouping open parenthesis or brace. Similarly, an expression containing a nested struct may be aligned with the first structure member name. In the absence of other considerations, use the minimum number of lines.
 
-```verilog
+```verilog good
 assign zulu = enabled && (alpha < bravo &&
                           charlie < delta);
 
@@ -550,11 +550,11 @@ Operators in a wrapped expression can be placed at either the end or the beginni
 
 #### Preprocessor Directives
 
-Keep branching preprocessor directives left-aligned and un-indented.
+<span class="Summary">Keep branching preprocessor directives left-aligned and un-indented.</span>
 
 Keep branching preprocessor directives (`` `ifdef ``, `` `ifndef ``, `` `else ``, `` `elsif ``, `` `endif ``) aligned to the left, even if they are nested. Indent the conditional branches of text as if the preprocessor directives were absent. Non-branching preprocessor directives must follow the same indentation rules as the regular code.
 
-```verilog
+```verilog good
 package foo_pkg;
 `ifdef FOO              // Good: branching directive left-aligned
   `include "foo.svh"    // normal indentation for non-branching directives
@@ -568,7 +568,7 @@ package foo_pkg;
 endpackage : foo_pkg
 ```
 
-```verilog
+```verilog bad
 package foo_pkg;
   `ifdef FOO            // Bad: needs to be un-indented
   `include "foo.svh"
@@ -582,7 +582,7 @@ package foo_pkg;
 endpackage : foo_pkg
 ```
 
-```verilog
+```verilog bad
 package foo_pkg;
   `ifdef FOO              // Bad: needs to be un-indented
     `include "foo.svh"    // Bad: extra indentation level
@@ -602,7 +602,7 @@ Un-indented branching preprocessor directives disrupt the flow of reading to emp
 
 #### Space Around Keywords
 
-Include whitespace before and after SystemVerilog keywords.
+<span class="Summary">Include whitespace before and after SystemVerilog keywords.</span>
 
 Keywords must be delimited by whitespace, even if not syntactically required.
 
@@ -614,7 +614,7 @@ Do not include a whitespace:
 
 For example:
 
-```verilog
+```verilog good
 // Normal indentation before if.  Include a space after if.
 if (foo) begin
 end
@@ -625,19 +625,19 @@ end
 
 #### Space Around Binary Operators
 
-Include whitespace on both sides of all binary operators.
+<span class="Summary">Include whitespace on both sides of all binary operators. </span>
 
 Use spaces around all binary operators. Add sufficient whitespace to aid readability.
 
 For example:
 
-```verilog
+```verilog good
 assign a = ((addr & mask) == MyAddress) ? b[1] : ~b[0];
 parameter int Width = Msb - Lsb;
 function logic crc(input logic [7:0] data, mask = 8'hff);
 ```
 
-```verilog
+```verilog bad
 assign a=((addr&mask)==MyAddress)?b[1]:~b[0];  // Bad: no space around operators
 parameter int Width=Msb - Lsb;  // Bad: no space around '='
 function automatic logic crc(input logic [7:0] data, mask=8'hff);  // Bad: no space around '='
@@ -645,7 +645,7 @@ function automatic logic crc(input logic [7:0] data, mask=8'hff);  // Bad: no sp
 
 **Exception:** When declaring a bit vector or indexing or slicing an array, it is acceptable to use the compact notation for simple expressions. For example:
 
-```verilog
+```verilog good
 logic [Width-1:0] foo;          // Declaration: compact is acceptable
 logic [Width - 1 : 0] foo;      // Declaration: spaced is fine also
 assign foo = bar[Width-1:0];    // Slice: compact is acceptable
@@ -654,17 +654,17 @@ assign foo = bar[Width - 1:0];  // Slice: spaced is fine also
 
 For more complex expressions in array indices, space-delimit all binary operators.
 
-```verilog
+```verilog good
 assign foo = bar[Factor1 - Factor0 - 1:0]; // Good: operators are space-delimited
 ```
 
-```verilog
+```verilog bad
 assign foo = bar[Factor1-Factor0-1:0]; // Bad: complex expression without spaces
 ```
 
 When splitting alternation expressions into multiple lines, use a format that is similar to an equivalent if-then-else line. For example:
 
-```verilog
+```verilog good
 assign a = ((addr & mask) == MyAddress)
            ? matches_value
            : doesnt_match_value;
@@ -672,18 +672,18 @@ assign a = ((addr & mask) == MyAddress)
 
 #### Comma-delimited Lists
 
-For multiple items on a line, one space must separate the comma and the next character.
+<span class="Summary">For multiple items on a line, one space must separate the comma and the next character.</span>
 
 Additional whitespace is allowed for readability.
 
-```verilog
+```verilog good
 bus = {addr, parity, data};
 a = myfunc(lorem, ipsum, dolor, sit, amet, consectetur, adipiscing, elit,
            rhoncus);
 mymodule mymodule (.a(a), .b(b));
 ```
 
-```verilog
+```verilog bad
 {parity,data} = bus;
 a = myfunc(a,b,c);
 mymodule mymodule (.a(a),.b(b));
@@ -691,7 +691,7 @@ mymodule mymodule (.a(a),.b(b));
 
 #### Tabular Alignment
 
-Adding whitespace to align related items is recommended.
+<span class="Summary">Adding whitespace to align related items is recommended.</span>
 
 Where it is reasonable to do so, align a group of two or more similar lines so that the identical parts are directly above one another. This alignment makes it easy to see which characters are the same and which characters are different between lines.
 
@@ -699,7 +699,7 @@ Where it is reasonable to do so, align a group of two or more similar lines so t
 
 For example:
 
-```verilog
+```verilog good
 logic [7:0]  my_interface_data;
 logic [15:0] my_interface_address;
 logic        my_interface_enable;
@@ -716,7 +716,7 @@ Do not add a space:
 
 Applies to packed and unpacked arrays as well as dynamic arrays, associative arrays, and queues.
 
-```verilog
+```verilog good
 logic [7:0][3:0] data[128][2];
 typedef logic [31:0] word_t;
 bit bit_array[512];
@@ -725,7 +725,7 @@ data_t some_map[addr_t];
 data_t some_q[$];
 ```
 
-```verilog
+```verilog bad
 // There must not be a space between dimensions.
 logic [7:0] [3:0] data[128] [2];
 // There must be a space around packed dimensions.
@@ -741,11 +741,11 @@ data_t some_q [$];
 
 #### Parameterized Types
 
-Add one space before type parameters, except when the type is part of a qualified name.
+<span class="Summary">Add one space before type parameters, except when the type is part of a qualified name.</span>
 
 A qualified name contains at least one scope `::` operator connecting its segments. A space in a qualified name would break the continuity of a reference to one symbol, so it must not be added. Parameter lists must follow the [space-after-comma](#comma-spacing) rule.
 
-```verilog
+```verilog good
 my_fifo #(.Width($bits(nibble_t)), .Depth(2)) my_fifo_nibble(.in, .out);
 
 class foo extends bar #(32, 8);  // unqualified base class
@@ -757,7 +757,7 @@ foo_h = my_class#(.X(1), .Y(0))::type_id::create("foo_h");  // static method cal
 my_pkg::x_class#(8, 1) bar;  // package-qualified name
 ```
 
-```verilog
+```verilog bad
 my_fifo#(.Width(4), .Depth(2)) my_fifo_2by4(.in, .out);  // instantiation
 
 class foo extends bar#(32, 8);  // unqualified base class
@@ -771,17 +771,17 @@ my_pkg::x_class #(8, 1) bar;  // package-qualified name
 
 #### Labels
 
-Code block labels have one space before and after the colon. Statement labels have no space before the colon and one space after the colon.
+<span class="Summary">Code block labels have one space before and after the colon. Statement labels have no space before the colon and one space after the colon.</span>
 
 For example:
 
-```verilog
+```verilog good
 begin : foo
   my_statement_label: assert(ptr > 0);
 end : foo
 ```
 
-```verilog
+```verilog bad
 end:bar              // Block label must have a space before and after the colon.
 endmodule: foobar    // Block label must have a space before the colon.
 
@@ -796,7 +796,7 @@ The `default` case item must include a colon.
 
 For example:
 
-```verilog
+```verilog good
 unique case (my_state)
   kInit:   $display("Shall we begin");
   kError:  $display("/this is fine meme");
@@ -807,7 +807,7 @@ unique case (my_state)
 endcase
 ```
 
-```verilog
+```verilog bad
 unique case (1'b1)
   (my_state == kError)  : interrupt = 1;  // Excess whitespace before colon
   default:begin end                       // Missing space after colon
@@ -816,11 +816,11 @@ endcase
 
 #### Module Header Spacing
 
-Module header definitions have spaces after the module name and between any parameter lists and port lists.
+<span class="Summary">Module header definitions have spaces after the module name and between any parameter lists and port lists.</span>
 
 For example:
 
-```verilog
+```verilog good
 module my_module (
     ...
 );
@@ -832,7 +832,7 @@ module my_module #(
 );
 ```
 
-```verilog
+```verilog bad
 module my_module( // There must be a space after the module name.
     ...
 );
@@ -846,16 +846,16 @@ module my_module #(
 
 #### Module Instantiation Spacing
 
-Module instances have spaces after the instance name and between any parameter lists and port lists.
+<span class="Summary">Module instances have spaces after the instance name and between any parameter lists and port lists.</span>
 
 For example:
 
-```verilog
+```verilog good
 my_module #(...) my_module (...);
 my_module my_module (...);
 ```
 
-```verilog
+```verilog bad
 // The space after the instance name is missing.
 my_module #(...) my_module(...);
 my_module my_module(...);
@@ -863,41 +863,41 @@ my_module my_module(...);
 
 #### Function And Task Calls
 
-Function and task calls must not have any spaces between the function name or task name and the open parenthesis.
+<span class="Summary">Function and task calls must not have any spaces between the function name or task name and the open parenthesis.</span>
 
 For example:
 
-```verilog
+```verilog good
 process_packet(pkt);
 ```
 
-```verilog
+```verilog bad
 process_packet (pkt);  // There must not be a space before "("
 ```
 
 #### Macro Calls
 
-Macro calls must not have any spaces between the macro name and the open parenthesis.
+<span class="Summary">Macro calls must not have any spaces between the macro name and the open parenthesis.</span>
 
 For example:
 
-```verilog
+```verilog good
 `uvm_error(ID, "you fail")
 `ASSERT(name_A, a & b, clk, rst)
 ```
 
-```verilog
+```verilog bad
 `uvm_error (ID, "you fail")  // There must not be a space before "("
 `ASSERT (name_A, a & b, clk, rst)
 ```
 
 #### Line Continuation
 
-It is recommended to right-align line continuations.
+<span class="Summary">It is recommended to right-align line continuations. </span>
 
 Aligning line continuations ('`\ `' character) helps visually mark the end of a multi-line macro. The position of alignment only needs to be beyond the rightmost extent of a multi-line macro by at least one space, when a space does not split a token, but must not exceed the maximum line length.
 
-```verilog
+```verilog good
 `define REALLY_LONG_MACRO(arg1, arg2, arg3) \
     do_something(arg1);                     \
     do_something_else(arg2);                \
@@ -906,22 +906,22 @@ Aligning line continuations ('`\ `' character) helps visually mark the end of a 
 
 ### Parentheses
 
-Use parentheses to make operations unambiguous.
+<span class="Summary">Use parentheses to make operations unambiguous.</span>
 
 In any instance where a reasonable human would need to expend thought or refer to an operator precedence chart, use parentheses instead to make the order of operations unambiguous.
 
 #### Reduction Operator
 
-Parentheses are required to isolate any reduction operation when immediately preceded by any other operator.
+<span class="Summary">Parentheses are required to isolate any reduction operation when immediately preceded by any other operator.</span>
 
-```verilog
+```verilog good
 logic [7:0] a;
 logic b;
 logic c;
 assign c = b & (&a);  // Parentheses make the intent clear
 ```
 
-```verilog
+```verilog bad
 logic [7:0] a;
 logic b;
 logic c;
@@ -930,11 +930,11 @@ assign c = b & &a;  // Bad: This can easily be a typo, still valid Systemverilog
 
 #### Ternary Expressions
 
-Nested ternary expressions must be enclosed in parentheses.
+<span class="Summary">Nested ternary expressions must be enclosed in parentheses.</span>
 
 For example:
 
-```verilog
+```verilog good
 assign state_next = condition_b
     ? (condition_a
        ? a_and_b
@@ -944,7 +944,7 @@ assign state_next = condition_b
 
 While the following nested ternary has only one meaning to the compiler, the meaning can be unclear and error-prone to humans:
 
-```verilog
+```verilog bad
 assign state_next = condition_b
     ? condition_a
     ? a_and_b
@@ -954,13 +954,13 @@ assign state_next = condition_b
 
 ### Comments
 
-C++ style comments (`// foo`) are strongly recommended for single and multi-line comments. The `/**` token is reserved for use with generators.
+<span class="Summary">C++ style comments (`// foo`) are strongly recommended for single and multi-line comments. The `/**` token is reserved for use with generators.</span>
 
 A standalone comment above a block of code explains that code. An inline comment explains the code that is on the same line as the comment.
 
 For example:
 
-```verilog
+```verilog good
 // This is a multi-line comment that describes the basic functionality and key
 // features of the following module.
 module foo;
@@ -972,7 +972,7 @@ localparam bit Baz = 1;  // This comment describes the item to the left. If
                          // line of code the comment is referring to.
 ```
 
-```verilog
+```verilog bad
 /* Grepping this line looks commented.
    Grepping this line looks uncommented.
    That is confusing. */
@@ -982,7 +982,7 @@ Comments that start with `/**` are reserved for use by generator directives.
 
 #### Punctuation, Spelling, and Grammar
 
-Maintain consistent and correct [punctuation, spelling, and grammar](https://google.github.io/styleguide/cppguide.html#Punctuation,_Spelling_and_Grammar) within comments.
+<span class="Summary">Maintain consistent and correct [punctuation, spelling, and grammar](https://google.github.io/styleguide/cppguide.html#Punctuation,_Spelling_and_Grammar) within comments.</span>
 
 Pay attention to punctuation, spelling, and grammar; it is easier to read well-written comments than badly written ones.
 
@@ -998,7 +998,7 @@ Do not keep commented out or unreachable code. Instead, rely on the version cont
 
 ### Naming Overview
 
-All identifiers are styled `lower_snake_case` unless otherwise specified in the following table.
+<span class="Summary">All identifiers are styled `lower_snake_case` unless otherwise specified in the following table.</span>
 
 > "There are only two hard things in Computer Science: cache invalidation and naming things." -- Phil Karlton
 
@@ -1037,7 +1037,7 @@ When adding a comment to a signal declaration, consider whether an improved sign
 
 Don't reuse variables for convenience. Instead create a new variable with a unique, descriptive name.
 
-```verilog
+```verilog bad
 logic temp;  // Bad: temp is not a descriptive name
 
 always_comb begin
@@ -1056,20 +1056,20 @@ endfunction
 
 ### Prefer Positive Enablement
 
-Signals, ports, and parameters must be named positively.
+<span class="Summary">Signals, ports, and parameters must be named positively.</span>
 
 All boolean signals are assumed to be active-high, unless explicitly named with a `_n` suffix to indicate that the [signal is active-low](#active-low-signals). Active-low signals are not recommended.
 
 When naming boolean parameters, prefer positive enablement names ("Foo" or "EnableFoo") over disablement ("DisableFoo").
 
-```verilog
+```verilog good
 // Good: binary parameters/localparams are named positively ("Enable"),
 // regardless of their default values.
 parameter bit EnableFoo = 0;
 parameter bit EnableBar = 1;
 ```
 
-```verilog
+```verilog bad
 // Bad: Parameter names are named negatively. Both the names and the values
 // must instead be inverted.
 parameter bit DisableFoo = 1;
@@ -1078,7 +1078,7 @@ parameter bit DisableBar = 0;
 
 ### Hierarchical consistency
 
-The same signal must have the same name at any level of the hierarchy.
+<span class="Summary">The same signal must have the same name at any level of the hierarchy.</span>
 
 A signal that connects to a port of an instance must have the same name as that port. By proceeding in this manner, signals that are directly connected must maintain the same name at any level of hierarchy.
 
@@ -1094,7 +1094,7 @@ A corollary of this principle is that signal names must change when that signal'
 
 ### Clock and Reset
 
-These signals must be named `clk`, `rst`, and `arst`.
+<span class="Summary">These signals must be named `clk`, `rst`, and `arst`. </span>
 
 Clocks and resets must follow the following naming rules:
 
@@ -1106,7 +1106,7 @@ These names may optionally be prefixed to specify more specific use. Most common
 
 For example:
 
-```verilog
+```verilog good
 input logic       smbus_clk,  // Clocks an "smbus" clock domain.
 input logic       smbus_rst,  // Synchronous reset, clocked by smbus_clk
 input logic       smbus_arst,  // Asynchronous reset, de-assert clocked by smbus_clk
@@ -1137,7 +1137,7 @@ Examples:
 
 Code example:
 
-```verilog
+```verilog good
 module fifo_controller (
     input logic clk,
     input logic rst,
@@ -1165,7 +1165,7 @@ This naming convention makes it easier to map port names onto similar signal nam
 
 #### Clock Domain Prefixes
 
-If a module contains multiple clocks, all signals must be prefixed by a clock domain mnemonic.
+<span class="Summary">If a module contains multiple clocks, all signals must be prefixed by a clock domain mnemonic.</span>
 
 Generally, it is recommended to structure modules so that most modules only have a single clock domain (fully synchronous). For modules that must span multiple clock domains, it is required that every port and signal within the module be labelled with a prefix that uniquely associates each signal with a clock domain. This prefix must be the same prefix used in the naming of the associated clock.
 
@@ -1173,7 +1173,7 @@ Even asynchronous resets must be de-asserted synchronously with a specific clock
 
 For example:
 
-```verilog
+```verilog good
 module foo_to_bar_cdc_fifo (
   // This module has two clocks, foo and bar:
   input  logic       foo_clk,
@@ -1206,7 +1206,7 @@ Source-destination prefixes are never mandatory, and must only be used at levels
 
 An example:
 
-```verilog
+```verilog good
 module foo (
     input logic clk,
     input logic rst,
@@ -1231,7 +1231,7 @@ module foo (
 );
 ```
 
-```verilog
+```verilog bad
 module foo (
     input logic clk,
     input logic rst,
@@ -1254,7 +1254,7 @@ module foo (
 
 #### Pipeline Stage Prefixes
 
-Clearly label your pipeline stage variables.
+<span class="Summary">Clearly label your pipeline stage variables.</span>
 
 When implementing a multi-stage pipeline, label your variables so that it is clear which pipeline stage each variable is associated with. For example, a three stage pipeline might use the prefixes `p1_`, `p2_`, and `p3_` to indicate which signal is associated with which stage.
 
@@ -1262,7 +1262,7 @@ Clearly labelling which pipeline stage a signal is associated with helps to dete
 
 Example:
 
-```verilog
+```verilog good
 // Pipe stage 1:
 always @(posedge clk) begin
   p1_x <= in_x;
@@ -1327,7 +1327,7 @@ Just as with [signals](#signal-units), include the units for a constant in the c
 
 Example:
 
-```verilog
+```verilog good
 localparam int InterfaceWidth = 64;  // Bits
 localparam int InterfaceWidthBytes = (InterfaceWidth + 7) / 8;
 localparam int InterfaceWidth64bWords = (InterfaceWidth + 63) / 64;
@@ -1339,19 +1339,19 @@ localparam int SystemClockHz = 200 * Mega;
 
 #### Active-Low Signals
 
-The `_n` suffix indicates an active-low signal.
+<span class="Summary">The `_n` suffix indicates an active-low signal.</span>
 
 It's recommended to avoid active-low signals. If active-low signals are used, they must have the `_n` suffix in their name. Otherwise, all signals are assumed to be active high.
 
 #### Differential Pairs
 
-Use the `_p` and `_n` suffixes to indicate a differential pair.
+<span class="Summary">Use the `_p` and `_n` suffixes to indicate a differential pair.</span>
 
 For example, `in_p` and `in_n` comprise a differential pair set.
 
 #### Valid Qualifier Suffix
 
-`foo_valid` indicates when `foo_*` signals are valid.
+<span class="Summary">`foo_valid` indicates when `foo_*` signals are valid. </span>
 
 Signals named with the "\_valid" suffix indicate when a set of related signals are valid. The signals being labelled by the "foo_valid" signal must all have the same "foo\_" prefix.
 
@@ -1363,7 +1363,7 @@ Note that the additional presence of a signal ending with `_ready` indicates the
 
 For example:
 
-```verilog
+```verilog good
 output logic [`DATA_WORD] data,
 output logic              data_valid,
 
@@ -1375,7 +1375,7 @@ output logic                    command_valid,
 
 #### Register Signal Suffixes
 
-The `_next` and `_le` suffixes have standard meanings related to registers.
+<span class="Summary">The `_next` and `_le` suffixes have standard meanings related to registers.</span>
 
 The `_next` suffix indicates a signal that is a D input into a register. Therefore, the `_next` suffix is permitted on interface signals and module ports to indicate next-state signals passing across hierarchical boundaries.
 
@@ -1383,7 +1383,7 @@ The `_le` suffix indicates an optional load-enable signal to a register.
 
 Example:
 
-```verilog
+```verilog good
 logic [15:0] foo;  // the Q output of a register
 logic [15:0] foo_next;  // the D input of that same register
 logic        foo_le;  // the load-enable for the foo register
@@ -1403,7 +1403,7 @@ The `_clear` suffix indicates a register-specific synchronous clear operation.
 
 #### Delayed Signal Suffix
 
-Signals delayed by a single clock cycle must end in a `_d` suffix.
+<span class="Summary">Signals delayed by a single clock cycle must end in a `_d` suffix.</span>
 
 If one signal is only a delayed version of another signal, the `_d` suffix must be used to indicate this relationship.
 
@@ -1411,7 +1411,7 @@ If another signal is then delayed by another clock cycle, the next signal must b
 
 Example:
 
-```verilog
+```verilog good
 always @(posedge clk) begin
   data_valid_d <= data_valid;
   data_valid_d2 <= data_valid_d;
@@ -1423,13 +1423,13 @@ NOTE: This guide makes a distinction between _delayed signals_ and _pipelines_. 
 
 #### Fixed-Point Signals
 
-Signals used for fixed-point arithmetic may be suffixed to indicate their sign, number of integer bits (including sign bit for signed signals), and number of fractional bits.
+<span class="Summary">Signals used for fixed-point arithmetic may be suffixed to indicate their sign, number of integer bits (including sign bit for signed signals), and number of fractional bits.</span>
 
 In modules with multiple fixed-point data types, adding a suffix to signal names may be useful to clearly capture intended design behavior. If a suffix is used, signal names must be in the form `_sMpN` for signed signals and `_uMpN` for unsigned signals. "N" indicates the number of fractional bits. "M" indicates the number of integer bits, including the sign bit for signed signals. This format is based on [Q Notation](https://en.wikipedia.org/wiki/Q_\(number_format\)).
 
 Example:
 
-```verilog
+```verilog good
 // signed, 3 bit integer, 12 bit fractional
 logic signed [14:0] foo_s3p12;
 // unsigned, 4 bit integer, 9 bit fractional
@@ -1443,7 +1443,7 @@ assign foo_bar_s6p12 = foo_s3p12 + signed'({1'b0, bar_u4p9, 3'd0});
 
 #### Order of Suffixes
 
-When combining multiple suffixes on a single signal, order them from inner semantic qualifiers to outer temporal qualifiers.
+<span class="Summary">When combining multiple suffixes on a single signal, order them from inner semantic qualifiers to outer temporal qualifiers.</span>
 
 When multiple standard suffixes apply to a single signal, they must be appended in the following order:
 
@@ -1455,7 +1455,7 @@ When multiple standard suffixes apply to a single signal, they must be appended 
 
 Examples:
 
-```verilog
+```verilog good
 // Semantic/unit qualifier before register/delay suffix
 logic foo_valid_d;
 logic [15:0] packet_len_bytes_next;
@@ -1474,7 +1474,7 @@ logic sync_n_n,  // Negative pin of active-low sync pair
 logic dma_req_n_d;
 ```
 
-```verilog
+```verilog bad
 // Bad: Register/delay suffix placed before semantic or fixed-point suffix
 logic in_d_valid;
 logic [15:0] packet_len_next_bytes;
@@ -1492,17 +1492,17 @@ This section provides guidance on the use of verilog preprocessor directives and
 
 ### Global Macro Files
 
-A global macro file is a file that contains only [global defines](#defines). Global defines are only permitted within global macro files.
+<span class="Summary">A global macro file is a file that contains only [global defines](#defines). Global defines are only permitted within global macro files.</span>
 
 Global macro files are distinct from [include files](#include-files). Global macro files may not be included using `` `include ``. They are intended to be visible by all source files in a project.
 
 ### Macro Definitions
 
-Macro names must be `ALL_CAPS` (in other words, consist of only capital letters, digits, or underscores).
+<span class="Summary">Macro names must be `ALL_CAPS` (in other words, consist of only capital letters, digits, or underscores).</span>
 
 A **global define** is a tick-defined macro in a [global macro file](#global-macro-files) that is shared by all source files in a project. To reduce namespace collisions, global defines must be prefixed by the name of a group of related macros, followed by a pair of underscores:
 
-```verilog
+```verilog good
 // The following is the BAR macro in the FOO namespace (optional)
 // of the DMA block.
 `define DMA_FOO__BAR(params) \
@@ -1511,7 +1511,7 @@ A **global define** is a tick-defined macro in a [global macro file](#global-mac
 
 A global define that is a natural extension or abbreviation of a construct in the UVM library is exempt from these rules - it is acceptable to define such macros with the same convention as the UVM library (in other words, `lower_snake_case`).
 
-Local macros must be prefixed with a single underscore.
+<span class="Summary">Local macros must be prefixed with a single underscore. </span>
 
 A **local define** is a tick-defined macro that must only be used within the scope of a single local file. It must be explicitly undefined after use, to avoid polluting the global macro namespace. To indicate that a macro is only meant to be used in the local scope, the macro name must be prefixed with a single underscore.
 
@@ -1519,7 +1519,7 @@ To ensure that local defines stay local, be careful not to `` `include `` other 
 
 Example:
 
-```verilog
+```verilog good
 `define _MAKE_THING(_x) \
     thing i_thing_##_x (.clk(clk), .i(i##_x) .o(o##_x));
 `_MAKE_THING(a)
@@ -1530,7 +1530,7 @@ Example:
 
 ### Standard Macros
 
-Use standard macros when available.
+<span class="Summary">Use standard macros when available.</span>
 
 Whenever possible, reuse standard macro libraries rather than writing your own. This style guide provides a reference implementation for the following standard macros.
 
@@ -1538,19 +1538,19 @@ Whenever possible, reuse standard macro libraries rather than writing your own. 
 
 The `STRINGIFY` macro presents a standard way to convert a macro argument into a string.
 
-```verilog
+```verilog good
 `define STRINGIFY(_x) `"_x`"
 ```
 
 For example:
 
-```verilog
+```verilog good
 `define DISPLAY_VALUE(_x) $display("%s: %p", `STRINGIFY(_x), (_x))
 ```
 
 Don't invent alternative implementations:
 
-```verilog
+```verilog bad
 // This doesn't work with all tools, use STRINGIFY instead:
 `define BAD_DISPLAY_VALUE(_x) $display("%s: %p", "_``_x``_", (_x))
 ```
@@ -1564,7 +1564,7 @@ The verilog expression `array[index]` would return `'X` for out-of-bound indices
 - Efficient: unnecessary high bits of index are discarded (aliasing the array).
 - Safe: returns '0 for all other out-of-bound indices.
 
-```verilog
+```verilog good
 `define BOUNDED_LOOKUP(__arr, __idx) \
     (($size(__arr) == 1'b1) ? __arr[$high(__arr)] \
     : (__idx[(($high(__arr) == 0) ? 1 : $clog2($high(__arr) + 1)) - 1 : 0] < $low(__arr) || \
@@ -1576,18 +1576,18 @@ The verilog expression `array[index]` would return `'X` for out-of-bound indices
 
 The `X_OF_TYPE` macro presents a standard way to typecast `'X`.
 
-```verilog
+```verilog good
 `define X_OF_TYPE(__type) \
   (__type'({$bits(__type){1'bx}}))
 ```
 
 #### Assertion Macros
 
-Use assertion libraries to enforce unified implementation throughout the design.
+<span class="Summary">Use assertion libraries to enforce unified implementation throughout the design.</span>
 
 Following is a reference implementation of standard assertion macros used in this document.
 
-```verilog
+```verilog good
 // Concurrent assertion to check that a property is not violated. The assertion
 // is disabled if reset is active. The sampling events are positive edges of the
 // clock.
@@ -1614,13 +1614,13 @@ Following is a reference implementation of standard assertion macros used in thi
 
 ### Synthesis Pragmas
 
-Do not use synthesis pragmas that can lead to simulation-synthesis differences.
+<span class="Summary">Do not use synthesis pragmas that can lead to simulation-synthesis differences.</span>
 
 There are several pragmas that impact the creation of the design database leading to different tools inferring different functionality. These can lead to hard-to-debug simulation-synthesis mismatches that (depending on methodology) might not be caught by logical equivalence checks. These include `translate_off` and `translate_on`, `synthesis_off` and `synthesis_on`, `read_comments_as_hdl on` and `read_comments_as_hdl off`, `parallel case`, and `full case`. Do not use these pragmas.
 
 ### `` `ifdef `` Directives
 
-Do not use `` `ifdef ``, `` `else ``, `` `elsif ``, or `` `ifndef `` compiler directives except as prescribed.
+<span class="Summary">Do not use `` `ifdef ``, `` `else ``, `` `elsif ``, or `` `ifndef `` compiler directives except as prescribed.</span>
 
 Avoid `` `ifdef `` whenever possible. Misuse of `` `ifdef ``-style compiler directives can negatively impact code coverage, and can lead to a mismatch between simulation and synthesis. For most use cases, separate source units or generate-if statements provide a better solution.
 
@@ -1634,7 +1634,7 @@ Do not use the SIMULATION macro to select between RTL and behavioral models (see
 
 For example:
 
-```verilog
+```verilog good
 `ifdef SIMULATION
 
 state_t prev_state = IDLE;
@@ -1653,7 +1653,7 @@ May only be used additively, to add assertions or assertion-specific modeling co
 
 For example:
 
-```verilog
+```verilog good
 `ifdef ASSERT_ON
 
 int outstanding_credits = 0;
@@ -1685,7 +1685,7 @@ The legal names to identify supported simulators are:
 - `XCELIUM`: for Cadence Xcelium simulators.
 - `DSIM`: for Metrics DSim simulators.
 
-```verilog
+```verilog good
 `ifdef VCS
   $stack();
 `endif  // VCS
@@ -1726,11 +1726,11 @@ There are always unanticipated exceptional scenarios. If your project must use n
 
 #### Include Files
 
-Files intended for [`` `include ``](#include-directives) are referred to as "include files".
+<span class="Summary">Files intended for [`` `include ``](#include-directives) are referred to as "include files".</span>
 
 #### Include Directives
 
-Use `` `include `` directives only to include files into a verilog package file or to include files with code snippets.
+<span class="Summary">Use `` `include `` directives only to include files into a verilog package file or to include files with code snippets.</span>
 
 Include directives used for the purpose of compiling each file standalone are forbidden. Instead, use a properly ordered compilation file list and Multi-File Compilation Unit (MFCU) mode.
 
@@ -1738,14 +1738,14 @@ There are only a few cases where include directives are allowed:
 
 1. Including files into a verilog package file is allowed. Each file must be included into only one package.
 
-   ```verilog
+   ```verilog good
    package foo_pkg;
      // Good: breaking large package into smaller files is okay.
      `include "foo_functions.svh"
    endpackage
    ```
 
-   ```verilog
+   ```verilog bad
    // Include 'foo_pkg' package because module 'foo_top' depends on it.
    // Bad: can lead to a repeated declaration of a package.
    `include "foo_pkg.sv"
@@ -1756,14 +1756,14 @@ There are only a few cases where include directives are allowed:
 
 2. Including files with code snippets is allowed, only when the code snippet cannot be wrapped into its own module or package.
 
-   ```verilog
+   ```verilog good
    module foo (
        `include "generated_signals.svh"  // Good: snippet, which cannot be wrapped
    );
    endmodule
    ```
 
-   ```verilog
+   ```verilog bad
    module foo ();
      `include "common_assertions.svh"  // Bad: wrap into a module instead
    endmodule
@@ -1771,11 +1771,11 @@ There are only a few cases where include directives are allowed:
 
 #### Include Guards
 
-Don't use include guards.
+<span class="Summary">Don't use include guards.</span>
 
 Include guards protect against repeated expansion within the same translation unit. They must not be used since the current style guide rule on the use of [includes](#include-directives) will prevent this from happening.
 
-```verilog
+```verilog bad
 // Bad: include guards are not needed.
 `ifndef PATH_TO_MY_CODE_VH_
 `define PATH_TO_MY_CODE_VH_
@@ -1785,11 +1785,11 @@ Include guards protect against repeated expansion within the same translation un
 
 ### Stopping Compilation
 
-Use the `` `DIE() `` macro to fail compilation.
+<span class="Summary">Use the `` `DIE() `` macro to fail compilation.</span>
 
 Using this (undefined) macro allows the source file to be parsed by tools that lack preprocessing, such as code search and IDE outline generators. Pass an explanation as a string to `` `DIE ``. This convention does not depend on any other macro files.
 
-```verilog
+```verilog good
 `ifndef USING_SIMULATOR_A
 `ifndef USING_SIMULATOR_B
 `DIE("Unknown or unsupported simulator.")
@@ -1797,7 +1797,7 @@ Using this (undefined) macro allows the source file to be parsed by tools that l
 `endif  // USING_SIMULATOR_A
 ```
 
-```verilog
+```verilog bad
 `ifndef USING_SIMULATOR_A
 `ifndef USING_SIMULATOR_B
 Error: intentional syntax error makes this unparseable without preprocessing
@@ -1809,7 +1809,7 @@ Error: intentional syntax error makes this unparseable without preprocessing
 
 ### Module Header Definition
 
-Use the Verilog-2001 full port declaration style, and use the following format.
+<span class="Summary">Use the Verilog-2001 full port declaration style, and use the following format.</span>
 
 Use the Verilog-2001 combined port and I/O declaration style. Do not use the Verilog-95 list style. Port declarations in the module header must fully declare the port name, type, and direction.
 
@@ -1826,7 +1826,7 @@ Each [import statement](#package-imports) must appear on its own dedicated line 
 
 Example of a module header without parameters:
 
-```verilog
+```verilog good
 module foo (
     input  logic clk,
     input  logic rst,
@@ -1837,7 +1837,7 @@ module foo (
 
 Example of a module header with a [parameter declaration](#parameterized-module-declaration):
 
-```verilog
+```verilog good
 module foo #(
     parameter int Width = 8
 ) (
@@ -1850,7 +1850,7 @@ module foo #(
 
 Example of a module header with an [import statement](#package-imports):
 
-```verilog
+```verilog good
 module foo
   // Imports the package for use in the header definition.
   // This is a complete statement within the module, so we indent one level.
@@ -1868,7 +1868,7 @@ module foo
 
 Do not use Verilog-95 style:
 
-```verilog
+```verilog bad
 module foo (a, b, c, d);
   input  logic [2:0] a;
   output logic b;
@@ -1877,7 +1877,7 @@ module foo (a, b, c, d);
 
 #### Module Names
 
-The top level module for a design `[design]` must be named `[design]_top`. Unit test module names end with `_test`.
+<span class="Summary">The top level module for a design `[design]` must be named `[design]_top`. Unit test module names end with `_test`.</span>
 
 Module names must use `lower_snake_case` and contain only lowercase alphanumeric characters and underscores. Use lowercase even when module-names contain proper nouns, such as the project's name.
 
@@ -1912,7 +1912,7 @@ For additional reading, see [New Verilog-2001 Techniques for Creating Parameteri
 
 Declare parameterized modules using a parameter port list, not with `defparam`.
 
-```verilog
+```verilog good
 module foo #(
     parameter int ParameterName = 1,
     parameter type type_parameter_name_t = logic
@@ -1937,7 +1937,7 @@ Explicitly declare the type for parameters. Use type "int" (signed integer) for 
 
 For example:
 
-```verilog
+```verilog good
 module cdc_fifo #(
     parameter int Width = 16,
     parameter int Depth = 4
@@ -1953,7 +1953,7 @@ module cdc_fifo #(
 
 #### Module Instance Names
 
-All module instance names must start with the name of the module being instantiated.
+<span class="Summary">All module instance names must start with the name of the module being instantiated.</span>
 
 All module instance names must be equal to the module name, plus an optional unique suffix. This unique suffix may be a string or a number, as appropriate. The intent of this naming convention is to make it easier to map from instance names to module names, especially in contexts where the module name is not readily available (for example, synthesis reports, assertions, etc.).
 
@@ -1961,7 +1961,7 @@ Exceptions can be made in instances where this style decreases the overall legib
 
 Some examples of legal instance names:
 
-```verilog
+```verilog good
 // A single instance of my_decoder within a module:
 my_decoder my_decoder ( ... );
 
@@ -1981,11 +1981,11 @@ sram sram_bar (.address(bar_address), .data(bar_data), .clk, .rst);
 
 #### Use named ports
 
-Use named ports to fully specify all instantiations.
+<span class="Summary">Use named ports to fully specify all instantiations. </span>
 
 When connecting signals to ports for an instantiation, use the named port style, like this:
 
-```verilog
+```verilog good
 my_module my_module(
     .clk(clk),
     .rst(rst),
@@ -1996,7 +1996,7 @@ my_module my_module(
 
 If the port and the connecting signal have the same name, you can use the `.port` syntax (without brackets) to indicate connectivity. For example:
 
-```verilog
+```verilog good
 my_module my_module(
     .clk,
     .rst,
@@ -2021,13 +2021,13 @@ It is recommended to use explicit widths, rather than relying on Verilog's impli
 
 Examples:
 
-```verilog
+```verilog good
 my_module my_module (
     .thirty_two_bit_input({16'd0, sixteen_bit_word})
 );
 ```
 
-```verilog
+```verilog bad
 my_module my_module (
     // Incorrectly implicitly extends from 16 bit to 32 bit
     .thirty_two_bit_input(sixteen_bit_word)
@@ -2036,20 +2036,20 @@ my_module my_module (
 
 #### Parameterized Module Instantiation
 
-Use named parameters for all instantiations.
+<span class="Summary">Use named parameters for all instantiations.</span>
 
 Instances must be named as specified in [Module Instance Names](#module-instance-names).
 
 When parameterizing an instance, do not specify parameters positionally. Specify parameters using the named parameter style, as follows:
 
-```verilog
+```verilog good
 my_module #(
     .Height(5),
     .Width(10)
 ) my_module (...);
 ```
 
-```verilog
+```verilog bad
 my_module #(5, 10) my_module (...);
 ```
 
@@ -2057,13 +2057,13 @@ Do not use `defparam`.
 
 #### Recursive Instantiation
 
-Do not instantiate recursively.
+<span class="Summary">Do not instantiate recursively.</span>
 
 Modules may not instantiate themselves recursively.
 
 ### Generate Constructs
 
-Always name generate construct blocks. The block name must start with the "gen\_" prefix.
+<span class="Summary">Always name generate construct blocks. The block name must start with the "gen\_" prefix.</span>
 
 When using a generate construct, always explicitly name each block of generated code. Name each possible outcome of the generating if statement, and name the iterated block of a generating for statement.
 
@@ -2073,7 +2073,7 @@ This ensures that generated hierarchical signal names are consistent across diff
 
 Example of a conditional generate construct:
 
-```verilog
+```verilog good
 if (TypeIsPosedge) begin : gen_posedge_type
   always @(posedge clk) foo <= bar;
 end else begin : gen_negedge_type
@@ -2083,7 +2083,7 @@ end
 
 Example of a loop generate construct:
 
-```verilog
+```verilog good
 for (genvar bus = 0; bus < NumberOfBuses; bus++) begin : gen_my_buses
   my_bus #(.index(bus)) my_bus (.foo(foo), .bar(bar[bus]));
 end
@@ -2097,7 +2097,7 @@ Do not use generate regions {`generate`, `endgenerate`}.
 
 The use of generate blocks other than for `loop`, `if`, or `case` generate constructs is not LRM compliant. While such usage might be accepted by some tools, this guide prohibits such "bare" generate blocks. Note that the similar "sequential block" construct is LRM compliant and allowed.
 
-```verilog
+```verilog bad
 module foo (
     input  logic bar,
     output logic foo
@@ -2120,13 +2120,13 @@ Package names must use `lower_snake_case` and contain only lowercase alphanumeri
 
 ### Package Dependencies
 
-Packages must not have cyclic dependencies.
+<span class="Summary">Packages must not have cyclic dependencies.</span>
 
 Package files may depend on constants and types in other package files, but there must not be any cyclic dependencies. That is: if package A depends on a constant from package B, package B must not depend on anything from package A. While cyclic dependencies are permitted by the SystemVerilog language specification, their use can break some tools.
 
 For example:
 
-```verilog
+```verilog bad
 package foo_pkg;
   parameter int PageSizeBytes = 16 * bar_pkg::Kibi;
   ...
@@ -2146,7 +2146,7 @@ Package imports are permitted within a local scope, like a module or package. Ex
 
 Packages must not be imported into the global scope, as this increases the risk of conflicts.
 
-```verilog
+```verilog good
 module foo
   import bar_pkg::AddressWidth; // Good: allows usage of package object in ports list
 (
@@ -2158,7 +2158,7 @@ module foo
   import bar_pkg::PageSizeBytes;  // Good: preferred explicit import
 ```
 
-```verilog
+```verilog bad
 import foo_pkg::*;  // Bad: pollutes global namespace
 module foo
 (
@@ -2198,7 +2198,7 @@ Additionally, the semantics of specific naming conventions are elaborated on in 
 
 ### Declare all signals
 
-Signals must be declared before they are used. This means that implicit net declarations must not be used.
+<span class="Summary">Signals must be declared before they are used. This means that implicit net declarations must not be used.</span>
 
 All signals must be explicitly declared before use. All declared signals must specify a data type. A correct design contains no inferred nets.
 
@@ -2206,25 +2206,25 @@ Within modules, it is recommended that signals, types, enums, and localparams be
 
 ### Use `logic` for synthesis
 
-Use `logic` for synthesis. `wire` is allowed when necessary.
+<span class="Summary">Use `logic` for synthesis. `wire` is allowed when necessary.</span>
 
 All signals in synthesizable RTL must be implemented in terms of 4-state data types. This means that all signals must ultimately be constructed of nets with the storage type of `logic`. While SystemVerilog does provide other data primitives with 4-state storage (for example, `integer`), those primitives are prone to misunderstandings and misuse.
 
 For example:
 
-```verilog
+```verilog good
 logic signed [31:0] x_velocity;  // say what you mean: a signed 32-bit integer.
 typedef logic [7:0] byte_t;
 ```
 
-```verilog
+```verilog bad
 bit signed [63:0] stars_in_the_sky;  // 2-state logic doesn't belong in RTL
 int grains_of_sand;  // Or wait, did I mean integer?  Easy to confuse!
 ```
 
 It is permissible to use wire as a short-hand to both declare a net and perform continuous assignment. Take care not to confuse continuous assignment with initialization. For example:
 
-```verilog
+```verilog good
 wire [7:0] sum = a + b;  // Continuous assignment
 
 logic [7:0] acc = '0;  // Initialization
@@ -2236,7 +2236,7 @@ It is permissible for DV to make use of 2-state logic, but all interfaces betwee
 
 ### Signal Naming
 
-Use `lower_snake_case` when naming signals.
+<span class="Summary">Use `lower_snake_case` when naming signals.</span>
 
 In this context, a **signal** is meant to mean a net, variable, or port within a SystemVerilog design.
 
@@ -2244,7 +2244,7 @@ Signal names may contain lowercase alphanumeric characters and underscores.
 
 Ports which connect **directly** to chip primary IO pads (for example, die IOs, ASIC package IOs, or FPGA IO buffers) may use `UPPER_SNAKE_CASE`.
 
-```verilog
+```verilog good
 module chip_top (
     input logic RESET_N,
     output logic LINK_LED,
@@ -2256,11 +2256,11 @@ There are a number of naming conventions associated with naming signals, which a
 
 ### Default Port Values
 
-Do not use default port values.
+<span class="Summary">Do not use default port values.</span>
 
 A default port value is a constant expression that is assigned to an input port of a module. Output ports that are assigned constant expressions are not considered default values and are permitted.
 
-```verilog
+```verilog good
 module foo (
     // Input d must be assigned when this module is instantiated
     input logic d,
@@ -2269,7 +2269,7 @@ module foo (
 );
 ```
 
-```verilog
+```verilog bad
 module foo (
     // Bad: Do not assign a default value to an input port
     input logic d = '0,
@@ -2279,7 +2279,7 @@ module foo (
 
 ### Constants
 
-Declare design-wide constants using parameters in the design package file. Declare local constants using `localparam`.
+<span class="Summary">Declare design-wide constants using parameters in the design package file. Declare local constants using `localparam`.</span>
 
 In this context, **constants** are distinct from tunable parameters for objects such as [parameterized modules](#parameterized-module-declaration), classes, etc.
 
@@ -2308,11 +2308,11 @@ Explicitly declare the type for constants. Use type "int" (signed integer) for a
 
 #### Avoid Magic Numbers
 
-It is recommended to use symbolically named [constants](#constants) instead of unnamed numerical constants (aka magic numbers).
+<span class="Summary">It is recommended to use symbolically named [constants](#constants) instead of unnamed numerical constants (aka magic numbers).</span>
 
 Try to give commonly used constants symbolic names rather than repeatedly typing magic numbers.
 
-```verilog
+```verilog good
 // Declares a symbolically named constant for the value 0xD5
 localparam logic [DataWidthBits-1:0] StartFrameDelimiter = 8'hD5;
 ...
@@ -2322,7 +2322,7 @@ if (data == StartFrameDelimiter) begin
 end
 ```
 
-```verilog
+```verilog bad
 // Bad: What's the significance of this number?
 if (data == 8'hD5) begin
   next_state = kRxData;
@@ -2331,7 +2331,7 @@ end
 
 Unnamed numerical constants may be acceptable in cases where adding a symbolic name adds no value. These type of constants are not considered magic numbers.
 
-```verilog
+```verilog good
 // Counter uses unnamed constant 1, but the meaning is obvious
 cycle_cnt <= cycle_cnt + 1;
 ```
@@ -2340,7 +2340,7 @@ cycle_cnt <= cycle_cnt + 1;
 
 Generally, module scoped constants, including those derived from [module parameters](#parameterized-module-declaration) are declared as localparam within the module body [close to first use](#declare-all-signals). It can be useful to have module scoped constants (potentially derived from module parameters) that control module port dimensions. Declare and define these constants as `localparam` in the module port list to prevent them from being overridden when the module is instantiated.
 
-```verilog
+```verilog good
 module foo #(
     parameter int NumEntries = 1,  // Tunable parameter
     localparam int IndexWidth = $clog2(NumEntries)  // Must not be overridden
@@ -2353,7 +2353,7 @@ module foo #(
 endmodule
 ```
 
-```verilog
+```verilog bad
 module foo #(
     localparam int Bar = 7,  // Bad: Bar is a constant so it goes close to usage
     parameter int NumEntries = 1,
@@ -2373,23 +2373,23 @@ Use packed arrays and structs for synthesizable signals. Unpacked arrays are app
 
 When declaring vectors and arrays, the msb and lsb must be non-negative.
 
-```verilog
+```verilog good
 logic [14:0] foo;
 ```
 
-```verilog
+```verilog bad
 logic [13:-1] foo;
 ```
 
 ### Packed Ordering
 
-Bit vectors and packed arrays must be little-endian.
+<span class="Summary">Bit vectors and packed arrays must be little-endian. </span>
 
 When declaring bit vectors and packed arrays, the index of the most-significant bound (left of the colon) must be greater than or equal to the least-significant bound (right of the colon). This style of bit vector declaration keeps packed variables little-endian.
 
 For example:
 
-```verilog
+```verilog good
 typedef logic [7:0] u8_t;
 logic [31:0] u32_word;
 u8_t [1:0] u16_word;
@@ -2400,7 +2400,7 @@ assign u32_word = {byte3, byte2, u16_word};
 
 ### Unpacked Ordering
 
-Unpacked arrays must be big-endian.
+<span class="Summary">Unpacked arrays must be big-endian.</span>
 
 When declaring unpacked arrays, the index to the left of the colon must be less than or equal to the index to the right of the colon.
 
@@ -2408,7 +2408,7 @@ Declare zero-based unpacked arrays using the shorter notation `[size]`. It is un
 
 Assigning directly to an unpacked array as a whole is acceptable, but not recommended, because mixing big-endian unpacked arrays with little-endian packed arrays is prone to reversed-ordering mistakes. Prefer assigning elements individually by index when possible (for parameter arrays, where element-by-element assignment is not possible without constant functions, initializing the unpacked array directly is acceptable with caution).
 
-```verilog
+```verilog good
 // Good: Assign unpacked array elements individually by index to avoid
 // reversed-ordering mistakes.
 logic [15:0] word_array[3];
@@ -2437,11 +2437,11 @@ This rule only applies to variables and parameters, not to other things such as 
 
 #### Declaring Structs and Unions
 
-Name structs and unions with a typedef.
+<span class="Summary">Name structs and unions with a typedef.</span>
 
 Always name `struct` and `union` types using `typedef`. Anonymous types are not allowed because they are not reusable. Struct type names must contain only lowercase alphanumeric characters and underscores and end with `_t`.
 
-```verilog
+```verilog good
 typedef struct packed {
   logic  dir;
   int    value;
@@ -2450,7 +2450,7 @@ typedef struct packed {
 data_t packet;
 ```
 
-```verilog
+```verilog bad
 struct packed {  // Typedef is missing
   logic  dir;
   int    value;
@@ -2459,11 +2459,11 @@ struct packed {  // Typedef is missing
 
 #### Naming Union Members
 
-Union member names must be prefixed with as\_\*.
+<span class="Summary">Union member names must be prefixed with as\_\*.</span>
 
 Always prefix union member names with `as_*`. A consistent naming convention reduces the effort required to understand RTL with deeply nested struct or union type hierarchies by making the type-cast like behavior of unions explicit.
 
-```verilog
+```verilog good
 typedef union packed {
   read_id_t   as_read_id;  // as_read_id prefix to refer to read_id_t type.
   write_id_t  as_write_id;
@@ -2472,7 +2472,7 @@ typedef union packed {
 assign write_id = cmd.id.as_write_id;
 ```
 
-```verilog
+```verilog bad
 typedef union packed {
   read_id_t   read_id;  // as_* is missing
   write_id_t  write_id;
@@ -2483,7 +2483,7 @@ assign write_id = cmd.id.write_id;
 
 ### Enumerations
 
-Name enumeration types `snake_case_t` (or `snake_case_e`). Name enumeration constants `kCamelCase`.
+<span class="Summary">Name enumeration types `snake_case_t` (or `snake_case_e`). Name enumeration constants `kCamelCase`.</span>
 
 Always name `enum` types using `typedef`. The storage type of any enumerated type must be specified. For synthesizable enums, the storage type must be a 4-state data type (`logic` rather than `bit`).
 
@@ -2493,7 +2493,7 @@ Enumeration type names must contain only lowercase alphanumeric characters and u
 
 Enumeration value names (constants) must be `kCamelCase`, for example, `kReadyToSend`. This indicates that the values are neither overrideable nor assignable.
 
-```verilog
+```verilog good
 typedef enum logic {  // A 4-state storage type
   kWrite,
   kRead
@@ -2501,7 +2501,7 @@ typedef enum logic {  // A 4-state storage type
 access_t req_access, resp_access;
 ```
 
-```verilog
+```verilog bad
 enum {  // Typedef is missing, storage type is missing.
   Write,
   Read
@@ -2510,13 +2510,13 @@ enum {  // Typedef is missing, storage type is missing.
 
 ### Vector Typedefs
 
-Prefer no single vector typedefs unless they are broadly used.
+<span class="Summary">Prefer no single vector typedefs unless they are broadly used.</span>
 
 Do not use `typedef` to define local or single-use vector types. Defining a new type for a vector that is only used in a limited scope adds unnecessary redirection. Instead, use the raw vector type directly.
 
 For vectors that are used broadly across multiple modules or packages (for example, a global address type), defining a named type using `typedef` is recommended to ensure consistency.
 
-```verilog
+```verilog good
 // Declare design-wide vector typedefs in a package.
 package my_pkg;
   typedef logic [AddrWidth-1:0] addr_t;
@@ -2531,7 +2531,7 @@ module my_module (
 endmodule
 ```
 
-```verilog
+```verilog bad
 module my_module (
   ...
 );
@@ -2544,13 +2544,13 @@ endmodule
 
 An exception is made when defining signed packed arrays, where a `typedef` is necessary to apply signedness to the elements of the array rather than the array as a whole (see [mixed-sign arithmetic operations](#mixed-sign-arithmetic-operations)).
 
-```verilog
+```verilog good
 // Good: Use local typedef to apply signedness to elements of a packed array.
 typedef logic signed [DataWidth - 1:0] data_t;
 data_t [NumChannels - 1:0] my_channel_data;
 ```
 
-```verilog
+```verilog bad
 // Bad: Signedness applies to the entire packed array, not the elements.
 logic signed [NumChannels - 1:0][DataWidth - 1:0] my_channel_data;
 ```
@@ -2559,23 +2559,20 @@ logic signed [NumChannels - 1:0][DataWidth - 1:0] my_channel_data;
 
 ### Choosing Between Functions, Tasks, and Modules
 
-In synthesizable RTL, use modules as the default construct to encapsulate behavior. Tasks must not be used in synthesizable RTL. Functions may be used for short, simple combinational logic with a single output.
+<span class="Summary">In synthesizable RTL, use modules as the default construct to encapsulate behavior. Tasks must not be used in synthesizable RTL. Functions may be used for short, simple combinational logic with a single output.</span>
 
 - **Modules**: Use modules as the default mechanism to encapsulate design behavior.
-
 - **Tasks**: Do not use tasks in synthesizable RTL; use modules instead. Tasks are permitted in testbenches.
-
 - **Functions**: Functions are useful as a lightweight alternative to modules for simple combinational logic.
-
   - Prefer functions over modules when there is a single output and the relationship between inputs and output can be expressed with a direct assignment (for example, `assign foo = check_foo(bar);`).
   - Prefer modules over functions when there are multiple outputs.
   - Functions can be defined in a package for wider reuse.
 
 ### Templates
 
-Function and task definitions must follow the template in the following example.
+<span class="Summary">Function and task definitions must follow the template in the following example.</span>
 
-```verilog
+```verilog good
 // Description of the function's behavior, inputs, and outputs
 function automatic logic foo(logic x, logic y);
   // Local variables
@@ -2607,7 +2604,7 @@ Do not infer a latch inside a function, as this may cause a simulation-synthesis
 
 ### Lifetime
 
-Explicitly declare functions and tasks defined outside of a class as static or automatic, preferring automatic. Functions must be automatic in synthesizable RTL.
+<span class="Summary">Explicitly declare functions and tasks defined outside of a class as static or automatic, preferring automatic. Functions must be automatic in synthesizable RTL.</span>
 
 Depending on their declaration context, functions and tasks have different default lifetimes. Within a class, they are always automatic, whereas the default is static in modules, interfaces, programs, and packages. To prevent potential confusion, functions and tasks declared outside of a class must always explicitly specify their lifetime. Automatic is generally the proper lifetime because it allows a function or task to be independently called from different contexts.
 
@@ -2615,48 +2612,48 @@ In synthesizable RTL, functions must always be declared as automatic.
 
 ### Function Data Types
 
-Explicitly declare the data type for a function, or declare the function as `void`.
+<span class="Summary">Explicitly declare the data type for a function, or declare the function as `void`.</span>
 
-```verilog
+```verilog good
 // The return type of the function is explicitly defined as 'bit'
 function automatic bit foo(int a);
 // The function has no return value.
 function automatic void foo(int a);
 ```
 
-```verilog
+```verilog bad
 // The function's data type is implicitly declared
 function automatic foo(int a);
 ```
 
 ### Argument Types
 
-Explicitly declare storage types for all arguments in function and task arguments lists.
+<span class="Summary">Explicitly declare storage types for all arguments in function and task arguments lists.</span>
 
 For example:
 
-```verilog
+```verilog good
 // Both arguments have explicitly declared 'int' as their storage type.
 task automatic foo(int a, int b);
 ```
 
-```verilog
+```verilog bad
 // Bad: No storage type explicitly declared for 'b'.
 task automatic foo(int a, b);
 ```
 
 ### Argument Directions
 
-Argument directions for functions and tasks are optional and considered inputs by default. If a direction is specified for _any_ argument, then it must be specified for _all_ arguments.
+<span class="Summary">Argument directions for functions and tasks are optional and considered inputs by default. If a direction is specified for _any_ argument, then it must be specified for _all_ arguments.</span>
 
 For example:
 
-```verilog
+```verilog good
 task automatic foo(int a, int b);  // Both arguments treated as inputs.
 function automatic bit foo(input int a, output int b, inout int c, ref int d);
 ```
 
-```verilog
+```verilog bad
 // Potential bug: Although not labeled, "b" will be treated as "ref".
 task automatic foo(ref int a, int b);
 ```
@@ -2669,7 +2666,7 @@ There is no preference between `always_ff` and `always` for clocked processes, o
 
 ### Use Non-Blocking Assignments
 
-Sequential logic must use non-blocking assignments.
+<span class="Summary">Sequential logic must use non-blocking assignments. </span>
 
 Never mix assignment types within a block declaration.
 
@@ -2681,7 +2678,7 @@ This is one of Clifford Cummings's [Golden Rules of Verilog](http://www.sunburst
 
 ### Sequential Logic (Latches)
 
-The use of latches is not recommended - use flip-flops when possible.
+<span class="Summary">The use of latches is not recommended - use flip-flops when possible.</span>
 
 Unless absolutely necessary, use flip-flops or registers instead of latches.
 
@@ -2689,7 +2686,7 @@ If you must use a latch, use `always_latch` over `always`, and use non-blocking 
 
 ### Sequential Logic (Registers)
 
-Use the standard format for declaring sequential blocks.
+<span class="Summary">Use the standard format for declaring sequential blocks. </span>
 
 In a sequential always block, only use non-blocking assignments (`<=`). Never use blocking assignments (`=`).
 
@@ -2707,7 +2704,7 @@ Initialization is commonly recommended for SRAM-based FPGAs, whereas synchronous
 
 A correctly implemented 8-bit register with an initial value of "0xAB" would be implemented as follows:
 
-```verilog
+```verilog good
 logic foo_le;
 logic [7:0] foo, foo_next;
 
@@ -2727,7 +2724,7 @@ Do not allow multiple non-blocking assignments to the same bit.
 
 Example:
 
-```verilog
+```verilog bad
 if (cond1) begin
   abc <= 4'h1;
 end
@@ -2745,7 +2742,7 @@ Exception: It is fine to set default values first, then specific values. However
 
 Example:
 
-```verilog
+```verilog good
 `ASSERT_KNOWN(state_is_known_A, state, clk, rst)
 always @(posedge clk) begin
   s1 <= s1_default;
@@ -2775,23 +2772,23 @@ Keep work in sequential blocks simple. If a sequential block becomes sufficientl
 
 ### Delay Modeling
 
-Do not use `#delay` in synthesizable design modules.
+<span class="Summary">Do not use `#delay` in synthesizable design modules. </span>
 
 Synthesizable design modules must be designed around a zero-delay simulation methodology. All forms of `#delay`, including `#0`, are not permitted.
 
 #### Delays and Time Units
 
-In non-synthesizable code always specify a time unit if `#delay` is used, except for `#0`.
+<span class="Summary">In non-synthesizable code always specify a time unit if `#delay` is used, except for `#0`.</span>
 
 Whenever using non-zero pound `#` delays, always specify a time unit in addition to the raw number, to avoid timescale issues.
 
-```verilog
+```verilog good
 q <= #10ns d;
 #(wait_in_ns * 1ns);
 #0;  // Special case.  No time units required
 ```
 
-```verilog
+```verilog bad
 // Missing time units.
 q <= #10 d;
 #wait_in_ns;
@@ -2801,7 +2798,7 @@ Note that specifying time units alone does not guarantee proper behavior. Use pr
 
 ### Finite State Machines
 
-State machines use an enum to define states, and are implemented with two process blocks: a combinational block and a clocked block.
+<span class="Summary">State machines use an enum to define states, and are implemented with two process blocks: a combinational block and a clocked block. </span>
 
 Every state machine description has three parts:
 
@@ -2838,7 +2835,7 @@ When possible, try to choose state names that differ near the beginning of their
 
 _Example_
 
-```verilog
+```verilog good
 // Define the states
 typedef enum logic [1:0] {
   kIdle, kFrameStart, kAccStoreWrite, kBandEnd
@@ -2899,13 +2896,13 @@ end
 
 ### Use `always_comb` or `assign`
 
-Avoid sensitivity lists.
+<span class="Summary">Avoid sensitivity lists.</span>
 
 Use either `always_comb` blocks or `assign` statements for combinational logic.
 
 ### Use blocking assignments
 
-Synthesizable combinational process blocks must only use blocking assignments.
+<span class="Summary">Synthesizable combinational process blocks must only use blocking assignments.</span>
 
 All assignments within a synthesizable [`always_comb` block](#comb-logic-use-always-comb) must be blocking assignments.
 
@@ -2913,7 +2910,7 @@ Non-blocking assignments are used only in [sequential logic blocks](#seq-logic-u
 
 ### X Propagation
 
-Either propagate `X`'s, or catch them via assertions. Do not silently squash `X` in logic.
+<span class="Summary">Either propagate `X`'s, or catch them via assertions. Do not silently squash `X` in logic.</span>
 
 Write logic that will either propagate `X` or assert when your inputs are `X`. Avoid silently squashing `X` by writing logic that resolves an `X` input to a non-`X` output. Instead, write logic that either explicitly propagates the `X` or uses an assertion to raise an exception when an input is `X`.
 
@@ -2923,7 +2920,7 @@ Note that logical operations involving `X` will propagate `X` in a way that accu
 
 Example:
 
-```verilog
+```verilog good
 $display("%b", 1'bx == 1'b1);  // produces 1'bx
 $display("%b", 1'bx != 1'b1);  // produces 1'bx
 $display("%b", 1'bx & 1'b1);   // produces 1'bx
@@ -2937,7 +2934,7 @@ However, when evaluated in a boolean context, `X` always evaluates to false. As 
 
 Example:
 
-```verilog
+```verilog bad
 always_comb begin
   if (value) result = 1'b0;  // value is 1'b1
   else result = 1'b1;        // value is 1'b0 or 1'bx
@@ -2948,13 +2945,13 @@ This can mask subtle problems in code and produce a mismatch between simulation 
 
 Instead, use conditional operators, which will propagate an `X`. If that hurts readability, an alternative is to use assertions to catch `X`.
 
-```verilog
+```verilog good
 always_comb begin
   result = value ? 1'b1 : 1'b0;  // 1'bx produces 1'bx
 end
 ```
 
-```verilog
+```verilog good
 `ASSERT_KNOWN(value_is_known_A, value, clk, rst)
 always_comb begin
   if (value) result = 1'b0;     // value is 1'b1
@@ -2964,7 +2961,7 @@ end
 
 Another alternative is to have explicit `if` and `else if` clauses for `0` and `1`. However, this is verbose and more difficult to maintain.
 
-```verilog
+```verilog good
 always_comb begin
   if (value) result = 1'b0;        // value is 1'b1
   else if (!value) result = 1'b1;  // value is 1'b0
@@ -2980,14 +2977,14 @@ See [Case Statements](#case-statements) for guidance and examples.
 
 Writing into an array when the index is `X` does not propagate the `X` to the array contents.
 
-```verilog
+```verilog bad
 // An X in index gets silently squashed in simulation.
 assign buf[index] = foo;
 ```
 
 Instead, assertions must be used to catch `X` in the array index.
 
-```verilog
+```verilog good
 `ASSERT_KNOWN(index_is_known_A, index, clk, rst)
 assign buf[index] = foo;
 ```
@@ -3005,7 +3002,7 @@ The reason for this is that the recommended coding styles for sequential logic d
 
 ### Don't-Care Assignments
 
-Do not specify don't-care logic in synthesizable code.
+<span class="Summary">Do not specify don't-care logic in synthesizable code. </span>
 
 For the purposes of this document, don't-care logic is defined as the explicit or implicit assignment to `X` based on known (non-`X`) inputs. Don't-care logic is a subset of unknown logic values, and not all assignments to `X` are considered don't-care logic. For examples of allowed assignments to `X`, see [X Propagation](#x-propagation).
 
@@ -3015,13 +3012,13 @@ Don't-care assignments are problematic for automated engineering change orders (
 
 Do not assign don't-care logic. A signal must be known if the signals driving it are known.
 
-```verilog
+```verilog bad
 // Bad: When valid is '0', wdata is considered don't-care
 assign wdata = valid ? data : 'x;
 assign we = valid;
 ```
 
-```verilog
+```verilog good
 assign wdata = data;
 assign we = valid;
 ```
@@ -3034,7 +3031,7 @@ See [Case Statements](#case-statements) for guidance on how to avoid introducing
 
 Do not access an index that is outside the bounds of an array. This can happen if the array size is not a power-of-two, or if the index contains superfluous MSBs.
 
-```verilog
+```verilog bad
 // For values of index > 4, the output ‘foo’ is treated as don’t-care
 logic       foo;
 logic [2:0] index;
@@ -3045,7 +3042,7 @@ assign foo = buffer[index];
 
 Instead, specify behavior for out-of-range indices or explicitly pad arrays up to power-of-two sizes. Also, add an assertion to catch out-of-range indices.
 
-```verilog
+```verilog good
 localparam BufferSize = 5;
 
 logic       foo;
@@ -3067,7 +3064,7 @@ assign bar = buffer_padded[index];
 
 Properly handling arbitrary array sizes is complex. It is recommended that projects use the standard [`BOUNDED_LOOKUP` macro](#bounded-lookup-macro) for the general case.
 
-```verilog
+```verilog good
 assign foo = `BOUNDED_LOOKUP(buffer, index)
 ```
 
@@ -3077,11 +3074,11 @@ Do not use three-state logic (`Z` state) to accomplish on-chip logic such as mux
 
 ### Case Statements
 
-Use `unique case` in synthesizable RTL. Always define a default case-item. Do not specify [don't-care](#dont-care-assignments) behavior. Do not use case-modifying pragmas.
+<span class="Summary">Use `unique case` in synthesizable RTL. Always define a default case-item. Do not specify [don't-care](#dont-care-assignments) behavior. Do not use case-modifying pragmas.</span>
 
 Here is an example of a style-compliant case statement:
 
-```verilog
+```verilog good
 always_comb begin
   unique case (select)
     2'b00:   foo = bar0;
@@ -3109,7 +3106,7 @@ When expressing a wildcard in a case item, use the '?' character since it more c
 
 Here is an example of a style-compliant `casez` statement:
 
-```verilog
+```verilog good
 always_comb begin
   unique casez (select)
     3'b000: operand = accum0 >> 0;
@@ -3130,7 +3127,7 @@ end
 
 To avoid don't-care behavior, specify non-`X` behavior for all outputs, across the full range of values in the case-expression. If this prevents x-propagation, assertions must be used to ensure `X`'s in the case-expression are not silently squashed.
 
-```verilog
+```verilog bad
 typedef enum logic [1:0] {kMode0, kMode1, kMode2} mode_t;
 mode_t mode;
 
@@ -3144,7 +3141,7 @@ always_comb begin
 end
 ```
 
-```verilog
+```verilog good
 typedef enum logic [1:0] {kMode0, kMode1, kMode2} mode_t;
 mode_t mode;
 
@@ -3161,7 +3158,7 @@ end
 
 Note that assigning to `X` from the default case-item of an otherwise fully-specified case statement does not introduce don’t-care logic. In this case, using the default for x-propagation is the recommended style.
 
-```verilog
+```verilog good
 typedef enum logic [1:0] {kMode0, kMode1, kMode2, kMode3} mode_t;
 mode_t mode;
 
@@ -3179,7 +3176,7 @@ end
 
 If assigning X to an enumerated type in the default case-item, then the assignment must be typecast. It is recommended that projects use a [macro](#x-of-type-macro) to safely contain this cast.
 
-```verilog
+```verilog good
 typedef enum logic [1:0] {kFoo0, kFoo1, kFoo2, kFoo3} foo_t;
 foo_t foo1, foo2;
 
@@ -3196,7 +3193,7 @@ end
 
 With multiple outputs, it can be convenient to specify default values outside of the case statement. If this is done, the `unique case` statement must be fully specified, otherwise these outputs are treated as don't-cares for any unspecified case-items.
 
-```verilog
+```verilog good
 `ASSERT_KNOWN(mode_is_known_A, mode, clk, rst)
 always_comb begin
   // Default behavior
@@ -3215,7 +3212,7 @@ end
 
 Upside-down unique case statements are another way of introducing don't-care behavior. If multiple conditions of the upside-down case statement are true, the output assignment is not explicitly provided in the code, effectively leading to a don't-care assignment. This will cause the same LEC and ECO issues as if the condition was explicitly coded as an X output. See [Don't-Care Assignments](#dont-care-assignments). It is recommended to rewrite the code as a non-upside-down case statement, or do manual logic reduction if timing is a concern.
 
-```verilog
+```verilog bad
 // If c_grant[0] == 1 and c_grant[1] == 1, out is don't-care.
 always_comb begin
   unique case (1'b1)
@@ -3226,7 +3223,7 @@ always_comb begin
 end
 ```
 
-```verilog
+```verilog good
 // If c_grant[0] == 1 and c_grant[1] == 1, out is explicitly 0.
 always_comb begin
   unique case (c_grant)
@@ -3249,7 +3246,7 @@ References:
 
 ### Signed Operations
 
-Use the available signed operator constructs wherever signed operations are used.
+<span class="Summary">Use the available signed operator constructs wherever signed operations are used.</span>
 
 Mixing signed and unsigned signals in an operation can result in unexpected behavior and, in some cases, simulation-synthesis mismatches. For all operations where signed and unsigned signals need to be used together, the unsigned signals must first be explicitly cast to signed, using the `signed'` cast operator.
 
@@ -3259,7 +3256,7 @@ If any operand in a calculation is unsigned, Verilog implicitly casts all operan
 
 Explicitly cast unsigned values to signed before use in mixed-sign arithmetic operations.
 
-```verilog
+```verilog good
 logic signed [7:0]  a = 8'sh80;   // equals signed(-128)
 logic               incr = 1'b1;  // equals unsigned(1)
 logic signed [15:0] sum;
@@ -3269,7 +3266,7 @@ always_comb begin
 end
 ```
 
-```verilog
+```verilog bad
 logic signed [7:0]  a = 8'sh80;   // equals signed(-128)
 logic               incr = 1'b1;  // equals unsigned(1)
 logic signed [15:0] sum;
@@ -3284,7 +3281,7 @@ end
 
 Explicitly cast unsigned values to signed before use in mixed-sign comparison operations.
 
-```verilog
+```verilog good
 logic        [7:0] unsigned_foo = 8'h00;   // equals unsigned(0)
 logic signed [7:0] signed_bar   = 8'shFF;  // equals signed(-1)
 logic              bar_less_than_foo;
@@ -3299,7 +3296,7 @@ always_comb begin
 end
 ```
 
-```verilog
+```verilog bad
 logic        [7:0] unsigned_foo = 8'h00;   // equals unsigned(0)
 logic signed [7:0] signed_bar   = 8'shFF;  // equals signed(-1)
 logic              bar_less_than_foo;
@@ -3319,7 +3316,7 @@ Always use the `>>>` operator instead of the `>>` operator when arithmetically r
 
 It is common practice to use right arithmetic shift operators to divide by powers of 2. With signed operands, care must be taken that the correct shift operator is used to preserve sign. The `>>` operator inserts a 0 at the most significant bit location. If the argument is a negative value, this will flip the sign. By using the `>>>` operator, the bit inserted at the most significant bit location is determined by the sign of the argument and will not flip.
 
-```verilog
+```verilog good
 logic signed [7:0] foo = 8'sh80;  // equals signed(-128)
 logic signed [7:0] bar;
 always_comb begin
@@ -3327,7 +3324,7 @@ always_comb begin
 end
 ```
 
-```verilog
+```verilog bad
 logic signed [7:0] foo = 8'sh80;  // equals signed(-128)
 logic signed [7:0] bar;
 always_comb begin
@@ -3339,7 +3336,7 @@ end
 
 ### Bit Widths
 
-Be careful about signal and expression widths.
+<span class="Summary">Be careful about signal and expression widths.</span>
 
 #### Always be explicit about the widths of number literals.
 
@@ -3355,7 +3352,7 @@ Exceptions:
 
 Examples:
 
-```verilog
+```verilog good
 localparam int Width = 5;  // int doesn't need explicit width
 localparam bit FeatureFlag = 1;  // bit type doesn't need explicit width
 localparam logic [3:0] Bar = 4'd4;
@@ -3375,7 +3372,7 @@ assign foo6 = 64'h2000;  // OK not to write out the whole hex constant
 assign foo7 = foo8 + 4;
 ```
 
-```verilog
+```verilog bad
 localparam logic [3:0] Bar = 4;
 
 logic [7:0] foo1, foo2, foo3, foo4;
@@ -3391,7 +3388,7 @@ Rather than letting boolean operations and if expressions reduce a multi-bit sig
 
 Examples:
 
-```verilog
+```verilog good
 logic [3:0] a, b;
 logic out;
 
@@ -3412,9 +3409,10 @@ always_comb begin
     // ...
   end
 end
+
 ```
 
-```verilog
+```verilog bad
 logic [3:0] a, b;
 logic out;
 
@@ -3432,9 +3430,9 @@ end
 
 #### Prefer Logical Operators for Single-Bit Signals
 
-When performing logical operations on single bit signals, it is recommended to use the logical operators (for example, &&, ||, !) instead of bitwise operators (for example, &, |, \~).
+<span class="Summary">When performing logical operations on single bit signals, it is recommended to use the logical operators (for example, &&, ||, !) instead of bitwise operators (for example, &, |, \~).</span>
 
-```verilog
+```verilog good
 logic a, b, c;
 ...
 // This aids readability as the logical operator makes clear `a` and `b`
@@ -3442,7 +3440,7 @@ logic a, b, c;
 assign c = a && b;
 ```
 
-```verilog
+```verilog good
 logic a, b, c;
 ...
 // `a` and `b` could be multi-bit vectors, it is not clear from the assignment.
@@ -3457,7 +3455,7 @@ Addition and negation operations produce a result one bit wider than the operand
 
 Example:
 
-```verilog
+```verilog good
 assign abc_next = abc + 4'h1;
 ```
 
@@ -3467,7 +3465,7 @@ Only use the bit slicing operator when the intent is to refer to a portion of a 
 
 Examples:
 
-```verilog
+```verilog good
 logic [7:0] a, b;
 logic [6:0] c;
 
@@ -3477,7 +3475,7 @@ assign a[7:1] = 7'd5;  // Good: it's partial assignment.
 assign a = b;          // Good: the parser would warn on width mismatch.
 ```
 
-```verilog
+```verilog bad
 logic [7:0] a, b;
 
 assign a[7:0] = 8'd7;  // Bad: redundant and can mask linter warnings.
@@ -3486,13 +3484,13 @@ assign a = b[7:0];     // Bad: redundant and masks linter warnings.
 
 ### Alias statement
 
-Do not use `alias`, use port connection if possible or `tran` if you must.
+<span class="Summary">Do not use `alias`, use port connection if possible or `tran` if you must.</span>
 
 `Alias` statement can be used to connect `inout` nets, but there is a history for `alias` statement to not be supported by EDA tools (as of 2019). Hence do not use `alias`. The recommended alternatives are using conventional port connections, if possible, or `tran` (a bidirectional pass switch) to connect ports.
 
 ### Implicitly Sized Expressions
 
-Do not rely on the width of implicitly sized sub-expressions.
+<span class="Summary">Do not rely on the width of implicitly sized sub-expressions.</span>
 
 Instead, when requiring that a sub-expression produce a result of a specific width, either:
 
@@ -3503,7 +3501,7 @@ The bit lengths of self-determined expressions (summarized in Table 11-21 of the
 
 For example, the following code is wrong:
 
-```verilog
+```verilog bad
 module compose_bitmap (
     input logic en_a,
     input logic en_b,
@@ -3518,13 +3516,13 @@ The expression in the preceding example synthesizes to zero, because (surprising
 
 A correct implementation would explicitly size each expression, either by adding explicit sizes to the sub-expressions:
 
-```verilog
+```verilog good
 assign en_bitmap = {4'(en_a << 3), 4'(en_b << 3)};
 ```
 
 Or by decomposing the expression into explicitly sized partial results:
 
-```verilog
+```verilog good
 logic [3:0] en_a_bitmap;
 logic [3:0] en_b_bitmap;
 assign en_a_bitmap = en_a << 3;
@@ -3546,7 +3544,7 @@ The key ideas in this section include:
 
 ### Timescale
 
-Every project must define a consistent way of specifying timescale.
+<span class="Summary">Every project must define a consistent way of specifying timescale.</span>
 
 There are multiple ways to specify the timescale, each with pros and cons. Each project must define a single way to specify the timescale for the entire project. Individuals must not implement one-off timescale solutions.
 
@@ -3559,7 +3557,7 @@ Bus protocols are commonly used to connect components of the chip. When using an
 
 ### Flow Control
 
-Standardize flow control using Ready/Valid semantics wherever possible.
+<span class="Summary">Standardize flow control using Ready/Valid semantics wherever possible.</span>
 
 Flow control is often used to facilitate back pressure as data moves through a pipeline.
 
@@ -3569,11 +3567,11 @@ If an interface is defined without flow control, a comment must explain why flow
 
 #### Struct Usage
 
-Do not group flow control and data signals in the same struct. All data signals in a struct must share the same flow control.
+<span class="Summary">Do not group flow control and data signals in the same struct. All data signals in a struct must share the same flow control.</span>
 
 When grouping data signals, flow control signals must not be included in the same structure as the data they are qualifying. Additionally, all data signals in the structure must have the same flow control behavior and be qualified by the same external flow control signals. Otherwise, use of the structure could easily lead to data propagation bugs.
 
-```verilog
+```verilog good
 typedef struct packed {
   logic         rw;
   foo_address_t addr;
@@ -3585,7 +3583,7 @@ logic foo_valid;           // Good: this is the flow control signal for foo.
 bar_interrupt_t bar_intr;  // Good: this has different flow control than foo.
 ```
 
-```verilog
+```verilog bad
 typedef struct packed {
   logic           rw;
   foo_address_t   addr;
@@ -3599,7 +3597,7 @@ foo_t foo;
 
 #### Ready/Valid
 
-Ready/Valid semantics express the recommended method of flow control.
+<span class="Summary">Ready/Valid semantics express the recommended method of flow control.</span>
 
 Ready/Valid semantics mimic the requirements of the AXI handshake process, as defined in the [AMBA AXI Protocol Specification](https://developer.arm.com/documentation/ihi0022/latest/).
 
@@ -3627,7 +3625,7 @@ Credit/Valid flow control decouples data transmission from flow-control feedback
 
 #### Req/Ack
 
-Req/Ack semantics express an alternate method of flow control.
+<span class="Summary">Req/Ack semantics express an alternate method of flow control.</span>
 
 Req/Ack semantics are functionally equivalent to [Ready/valid semantics](#ready-valid). [Ready/Valid](#ready-valid) is the recommended style for most new code. [Credit/Valid](#credit-valid) is recommended to be considered for very long, very wide, or very high-speed buses.
 
@@ -3642,7 +3640,7 @@ If foo_req is not asserted, no assumptions can be made about foo_ack (the receiv
 
 For example:
 
-```verilog
+```verilog good
 output logic [63:0] write_to_fifo_data,
 output logic        write_to_fifo_req,
 input  logic        write_to_fifo_ack
@@ -3650,9 +3648,9 @@ input  logic        write_to_fifo_ack
 
 ### Synchronization
 
-Users must avoid implementing their own CDC synchronizers and instead rely upon a proven library implementation.
+<span class="Summary">Users must avoid implementing their own CDC synchronizers and instead rely upon a proven library implementation.</span>
 
-Any module that contains CDC synchronizers must separate and encapsulate logic for each clock domain in separate sub-modules.
+<span class="Summary">Any module that contains CDC synchronizers must separate and encapsulate logic for each clock domain in separate sub-modules.</span>
 
 It is not acceptable to have combinational or sequential code written in the same level of hierarchy that includes a CDC instantiation. If there are multiple clock domains in a module, then all logic that belongs to each domain must be separated from the others and encapsulated within one or more sub-modules.
 
@@ -3660,7 +3658,7 @@ _Exception:_ CDC implementations (for example, from a design library) are not su
 
 _Rationale:_ Mixing functional logic from multiple clock domains in the same module results in poor readability of combinational and sequential logic (for example, extra [clock name prefix](#clock-domains) on signals in logical expressions) and can increase the risk of accidental CDC bugs (for example, crossing clock domains without a synchronizer). This style rule enforces structural separation of logic that belongs to different clock domains.
 
-```verilog
+```verilog good
 module module_foo_bar (
     ...
 );
@@ -3681,7 +3679,7 @@ module module_foo_bar (
 endmodule
 ```
 
-```verilog
+```verilog bad
 module module_foo_bar (
     ...
 );
@@ -3705,25 +3703,22 @@ endmodule
 
 ### Top-level Implementation
 
-A set of guidelines that emphasize maintainability of the top-level implementation.
+<span class="Summary">A set of guidelines that emphasize maintainability of the top-level implementation.</span>
 
 The top-level implementation is a pain point for many designs. The following recommendations focus on keeping top-level implementations simple and maintainable.
 
 The following practices are recommended:
 
 - _No logic or registers_ in the top-level instance. All logic is implemented within sub-modules. The top level instance contains nothing but instances of sub-modules.
-
 - _Simple mapping of ports to signals_. The goal is to make the mapping of ports onto signals as simple (and automatable) as possible. The best practice is to have top-level signal names that are identical to port names. When this is not practical, the following simple and consistent mapping schemes represent the next best thing:
-
   - a consistent renaming that maps all ports with one prefix to signals with another prefix. For example, a set of "m_axi\_\*" ports might be mapped consistently to a set of "s05_axi\_\*" wires.
   - mapping a port to a slice of a larger bus. For example, an `access_requestN` port might be connected to an `access_request[5]` wire.
   - if interfaces are being used, it may be necessary to create a consistent instance name that is distinct from the interface name or modport name.
-
 - Consider _automating_ the production of your top-level block, using automatic tools such as [verilogpp](https://github.com/google/verilogpp) .
 
 ### Registered Inputs and Outputs
 
-Strongly prefer to place module-boundary registers on outputs.
+<span class="Summary">Strongly prefer to place module-boundary registers on outputs.</span>
 
 When placing module-boundary registers, it is strongly recommended that the registers be placed on the module outputs, rather than the module inputs.
 
@@ -3740,11 +3735,11 @@ It is assumed that inputs to all modules come from the output flops of a previou
 
 ### Summary
 
-This section documents guidelines for writing Design Verification (DV) code in Verilog.
+<span class="Summary">This section documents guidelines for writing Design Verification (DV) code in Verilog.</span>
 
 ### Assertions
 
-Assumptions and invariants in logic must be formally expressed as runtime assertions.
+<span class="Summary">Assumptions and invariants in logic must be formally expressed as runtime assertions.</span>
 
 Assertions must represent behaviors that ALWAYS happen (and not be used to flag error conditions that might be exercised in simulation).
 
@@ -3762,7 +3757,7 @@ Use [standardized assertion macros](#assertion-macros) whenever possible.
 
 ### Unit Tests and Designer Tests
 
-Thorough unit tests are required for shared libraries and [reusable IP](#reusable-ip) design blocks. All other design blocks require designer tests.
+<span class="Summary">Thorough unit tests are required for shared libraries and [reusable IP](#reusable-ip) design blocks. All other design blocks require designer tests.</span>
 
 #### Naming Unit Tests
 
@@ -3782,15 +3777,15 @@ The second category is also referred to as "designer tests".
 
 ### Constraints
 
-Use `lower_snake_case` when naming constraints with an `_c` suffix.
+<span class="Summary">Use `lower_snake_case` when naming constraints with an `_c` suffix.</span>
 
-```verilog
+```verilog good
 constraint legal_pkt_size_in_bytes_c {
   pkt_size_in_bytes inside {[64:1500]};
 }
 ```
 
-```verilog
+```verilog bad
 constraint c_My_Constraint { // c_ at the beginning.  Not lower_snake_case.
   pkt_size_in_bytes inside {[64:1500]};
 }
@@ -3800,11 +3795,11 @@ constraint c_My_Constraint { // c_ at the beginning.  Not lower_snake_case.
 
 #### Plusarg Value Assignment
 
-Plusargs must specify a value to be assigned to a variable (for example, use +en_foo=1, not +en_foo). Do not use $test$plusargs.
+<span class="Summary">Plusargs must specify a value to be assigned to a variable (for example, use +en_foo=1, not +en_foo). Do not use $test$plusargs.</span>
 
 For example:
 
-```verilog
+```verilog good
 bit en_ingress;
 bit plusarg_found = $value$plusargs("en_ingress=%d", en_ingress);
 if (en_ingress) begin
@@ -3812,7 +3807,7 @@ if (en_ingress) begin
 end
 ```
 
-```verilog
+```verilog bad
 bit en_ingress;
 if ($test$plusargs("en_ingress")) begin
   // Do stuff...
@@ -3821,11 +3816,11 @@ end
 
 #### Plusarg Naming
 
-The plusarg name must match the variable that stores the passed plusarg, exclusive of any prefix or suffix of either the plusarg or the variable.
+<span class="Summary">The plusarg name must match the variable that stores the passed plusarg, exclusive of any prefix or suffix of either the plusarg or the variable.</span>
 
 For example:
 
-```verilog
+```verilog good
 int foo;
 int prefix_bar_suffix;
 // Any of the following plusarg run-time calls would be acceptable:
@@ -3837,7 +3832,7 @@ int prefix_bar_suffix;
 // +PREFIX_BAR_SUFFIX=123
 ```
 
-```verilog
+```verilog bad
 string file_name;
 // Plusarg string name and variable names must match.  These are not acceptable:
 // +filename="foo.txt"
@@ -3848,7 +3843,7 @@ string file_name;
 
 #### Displayed Number Format
 
-Printed numbers must be prefixed with their radix as shown in the following examples.
+<span class="Summary">Printed numbers must be prefixed with their radix as shown in the following examples.</span>
 
 When formatting text representations of numbers for log files, make it clear what data you are including.
 
@@ -3860,7 +3855,7 @@ Hexadecimal: `0x` or `'h`
 
 Decode individual fields of large structures individually, instead of expecting the user to manually decode raw values.
 
-```verilog
+```verilog good
 $display("0x%0x", some_hex_value);
 $display("0b%0b", some_binary_value);
 $display("'h%0h", some_hex_value);
@@ -3868,7 +3863,7 @@ $display("'b%0b", some_binary_value);
 $display("%0d", some_decimal_value);
 ```
 
-```verilog
+```verilog bad
 $display("%0x", some_hex_value);
 $display("%0b", some_binary_value);
 $display("0d%0d", some_decimal_value);
@@ -3877,11 +3872,11 @@ $display("'d%0d", some_decimal_value);
 
 #### String Formatting
 
-Use `$sformatf()` for string type formatting. Avoid using `$display()` to format string types.
+<span class="Summary">Use `$sformatf()` for string type formatting. Avoid using `$display()` to format string types.</span>
 
 The [SystemVerilog-2017 standard](https://ieeexplore.ieee.org/document/8299595) is vague on how string type formatting must be handled by `$display()`. Simulator implementation of this functionality varies. `$sformatf()` has a more consistent interpretation and implementation.
 
-```verilog
+```verilog good
 string str_type = "Hello %s";
 // Good: String type formatting using $sformatf()
 string str_type_sformat = $sformatf(str_type, "world!");
@@ -3891,12 +3886,12 @@ $display(str_type_sformat);
 $display($sformatf(str_type, "world!"));
 ```
 
-```verilog
+```verilog good
 // String literal formatting with $display() is allowed
 $display("Hello %s", "world!");
 ```
 
-```verilog
+```verilog bad
 string str_type = "Hello %s";
 // Bad: String type formatting using $display()
 $display(str_type, "world!");
@@ -3906,23 +3901,23 @@ $display(str_type, "world!");
 
 Do not use a '' (backslash) character to continue a long string literal to the next line, use `{}` string concatenation operator instead.
 
-```verilog
+```verilog good
 $display({"a really long ",
           "long long quoted string"});
 ```
 
-```verilog
+```verilog bad
 $display("a really long \
 long long quoted string");  // Bad: continuation of a string literal
 ```
 
 ### Loop operators
 
-Prefer foreach loops.
+<span class="Summary">Prefer foreach loops.</span>
 
 Where possible, prefer foreach loops over equivalent loop operators. They are concise and less prone to subtle errors.
 
-```verilog
+```verilog good
 foreach (data[byte_i]) begin
   data[byte_i] = 0;
 end
@@ -3933,7 +3928,7 @@ foreach (data[burst_i, byte_i]) begin
 end
 ```
 
-```verilog
+```verilog bad
 // Less readable and note the typo below, must be '<' not '<='.
 for (int byte_i = 0; byte_i <= data.size(); byte_i++) begin
   data[byte_i] = 0;
@@ -3946,12 +3941,12 @@ Do not assert on calls to `randomize`. More broadly, do not place any expression
 
 SystemVerilog has a couple ways to disable all assertions such as `$assertoff` or `$assertkill`. When an assertion is disabled, future assertion attempts will not evaluate the assertion expression, as per the LRM (not until the assertion is re-enabled via `$asserton` or one of its alternatives). This is particularly bad when randomize is used within the assertion expression, because disabled assertions result in unrandomized objects.
 
-```verilog
+```verilog good
 ret = item.randomize() with {<constraints>};
 assert(ret);
 ```
 
-```verilog
+```verilog bad
 assert(randomize(<some variables>) with {<constraints>});
 assert(item.randomize() with {<constraints>});
 assert(function_with_side_effects());
@@ -3961,7 +3956,7 @@ assert(function_with_side_effects());
 
 Always put `wait fork` or `disable fork` constructs inside of an isolation `fork ... join` block, or the environment can end up waiting on other, earlier forks it was not intending to wait for.
 
-```verilog
+```verilog good
 fork begin : isolation_fork
   fork
     begin
@@ -3982,7 +3977,7 @@ Do not void cast calls that have useful or important return values. This include
 
 For example, **do not do the following**:
 
-```verilog
+```verilog bad
 void'(randomize(<some variables>) with {<constraints>});
 void'(item.randomize() with {<constraints>});
 void'(uvm_config_db#(<object>)::get(<parameters>));
@@ -3991,7 +3986,7 @@ void'(uvm_hdl_read($sformatf("%sglink_gsw_link_down", glink_path), rd_lnk_dwn));
 
 Instead, check the return value of calls to `randomize` and similar calls in order to handle the potential error.
 
-```verilog
+```verilog good
 if (!item.randomize() with {<constraints>}) begin
   <issue error>
 end
@@ -4003,17 +3998,17 @@ end
 
 ### Associative arrays
 
-Do not use wildcard indexed \[\*] associative arrays.
+<span class="Summary">Do not use wildcard indexed \[\*] associative arrays.</span>
 
 Associative arrays with wildcard index are hard to use because the item type could be anything. Always specify a particular index type for associative arrays:
 
-```verilog
+```verilog good
 bit channel_enable[int];
 register_t registers[string];
 int object_count[index_type];
 ```
 
-```verilog
+```verilog bad
 int object_count[*];  // Bad: wildcard indexed array
 ```
 
@@ -4025,13 +4020,13 @@ int object_count[*];  // Bad: wildcard indexed array
 
 ### Program block
 
-Do not use `program` and `endprogram` blocks.
+<span class="Summary">Do not use `program` and `endprogram` blocks.</span>
 
 It provides the false sense of security. Use `module` and clocking blocks to avoid DUT race conditions instead.
 
 ### Simulator-specific code
 
-All simulator-specific code must be wrapped inside preprocessor guards.
+<span class="Summary">All simulator-specific code must be wrapped inside preprocessor guards.</span>
 
 The following macro names are always defined by each simulator. These names must be used to wrap all simulator-specific code, so the code can be compiled for every simulator.
 
@@ -4040,7 +4035,7 @@ The following macro names are always defined by each simulator. These names must
 - `XCELIUM` - for Xcelium/xrun
 - `DSIM` - for DSim
 
-```verilog
+```verilog good
 `ifdef VCS
   $stack();
 `endif
@@ -4064,13 +4059,13 @@ Do not use the following functions.
 
 #### Phase Methods
 
-Always call `super.<phase_name>(phase)` when overriding UVM phase methods in derived classes.
+<span class="Summary">Always call `super.<phase_name>(phase)` when overriding UVM phase methods in derived classes.</span>
 
 When overriding UVM phase methods (such as `build_phase`, `connect_phase`, `run_phase`, etc.) in a class derived from a UVM component, you must call the parent class's implementation using `super.<phase_name>(phase)`. This ensures that any setup or configuration performed by the parent class is executed.
 
 Exceptions are allowed if the base class is a direct UVM library class (like `uvm_component`, `uvm_test`, `uvm_env`, etc.) where the default implementation is known to be empty, BUT it is still recommended to call it for consistency and future-proofing. For user-defined base classes, it is mandatory.
 
-```verilog
+```verilog good
 class my_test extends base_test;
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
@@ -4079,7 +4074,7 @@ class my_test extends base_test;
 endclass
 ```
 
-```verilog
+```verilog bad
 class my_test extends base_test;
   virtual function void build_phase(uvm_phase phase);
     // Missing super.build_phase(phase)
@@ -4090,7 +4085,7 @@ endclass
 
 #### UVM Logging
 
-Only use `` `uvm_info ``, `` `uvm_error ``, and `` `uvm_fatal `` UVM messaging macros for message logging in UVM environments.
+<span class="Summary">Only use `` `uvm_info ``, `` `uvm_error ``, and `` `uvm_fatal `` UVM messaging macros for message logging in UVM environments.</span>
 
 Only use the following UVM macros to display log messages in UVM environments:
 
@@ -4102,11 +4097,11 @@ Do not call underlying UVM functions like `uvm_report_*`. Macros provide better 
 
 Do not use the `` `uvm_warning `` macro. Categorize messages as informational (info) or as conveying an issue that needs to be addressed (error or fatal). Although forbidden, it's recommended to setup your infrastructure to treat `` `uvm_warning `` as errors.
 
-```verilog
+```verilog good
 `uvm_error(get_full_name(), $sformatf("Unsupported burst type : %s", burst_type.name()))
 ```
 
-```verilog
+```verilog bad
 $display("Debug: Byte enable=%d", byte_en);
 uvm_report_info("ID", "Debug message", UVM_LOW)
 `uvm_warning(get_full_name(), "Incorrect condition, maybe")
@@ -4114,17 +4109,17 @@ uvm_report_info("ID", "Debug message", UVM_LOW)
 
 #### UVM Macro Semicolons
 
-Do not append a semicolon to UVM macro calls.
+<span class="Summary">Do not append a semicolon to UVM macro calls.</span>
 
 UVM macros (including messaging macros like `` `uvm_info `` and sequence action macros like `` `uvm_do ``) must not be followed by a semicolon. Appending a semicolon can result in an empty statement, which can cause syntax errors in contexts like `if` statements without `begin` / `end` blocks.
 
-```verilog
+```verilog good
 // Good: UVM macros must not be followed by a semicolon.
 `uvm_info("ID", "Message", UVM_LOW)
 `uvm_do(my_seq)
 ```
 
-```verilog
+```verilog bad
 // Bad: Do not append a trailing semicolon to UVM macro calls.
 `uvm_info("ID", "Message", UVM_LOW);
 `uvm_do(my_seq);
@@ -4136,7 +4131,7 @@ Call the `randomize()` or `randomize() with {}` function of the sequence before 
 
 #### Creating Objects and Components
 
-Use the `create()` API to create UVM objects and components.
+<span class="Summary">Use the `create()` API to create UVM objects and components.</span>
 
 Use the `type_id::create()` API to instantiate all UVM objects and components. This is standard UVM programming practice and is necessary to take advantage of UVM factory features, such as type and instance overrides.
 
@@ -4144,12 +4139,12 @@ Exceptions are permitted for objects or components that are not intended for reu
 
 When creating classes derived from `uvm_component`, pass `this` as the `parent` argument so that the component hierarchy is built properly.
 
-```verilog
+```verilog good
 env_h = tb_block_env::type_id::create("env_h", this);
 ip_pkt = tx_seq_item::type_id::create("ip_pkt");
 ```
 
-```verilog
+```verilog bad
 // Direct calls to new() bypass the UVM factory and prevent overrides.
 env_h = new("env_h", this);
 ip_pkt = new("ip_pkt");
@@ -4157,20 +4152,20 @@ ip_pkt = new("ip_pkt");
 
 #### UVM Naming
 
-When creating a UVM object or component using `type_id::create()`, the string name argument must match the name of the variable to which it is assigned.
+<span class="Summary">When creating a UVM object or component using `type_id::create()`, the string name argument must match the name of the variable to which it is assigned.</span>
 
 For array assignments, the string name must include the index in square brackets (for example, `[<index>]`).
 
 This ensures consistency and helps with debugging, as the hierarchical path in UVM will match the variable names in the code.
 
-```verilog
+```verilog good
 my_agent = my_agent_type::type_id::create("my_agent", this);
 
 // For arrays, include the index in the string name
 my_agents[i] = my_agent_type::type_id::create($sformatf("my_agents[%0d]", i), this);
 ```
 
-```verilog
+```verilog bad
 // String name does not match variable name
 my_agent = my_agent_type::type_id::create("different_name", this);
 
@@ -4180,14 +4175,14 @@ my_agents[i] = my_agent_type::type_id::create($sformatf("my_agents_%0d", i), thi
 
 #### Class Constructor Default Values
 
-For classes derived from `uvm_object`, the constructor parameter `name` must default to `""`. For classes derived from `uvm_component`, the constructor must not specify default values.
+<span class="Summary">For classes derived from `uvm_object`, the constructor parameter `name` must default to `""`. For classes derived from `uvm_component`, the constructor must not specify default values.</span>
 
 When defining a constructor for a UVM class:
 
 - Classes extending `uvm_object` must define the constructor parameter as `string name = ""` (empty string) and pass it to `super.new(name)`. Do not provide non-empty default object names.
 - Classes extending `uvm_component` must define the constructor parameters as `(string name, uvm_component parent)` without default argument values.
 
-```verilog
+```verilog good
 // uvm_object derived class constructor
 function new (string name = "");
 
@@ -4195,7 +4190,7 @@ function new (string name = "");
 function new (string name, uvm_component parent);
 ```
 
-```verilog
+```verilog bad
 // Bad: name default parameter must be ""
 function new (string name = "my_object");
 
@@ -4205,17 +4200,17 @@ function new (string name = "my_component", uvm_component parent = this);
 
 #### Test Execution
 
-Do not pass arguments to `run_test()`.
+<span class="Summary">Do not pass arguments to `run_test()`.</span>
 
 Always call `run_test()` without arguments. Specify the test name on the command line using `+UVM_TESTNAME=test_name` instead of hardcoding it in the code.
 
-```verilog
+```verilog good
 initial begin
   run_test();
 end
 ```
 
-```verilog
+```verilog bad
 initial begin
   run_test("my_test_name");
 end

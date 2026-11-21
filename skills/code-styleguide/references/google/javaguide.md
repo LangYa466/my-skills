@@ -254,7 +254,7 @@ An empty block or block-like construct may be in K & R style (as described in [S
 
 Examples:
 
-```java
+```java good
   // This is acceptable
   void doNothing() {}
 
@@ -263,7 +263,7 @@ Examples:
   }
 ```
 
-```java
+```java bad
   // This is not acceptable: No concise empty blocks in a multi-block statement
   try {
     doSomething();
@@ -386,7 +386,7 @@ Beyond where required by the language or other style rules, and apart from withi
    - the ampersand that separates multiple type bounds: `<T extends Foo & Bar>`
    - the pipe for a catch block that handles multiple exceptions: `catch (FooException | BarException e)`
    - the colon (`:`) in an enhanced `for` ("foreach") statement
-   - the arrow in a lambda expression: `(String str) -> str.length()`\
+   - the arrow in a lambda expression: `(String str) -> str.length()` \
      or switch rule: `case "FOO" -> bar();`
 
    but not
@@ -651,13 +651,13 @@ A `TODO` comment begins with the word `TODO` in all caps, a following colon, and
 
 The purpose is to have a consistent `TODO` format that can be searched to find out how to get more details.
 
-```java
+```java good
 // TODO: example.com/12345678 - Remove this after the 2047q4 compatibility window expires.
 ```
 
 Avoid adding TODOs that refer to an individual or team as the context:
 
-```java
+```java bad
 // TODO: username - File an issue and use a '*' for repetition.
 ```
 

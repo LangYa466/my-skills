@@ -6,14 +6,14 @@ Source: <https://developer.android.com/kotlin/style-guide> · developer.android.
 
 - L24 Source files
   - L28 Naming
-  - L64 Special Characters
-  - L88 Structure
-- L161 Formatting
-  - L163 Braces
-  - L389 Whitespace
-  - L590 Specific constructs
-  - L679 Naming
-  - L834 Documentation
+  - L56 Special Characters
+  - L80 Structure
+- L153 Formatting
+  - L155 Braces
+  - L352 Whitespace
+  - L541 Specific constructs
+  - L618 Naming
+  - L759 Documentation
 
 ---
 
@@ -34,8 +34,6 @@ If a source file contains only a single top-level class, the file name should re
 class MyClass { }
 ```
 
-
-
 ```kotlin
 // Bar.kt
 class Bar { }
@@ -43,23 +41,17 @@ class Bar { }
 fun Runnable.toBar(): Bar = Bar()
 ```
 
-
-
 ```kotlin
 // Map.kt
 fun <T, O> Set<T>.map(func: (T) -> O): List<O> = emptyList()
 fun <T, O> List<T>.map(func: (T) -> O): List<O> = emptyList()
 ```
 
-
-
 ```kotlin
 // extensions.kt
 fun MyClass.process() = { /* ... */ }
 fun MyResult.print() = { /* ... */ }
 ```
-
-
 
 ### Special Characters
 
@@ -176,8 +168,6 @@ when (value) {
 }
 ```
 
-
-
 Braces are otherwise required for any `if`, `for`, `when` branch, `do`, and `while` statements and expressions, even when the body is empty or contains only a single statement.
 
 ```kotlin
@@ -215,8 +205,6 @@ return Runnable {
 }
 ```
 
-
-
 ```kotlin
 return object : MyClass() {
     override fun foo() {
@@ -234,8 +222,6 @@ return object : MyClass() {
     }
 }
 ```
-
-
 
 A few exceptions for [enum classes](https://developer.android.com/kotlin/style-guide.md.txt#enum-classes) are given below.
 
@@ -256,8 +242,6 @@ try {
 } // Okay
 ```
 
-
-
 #### Expressions
 
 An `if/else` conditional that is used as an expression may omit braces _only_ if the entire expression fits on one line.
@@ -265,8 +249,6 @@ An `if/else` conditional that is used as an expression may omit braces _only_ if
 ```kotlin
 val value = if (string.isEmpty()) 0 else 1 // Okay
 ```
-
-
 
 ```kotlin
 val value = if (string.isEmpty())  // WRONG!
@@ -282,8 +264,6 @@ val value = if (string.isEmpty()) { // Okay
     1
 }
 ```
-
-
 
 #### Indentation
 
@@ -308,16 +288,11 @@ Exceptions:
 The prime directive of line-wrapping is: prefer to break at a higher syntactic level. Also:
 
 - When a line is broken at an operator or infix function name, the break comes after the operator or infix function name.
-
 - When a line is broken at the following "operator-like" symbols, the break comes before the symbol:
-
   - The dot separator (`.`, `?.`).
   - The two colons of a member reference (`::`).
-
 - A method or constructor name stays attached to the open parenthesis (`(`) that follows it.
-
 - A comma (`,`) stays attached to the token that precedes it.
-
 - A lambda arrow (`->`) stays attached to the argument list that precedes it.
 
 > \[!NOTE] **Note:** The primary goal for line wrapping is to have clear code, not necessarily code that fits in the smallest number of lines.
@@ -336,8 +311,6 @@ fun <T> Iterable<T>.joinToString(
 }
 ```
 
-
-
 ##### Expression functions
 
 When a function contains only a single expression it can be represented as an [expression function](https://kotlinlang.org/docs/reference/functions.html#single-expression-functions).
@@ -348,13 +321,9 @@ override fun toString(): String {
 }
 ```
 
-
-
 ```kotlin
 override fun toString(): String = "Hey"
 ```
-
-
 
 #### Properties
 
@@ -364,8 +333,6 @@ When a property initializer does not fit on a single line, break after the equal
 private val defaultCharset: Charset? =
     EncodingRegistry.getInstance().getDefaultCharsetForPropertiesFiles(file)
 ```
-
-
 
 Properties declaring a `get` and/or `set` function should place each on their own line with a normal indent (+4). Format them using the same rules as functions.
 
@@ -378,13 +345,9 @@ var directory: File? = null
 
 Read-only properties can use a shorter syntax which fits on a single line.
 
-
-
 ```kotlin
 val defaultExtension: String get() = "kt"
 ```
-
-
 
 ### Whitespace
 
@@ -393,14 +356,10 @@ val defaultExtension: String get() = "kt"
 A single blank line appears:
 
 - _Between_ consecutive members of a class: properties, constructors, functions, nested classes, etc.
-
   - **Exception:** A blank line between two consecutive properties (having no other code between them) is optional. Such blank lines are used as needed to create logical groupings of properties and associate properties with their backing property, if present.
   - **Exception:** Blank lines between enum constants are covered below.
-
 - Between statements, _as needed_ to organize the code into logical subsections.
-
 - _Optionally_ before the first statement in a function, before the first member of a class, or after the last member of a class (neither encouraged nor discouraged).
-
 - As required by other sections of this document (such as the [Structure](https://developer.android.com/kotlin/style-guide.md.txt#structure) section).
 
 Multiple consecutive blank lines are permitted, but not encouraged or ever required.
@@ -422,7 +381,6 @@ Beyond where required by the language or other style rules, and apart from liter
   for (i in 0..1) {
   }
   ```
-
 - Separating any reserved word, such as `else` or `catch`, from a closing curly brace (`}`) that precedes it on that line.
 
   ```kotlin
@@ -436,7 +394,6 @@ Beyond where required by the language or other style rules, and apart from liter
   } else {
   }
   ```
-
 - Before any open curly brace (`{`).
 
   ```kotlin
@@ -450,7 +407,6 @@ Beyond where required by the language or other style rules, and apart from liter
   if (list.isEmpty()) {
   }
   ```
-
 - On both sides of any binary operator.
 
   ```kotlin
@@ -490,7 +446,6 @@ Beyond where required by the language or other style rules, and apart from liter
     // Okay
     val toString = Any::toString
     ```
-
   - the dot separator (`.`).
 
     ```kotlin
@@ -502,7 +457,6 @@ Beyond where required by the language or other style rules, and apart from liter
     // Okay
     it.toString()
     ```
-
   - the range operator (`..`).
 
     ```kotlin
@@ -518,7 +472,6 @@ Beyond where required by the language or other style rules, and apart from liter
       print(i)
     }
     ```
-
 - Before a colon (`:`) only if used in a class declaration for specifying a base class or interfaces, or when used in a `where` clause for [generic constraints](https://kotlinlang.org/docs/reference/generics.html#generic-constraints).
 
   ```kotlin
@@ -550,7 +503,6 @@ Beyond where required by the language or other style rules, and apart from liter
   // Okay
   fun <T> max(a: T, b: T) where T : Comparable<T> {}
   ```
-
 - After a comma (`,`) or colon (`:`).
 
   ```kotlin
@@ -572,7 +524,6 @@ Beyond where required by the language or other style rules, and apart from liter
   // Okay
   class Foo : Runnable
   ```
-
 - On both sides of the double slash (`//`) that begins an end-of-line comment. Here, multiple spaces are allowed, but not required.
 
   ```kotlin
@@ -597,8 +548,6 @@ An enum with no functions and no documentation on its constants may optionally b
 enum class Answer { YES, NO, MAYBE }
 ```
 
-
-
 When the constants in an enum are placed on separate lines, a blank line is not required between them except in the case where they define a body.
 
 ```kotlin
@@ -612,8 +561,6 @@ enum class Answer {
 }
 ```
 
-
-
 Since enum classes are classes, all other rules for formatting classes apply.
 
 #### Annotations
@@ -626,16 +573,12 @@ Member or type annotations are placed on separate lines immediately prior to the
 annotation class Global
 ```
 
-
-
 Annotations without arguments can be placed on a single line.
 
 ```kotlin
 @JvmField @Volatile
 var disposable: Disposable? = null
 ```
-
-
 
 When only a single annotation without arguments is present, it may be placed on the same line as the declaration.
 
@@ -647,16 +590,12 @@ When only a single annotation without arguments is present, it may be placed on 
 }
 ```
 
-
-
 `@[...]` syntax may only be used with an explicit use-site target, and only for combining 2 or more annotations without arguments on a single line.
 
 ```kotlin
 @field:[JvmStatic Volatile]
 var disposable: Disposable? = null
 ```
-
-
 
 #### Implicit return/property types
 
@@ -713,8 +652,6 @@ Underscores are permitted to appear in test function names to separate logical c
 }
 ```
 
-
-
 Functions annotated with `@Composable` that return `Unit` are PascalCased and named as nouns, as if they were types.
 
 ```kotlin
@@ -723,8 +660,6 @@ fun NameTag(name: String) {
     // ...
 }
 ```
-
-
 
 Function names should not contain spaces because this is not supported on every platform (notably, this is not fully supported in Android).
 
@@ -749,8 +684,6 @@ val COMMA_JOINED = NAMES.joinToString(", ")
 val EMPTY_ARRAY = arrayOf<SomeMutableType>()
 ```
 
-
-
 These names are typically nouns or noun phrases.
 
 Constant values can only be defined inside of an `object` or as a top-level declaration. Values otherwise meeting the requirement of a constant but defined inside of a `class` must use a non-constant name.
@@ -771,8 +704,6 @@ val logger = Logger.getLogger(MyClass::class.java.name)
 val nonEmptyArray = arrayOf("these", "can", "change")
 ```
 
-
-
 These names are typically nouns or noun phrases.
 
 ##### Backing properties
@@ -791,8 +722,6 @@ val table: Map<String, Int>
     }
 ```
 
-
-
 #### Type variable names
 
 Each type variable is named in one of two styles:
@@ -807,14 +736,10 @@ Sometimes there is more than one reasonable way to convert an English phrase int
 Beginning with the prose form of the name:
 
 1. Convert the phrase to plain ASCII and remove any apostrophes. For example, "Müller's algorithm" might become "Muellers algorithm".
-
 2. Divide this result into words, splitting on spaces and any remaining punctuation (typically hyphens). _Recommended:_ if any word already has a conventional camel-case appearance in common usage, split this into its constituent parts (e.g., "AdWords" becomes "ad words"). Note that a word such as "iOS" is not really in camel case per se; it defies any convention, so this recommendation does not apply.
-
 3. Now lowercase everything (including acronyms), then do one of the following:
-
    - Uppercase the first character of each word to yield pascal case.
    - Uppercase the first character of each word except the first to yield camel case.
-
 4. Finally, join all the words into a single identifier.
 
 Note that the casing of the original words is almost entirely disregarded.
@@ -847,15 +772,11 @@ fun method(arg: String) {
 }
 ```
 
-
-
 ...or in this single-line example:
 
 ```kotlin
 /** An especially short bit of KDoc. */
 ```
-
-
 
 The basic form is always acceptable. The single-line form may be substituted when the entirety of the KDoc block (including comment markers) can fit on a single line. Note that this only applies when there are no block tags such as `@return`.
 

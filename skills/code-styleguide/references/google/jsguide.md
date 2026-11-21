@@ -18,60 +18,60 @@ Source: <https://google.github.io/styleguide/jsguide.html> · google/styleguide@
   - L249 3.4 ES modules
   - L502 3.5 goog.setTestOnly
   - L508 3.6 goog.require and goog.requireType statements
-  - L608 3.7 The file’s implementation
-- L614 4 Formatting
-  - L620 4.1 Braces
-  - L694 4.2 Block indentation: +2 spaces
-  - L839 4.3 Statements
-  - L849 4.4 Column limit: 80
-  - L865 4.5 Line-wrapping
-  - L915 4.6 Whitespace
-  - L1010 4.7 Grouping parentheses: recommended
-  - L1018 4.8 Comments
-- L1056 5 Language features
-  - L1062 5.1 Local variable declarations
-  - L1118 5.2 Array literals
-  - L1214 5.3 Object literals
-  - L1392 5.4 Classes
-  - L1654 5.5 Functions
-  - L1825 5.6 String literals
-  - L1881 5.7 Number literals
-  - L1885 5.8 Control structures
-  - L1956 5.9 this
-  - L1962 5.10 Equality Checks
-  - L1978 5.11 Disallowed features
-- L2045 6 Naming
-  - L2047 6.1 Rules common to all identifiers
-  - L2074 6.2 Rules by identifier type
-  - L2185 6.3 Camel case: defined
-- L2221 7 JSDoc
-  - L2225 7.1 General form
-  - L2249 7.2 Markdown
-  - L2282 7.3 JSDoc tags
-  - L2323 7.4 Line wrapping
-  - L2342 7.5 Top/file-level comments
-  - L2356 7.6 Class comments
-  - L2387 7.7 Enum and typedef comments
-  - L2412 7.8 Method and function comments
-  - L2495 7.9 Property comments
-  - L2527 7.10 Type annotations
-  - L2680 7.11 Visibility annotations
-- L2684 8 Policies
-  - L2686 8.1 Issues unspecified by Google Style: Be Consistent!
-  - L2690 8.2 Compiler warnings
-  - L2722 8.3 Deprecation
-  - L2726 8.4 Code not in Google Style
-  - L2745 8.5 Local style rules
-  - L2749 8.6 Generated code: mostly exempt
-- L2753 9 Appendices
-  - L2755 9.1 JSDoc tag reference
-  - L2904 9.2 Commonly misunderstood style rules
-  - L2914 9.3 Style-related tools
-  - L2940 9.4 Exceptions for legacy platforms
+  - L607 3.7 The file’s implementation
+- L613 4 Formatting
+  - L619 4.1 Braces
+  - L693 4.2 Block indentation: +2 spaces
+  - L838 4.3 Statements
+  - L848 4.4 Column limit: 80
+  - L861 4.5 Line-wrapping
+  - L911 4.6 Whitespace
+  - L998 4.7 Grouping parentheses: recommended
+  - L1006 4.8 Comments
+- L1044 5 Language features
+  - L1050 5.1 Local variable declarations
+  - L1106 5.2 Array literals
+  - L1202 5.3 Object literals
+  - L1380 5.4 Classes
+  - L1642 5.5 Functions
+  - L1813 5.6 String literals
+  - L1869 5.7 Number literals
+  - L1873 5.8 Control structures
+  - L1944 5.9 this
+  - L1950 5.10 Equality Checks
+  - L1966 5.11 Disallowed features
+- L2033 6 Naming
+  - L2035 6.1 Rules common to all identifiers
+  - L2062 6.2 Rules by identifier type
+  - L2173 6.3 Camel case: defined
+- L2205 7 JSDoc
+  - L2209 7.1 General form
+  - L2233 7.2 Markdown
+  - L2266 7.3 JSDoc tags
+  - L2307 7.4 Line wrapping
+  - L2326 7.5 Top/file-level comments
+  - L2340 7.6 Class comments
+  - L2371 7.7 Enum and typedef comments
+  - L2396 7.8 Method and function comments
+  - L2479 7.9 Property comments
+  - L2511 7.10 Type annotations
+  - L2664 7.11 Visibility annotations
+- L2668 8 Policies
+  - L2670 8.1 Issues unspecified by Google Style: Be Consistent!
+  - L2674 8.2 Compiler warnings
+  - L2706 8.3 Deprecation
+  - L2710 8.4 Code not in Google Style
+  - L2729 8.5 Local style rules
+  - L2733 8.6 Generated code: mostly exempt
+- L2737 9 Appendices
+  - L2739 9.1 JSDoc tag reference
+  - L2888 9.2 Commonly misunderstood style rules
+  - L2898 9.3 Style-related tools
+  - L2924 9.4 Exceptions for legacy platforms
 
 ---
 
-> **Important: This guide is no longer being updated. Google recommends migrating to TypeScript, and following the [TypeScript guide](https://google.github.io/styleguide/tsguide.html).**
+> **Important: This guide is no longer being updated. Google recommends migrating to TypeScript, and following the <a href="tsguide.html">TypeScript guide</a>.**
 
 ## 1 Introduction
 
@@ -121,7 +121,7 @@ For the remaining non-ASCII characters, either the actual Unicode character (e.g
 
 > Tip: In the Unicode escape case, and occasionally even when actual Unicode characters are used, an explanatory comment can be very helpful.
 
-```js
+```js good
 /* Best: perfectly clear even without a comment. */
 const units = 'μs';
 
@@ -132,7 +132,7 @@ const units = '\u03bcs'; // 'μs'
 return '\ufeff' + content;  // Prepend a byte order mark.
 ```
 
-```js
+```js bad
 /* Poor: the reader has no idea what character this is. */
 const units = '\u03bcs';
 ```
@@ -170,7 +170,7 @@ The entire argument to `goog.module` is what defines a namespace. It is the pack
 
 Example:
 
-```js
+```js good
 goog.module('search.urlHistory.urlHistoryService');
 ```
 
@@ -180,7 +180,7 @@ Module namespaces may never be named as a _direct_ child of another module's nam
 
 Disallowed:
 
-```js
+```js bad
 goog.module('foo.bar');   // 'foo.bar.qux' would be fine, though
 goog.module('foo.bar.baz');
 ```
@@ -193,7 +193,7 @@ The single `goog.module` statement may optionally be followed by a call to `goog
 
 Example:
 
-```js
+```js good
 goog.module('my.test.helpers');
 goog.module.declareLegacyNamespace();
 goog.setTestOnly();
@@ -207,7 +207,7 @@ Classes, enums, functions, constants, and other symbols are exported using the `
 
 Examples:
 
-```js
+```js good
 const /** !Array<number> */ exportedArray = [1, 2, 3];
 
 const /** !Array<number> */ moduleLocalArray = [4, 5, 6];
@@ -225,7 +225,7 @@ function exportedFunction() {
 exports = {exportedArray, exportedFunction};
 ```
 
-```js
+```js good
 /** @const {number} */
 exports.CONSTANT_ONE = 1;
 
@@ -235,14 +235,14 @@ exports.CONSTANT_TWO = 'Another constant';
 
 Do not annotate the `exports` object as `@const` as it is already treated as a constant by the compiler.
 
-```js
+```js bad
 /** @const */
 exports = {exportedFunction};
 ```
 
 Do not use default exports as they don't translate easily to ES module semantics.
 
-```js
+```js bad
 exports = FancyClass;
 ```
 
@@ -258,7 +258,7 @@ Import statements must not be line wrapped and are therefore an exception to the
 
 ES module files must use the `import` statement to import other ES module files. Do not `goog.require` another ES module.
 
-```js
+```js good
 import './sideeffects.js';
 
 import * as goog from '../closure/goog/goog.js';
@@ -271,11 +271,11 @@ import {name} from './sibling.js';
 
 The `.js` file extension is not optional in import paths and must always be included.
 
-```js
+```js bad
 import '../directory/file';
 ```
 
-```js
+```js good
 import '../directory/file.js';
 ```
 
@@ -283,7 +283,7 @@ import '../directory/file.js';
 
 Do not import the same file multiple times. This can make it hard to determine the aggregate imports of a file.
 
-```js
+```js bad
 // Imports have the same path, but since it doesn't align it can be hard to see.
 import {short} from './long/path/to/a/file.js';
 import {aLongNameThatBreaksAlignment} from './long/path/to/a/file.js';
@@ -295,13 +295,13 @@ import {aLongNameThatBreaksAlignment} from './long/path/to/a/file.js';
 
 Module import names (`import * as name`) are `lowerCamelCase` names that are derived from the imported file name.
 
-```js
+```js good
 import * as fileOne from '../file-one.js';
 import * as fileTwo from '../file_two.js';
 import * as fileThree from '../filethree.js';
 ```
 
-```js
+```js good
 import * as libString from './lib/string.js';
 import * as math from './math/math.js';
 import * as vectorMath from './vector/math.js';
@@ -313,7 +313,7 @@ Some libraries might commonly use a namespace import prefix that violates this n
 
 Default import names are derived from the imported file name and follow the rules in [6.2 Rules by identifier type](#naming-rules-by-identifier-type).
 
-```js
+```js good
 import MyClass from '../my-class.js';
 import myFunction from '../my_function.js';
 import SOME_CONSTANT from '../someconstant.js';
@@ -325,7 +325,7 @@ Note: In general this should not happen as default exports are banned by this st
 
 In general symbols imported via the named import (`import {name}`) should keep the same name. Avoid aliasing imports (`import {SomeThing as SomeOtherThing}`). Prefer fixing name collisions by using a module import (`import *`) or renaming the exports themselves.
 
-```js
+```js good
 import * as bigAnimals from './biganimals.js';
 import * as domesticatedAnimals from './domesticatedanimals.js';
 
@@ -335,7 +335,7 @@ new domesticatedAnimals.Cat();
 
 If renaming a named import is needed then use components of the imported module's file name or path in the resulting alias.
 
-```js
+```js good
 import {Cat as BigCat} from './biganimals.js';
 import {Cat as DomesticatedCat} from './domesticatedanimals.js';
 
@@ -353,17 +353,17 @@ Use named exports in all code. You can apply the `export` keyword to a declarati
 
 Do not use default exports. Importing modules must give a name to these values, which can lead to inconsistencies in naming across modules.
 
-```js
+```js bad
 // Do not use default exports:
 export default class Foo { ... } // BAD!
 ```
 
-```js
+```js good
 // Use named exports:
 export class Foo { ... }
 ```
 
-```js
+```js good
 // Alternate style named exports:
 class Foo { ... }
 
@@ -376,7 +376,7 @@ Exported variables must not be mutated outside of module initialization.
 
 There are alternatives if mutation is needed, including exporting a constant reference to an object that has mutable fields or exporting accessor functions for mutable data.
 
-```js
+```js bad
 // Bad: both foo and mutateFoo are exported and mutated.
 export let /** number */ foo = 0;
 
@@ -398,7 +398,7 @@ export function setMutateFoo(newMutateFoo) {
 }
 ```
 
-```js
+```js good
 // Good: Rather than export the mutable variables foo and mutateFoo directly,
 // instead make them module scoped and export a getter for foo and a wrapper for
 // mutateFooFunc.
@@ -424,7 +424,7 @@ export function setMutateFoo(mutateFoo) {
 
 `export from` statements must not be line wrapped and are therefore an exception to the 80-column limit. This applies to both `export from` flavors.
 
-```js
+```js good
 export {specificName} from './other.js';
 export * from './another.js';
 ```
@@ -433,12 +433,12 @@ export * from './another.js';
 
 Do not create cycles between ES modules, even though the ECMAScript specification allows this. Note that it is possible to create cycles with both the `import` and `export` statements.
 
-```js
+```js bad
 // a.js
 import './b.js';
 ```
 
-```js
+```js bad
 // b.js
 import './a.js';
 
@@ -446,7 +446,7 @@ import './a.js';
 export {x} from './c.js';
 ```
 
-```js
+```js bad
 // c.js
 import './b.js';
 
@@ -459,7 +459,7 @@ export let x;
 
 To reference the Closure `goog` namespace, import Closure's `goog.js`.
 
-```js
+```js good
 import * as goog from '../closure/goog/goog.js';
 
 const {compute} = goog.require('a.name');
@@ -473,7 +473,7 @@ export const CONSTANT = compute();
 
 `goog.require` in ES modules works as it does in `goog.module` files. You can require any Closure namespace symbol (i.e., symbols created by `goog.provide` or `goog.module`) and `goog.require` will return the value.
 
-```js
+```js good
 import * as goog from '../closure/goog/goog.js';
 import * as anEsModule from './anEsModule.js';
 
@@ -491,7 +491,7 @@ Note: It is an error to call `goog.module.declareLegacyNamespace` in an ES modul
 
 `goog.declareModuleId` should only be used to upgrade Closure files to ES modules in place, where named exports are used.
 
-```js
+```js good
 import * as goog from '../closure/goog.js';
 
 goog.declareModuleId('my.esm');
@@ -533,7 +533,7 @@ If a long alias or module name would cause a line to exceed the 80-column limit,
 
 Example:
 
-```js
+```js good
 // Standard alias style.
 const asserts = goog.require('goog.asserts');
 // Namespace-based alias used to disambiguate.
@@ -560,7 +560,7 @@ goog.require('my.framework.initialization');
 
 Discouraged:
 
-```js
+```js bad
 // Some legacy code uses a "default export" style to export a single class, enum,
 // record type, etc. Do not use this pattern in new JS.
 // When using a "default export", prefer destructuring into aliases.
@@ -568,7 +568,7 @@ const MyClass = goog.require('some.package.MyClass');
 const MyType = goog.requireType('some.package.MyType');
 ```
 
-```js
+```js bad
 // If necessary to disambiguate, prefer PackageClass over SomeClass as it is
 // closer to the format of the module name.
 const SomeClass = goog.require('some.package.Class');
@@ -576,7 +576,7 @@ const SomeClass = goog.require('some.package.Class');
 
 Disallowed:
 
-```js
+```js bad
 // Extra terms must come from the namespace.
 const MyClassForBizzing = goog.require('some.package.MyClass');
 // Alias must include the entire final namespace component.
@@ -592,7 +592,6 @@ const randomName = goog.require('something.else');
 const {Foo:FooProto} = goog.require('some.package.proto.Foo');
 // goog.requireType without an alias.
 goog.requireType('some.package.with.a.Type');
-
 
 /**
  * @param {!some.unimported.Dependency} param All external types used in JSDoc
@@ -625,7 +624,7 @@ Braces are required for all control structures (i.e. `if`, `else`, `for`, `do`, 
 
 Disallowed:
 
-```js
+```js bad
 if (someVeryLongCondition())
   doSomething();
 
@@ -634,7 +633,7 @@ for (let i = 0; i < foo.length; i++) bar(foo[i]);
 
 **Exception**: A simple if statement that can fit entirely on a single line with no wrapping (and that doesn’t have an else) may be kept on a single line with no braces when it improves readability. This is the only case in which a control structure may omit braces and newlines.
 
-```js
+```js good
 if (shortCondition()) foo();
 ```
 
@@ -649,7 +648,7 @@ Braces follow the Kernighan and Ritchie style ("[Egyptian brackets](https://blog
 
 Example:
 
-```js
+```js good
 class InnerClass {
   constructor() {}
 
@@ -673,13 +672,13 @@ An empty block or block-like construct _may_ be closed immediately after it is o
 
 Example:
 
-```js
+```js good
 function doNothing() {}
 ```
 
 Disallowed:
 
-```js
+```js bad
 if (condition) {
   // …
 } else if (otherCondition) {} else {
@@ -699,7 +698,7 @@ Each time a new block or block-like construct is opened, the indent increases by
 
 Any array literal may optionally be formatted as if it were a “block-like construct.” For example, the following are all valid (**not** an exhaustive list):
 
-```js
+```js good
 const a = [
   0,
   1,
@@ -710,7 +709,7 @@ const b =
     [0, 1, 2];
 ```
 
-```js
+```js good
 const c = [0, 1, 2];
 
 someMethod(foo, [
@@ -724,7 +723,7 @@ Other combinations are allowed, particularly when emphasizing semantic groupings
 
 Any object literal may optionally be formatted as if it were a “block-like construct.” The same examples apply as [4.2.1 Array literals: optionally "block-like"](#formatting-array-literals). For example, the following are all valid (**not** an exhaustive list):
 
-```js
+```js good
 const a = {
   a: 0,
   b: 1,
@@ -734,7 +733,7 @@ const b =
     {a: 0, b: 1};
 ```
 
-```js
+```js good
 const c = {a: 0, b: 1};
 
 someMethod(foo, {
@@ -748,7 +747,7 @@ Class literals (whether declarations or expressions) are indented as blocks. Do 
 
 Example:
 
-```js
+```js good
 /** @template T */
 class Foo {
   /** @param {T} x */
@@ -773,7 +772,7 @@ exports.Baz = class extends Bar {
 };
 ```
 
-```js
+```js bad
 /** @extends {Bar} */ // <-- unnecessary @extends
 exports.Baz = class extends Bar {
   /** @return {number} */
@@ -789,7 +788,7 @@ When declaring an anonymous function in the list of arguments for a function cal
 
 Example:
 
-```js
+```js good
 prefix.something.reallyLongFunctionName('whatever', (a1, a2) => {
   // Indent the function body +2 relative to indentation depth
   // of the 'prefix' statement one line above.
@@ -821,7 +820,7 @@ A blank line is optional between a `break` and the following case.
 
 Example:
 
-```js
+```js good
 switch (animal) {
   case Animal.BANDERSNATCH:
     handleBandersnatch();
@@ -853,11 +852,8 @@ JavaScript code has a column limit of 80 characters. Except as noted below, any 
 **Exceptions:**
 
 1. `goog.module`, `goog.require` and `goog.requireType` statements (see [3.3 `goog.module` statement](#file-goog-module) and [3.6 `goog.require` and `goog.requireType` statements](#file-goog-require)).
-
 2. ES module `import` and `export from` statements (see [3.4.1 Imports](#es-module-imports) and [3.4.2.3 export from](#es-module-export-from)).
-
 3. Lines where obeying the column limit is not possible or would hinder discoverability. Examples include:
-
    - A long URL which should be clickable in source.
    - A shell command intended to be copied-and-pasted.
    - A long string literal which may need to be copied or searched for wholly (e.g., a long file path).
@@ -878,7 +874,7 @@ The prime directive of line-wrapping is: prefer to break at a **higher syntactic
 
 Preferred:
 
-```js
+```js good
 currentEstimate =
     calc(currentEstimate + x * currentEstimate) /
         2.0;
@@ -886,7 +882,7 @@ currentEstimate =
 
 Discouraged:
 
-```js
+```js bad
 currentEstimate = calc(currentEstimate + x *
     currentEstimate) / 2.0;
 ```
@@ -933,22 +929,14 @@ Use of horizontal whitespace depends on location, and falls into three broad cat
 Beyond where required by the language or other style rules, and apart from literals, comments, and JSDoc, a single internal ASCII space also appears in the following places **only**.
 
 1. Separating any reserved word (such as `if`, `for`, or `catch`) except for `function` and `super`, from an open parenthesis (`(`) that follows it on that line.
-
 2. Separating any reserved word (such as `else` or `catch`) from a closing curly brace (`}`) that precedes it on that line.
-
 3. Before any open curly brace (`{`), with two exceptions:
-
    1. Before an object literal that is the first argument of a function or the first element in an array literal (e.g. `foo({a: [{c: d}]})`).
    2. In a template expansion, as it is forbidden by the language (e.g. valid: `` `ab${1 + 2}cd` ``, invalid: `` `xy$ {3}z` ``).
-
 4. On both sides of any binary or ternary operator.
-
 5. After a comma (`,`) or semicolon (`;`). Note that spaces are _never_ allowed before these characters.
-
 6. After the colon (`:`) in an object literal.
-
 7. On both sides of the double slash (`//`) that begins an end-of-line comment. Here, multiple spaces are allowed, but not required.
-
 8. After an open-block comment character and on both sides of close characters (e.g. for short-form type declarations, casts, and parameter name comments: `this.foo = /** @type {number} */ (bar)`; or `function(/** string */ foo) {`; or `baz(/* buzz= */ true)`).
 
 #### 4.6.3 Horizontal alignment: discouraged
@@ -959,7 +947,7 @@ This practice is permitted, but it is **generally discouraged** by Google Style.
 
 Here is an example without alignment, followed by one with alignment. Both are allowed, but the latter is discouraged:
 
-```js
+```js good
 {
   tiny: 42, // this is great
   longer: 435, // this too
@@ -977,7 +965,7 @@ Here is an example without alignment, followed by one with alignment. Both are a
 
 Prefer to put all function arguments on the same line as the function name. If doing so would exceed the 80-column limit, the arguments must be line-wrapped in a readable way. To save space, you may wrap as close to 80 as possible, or put each argument on its own line to enhance readability. Indentation should be four spaces. Aligning to the parenthesis is allowed, but discouraged. Below are the most common patterns for argument wrapping:
 
-```js
+```js good
 // Arguments start on a new line, indented four spaces. Preferred when the
 // arguments don't fit on the same line with the function name (or the keyword
 // "function") but fit entirely on the second line. Works with very long
@@ -1023,7 +1011,7 @@ This section addresses _implementation comments_. JSDoc is addressed separately 
 
 Block comments are indented at the same level as the surrounding code. They may be in `/* … */` or `//`-style. For multi-line `/* … */` comments, subsequent lines must start with `*` aligned with the `*` on the previous line, to make comments obvious with no extra context.
 
-```js
+```js good
 /*
  * This is
  * okay.
@@ -1043,13 +1031,13 @@ Do not use JSDoc (`/** … */`) for implementation comments.
 
 “Parameter name” comments should be used whenever the value and method name do not sufficiently convey the meaning, and refactoring the method to be clearer is infeasible. Their preferred format is before the value with "=":
 
-```js
+```js good
 someFunction(obviousParam, /* shouldRender= */ true, /* name= */ 'hello');
 ```
 
 For consistency with surrounding code you may put them after the value without "=":
 
-```js
+```js good
 someFunction(obviousParam, true /* shouldRender */, 'hello' /* name */);
 ```
 
@@ -1079,7 +1067,7 @@ JSDoc type annotations may be added either on the line above the declaration, or
 
 Example:
 
-```js
+```js good
 const /** !Array<number> */ data = [];
 
 /**
@@ -1091,14 +1079,14 @@ const data = [];
 
 Mixing inline and JSDoc styles is not allowed: the compiler will only process the first JsDoc and the inline annotations will be lost.
 
-```js
+```js bad
 /** Some description. */
 const /** !Array<number> */ data = [];
 ```
 
 There are many cases where the compiler can infer a templatized type but not its parameters. This is particularly the case when the initializing literal or constructor call does not include any values of the template parameter type (e.g., empty arrays, objects, `Map`s, or `Set`s), or if the variable is modified in a closure. Local variable type annotations are particularly helpful in these cases since otherwise the compiler will infer the template parameter as unknown.
 
-```js
+```js good
 /** @param {!Array<string>} ids */
 function process(ids) {
   // Inferred as !Set<string> from the argument, so no annotation is needed.
@@ -1110,7 +1098,7 @@ const /** !Map<string, number> */ wordCounts = new Map();
 const /** !Set<string> */ seenIds = new Set();
 ```
 
-```js
+```js bad
 // The key and value types of the Map are inferred as unknown.
 const wordCounts = new Map();
 ```
@@ -1123,7 +1111,7 @@ Include a trailing comma whenever there is a line break between the final elemen
 
 Example:
 
-```js
+```js good
 const values = [
   'first value',
   'second value',
@@ -1136,7 +1124,7 @@ The constructor is error-prone if arguments are added or removed. Use a literal 
 
 Disallowed:
 
-```js
+```js bad
 const a1 = new Array(x1, x2, x3);
 const a2 = new Array(x1, x2);
 const a3 = new Array(x1);
@@ -1147,7 +1135,7 @@ This works as expected except for the third case: if `x1` is a whole number then
 
 Instead, write
 
-```js
+```js good
 const a1 = [x1, x2, x3];
 const a2 = [x1, x2];
 const a3 = [x1];
@@ -1164,27 +1152,27 @@ Do not define or use non-numeric properties on an array (other than `length`). U
 
 Array literals may be used on the left-hand side of an assignment to perform destructuring (such as when unpacking multiple values from a single array or iterable). A final "rest" element may be included (with no space between the `...` and the variable name). Elements should be omitted if they are unused.
 
-```js
+```js good
 const [a, b, c, ...rest] = generateResults();
 let [, b,, d] = someArray;
 ```
 
 Destructuring may also be used for function parameters (note that a parameter name is required but ignored). Always specify `[]` as the default value if a destructured array parameter is optional, and provide default values on the left hand side:
 
-```js
+```js good
 /** @param {!Array<number>=} param1 */
 function optionalDestructuring([a = 4, b = 2] = []) { … };
 ```
 
 Disallowed:
 
-```js
+```js bad
 function badDestructuring([a, b] = [4, 2]) { … };
 ```
 
 For (un)packing multiple values into a function’s parameter or return, prefer object destructuring to array destructuring when possible, as it allows naming the individual elements and specifying a different type for each.
 
-```js
+```js good
 /** @return {{name: string, age: number}} */
 function getUser() {
   return {name: 'Alice', age: 30};
@@ -1192,7 +1180,7 @@ function getUser() {
 const {name, age} = getUser();
 ```
 
-```js
+```js bad
 /** @return {!Array<string|number>} */
 function getUser() {
   return ['Alice', 30];
@@ -1206,7 +1194,7 @@ Array literals may include the spread operator (`...`) to flatten elements out o
 
 Example:
 
-```js
+```js good
 [...foo]   // preferred over Array.prototype.slice.call(foo)
 [...foo, ...bar]   // preferred over foo.concat(bar)
 ```
@@ -1227,7 +1215,7 @@ Object literals may represent either _structs_ (with unquoted keys and/or symbol
 
 Disallowed:
 
-```js
+```js bad
 {
   width: 42, // struct-style unquoted key
   'maxWidth': 43, // dict-style quoted key
@@ -1266,7 +1254,7 @@ Methods can be defined on object literals using the method shorthand (`{method()
 
 Example:
 
-```js
+```js good
 return {
   stuff: 'candy',
   method() {
@@ -1279,7 +1267,7 @@ Note that `this` in a method shorthand or `function` refers to the object litera
 
 Example:
 
-```js
+```js good
 class {
   getObjectLiteral() {
     this.stuff = 'fruit';
@@ -1297,7 +1285,7 @@ Shorthand properties are allowed on object literals.
 
 Example:
 
-```js
+```js good
 const foo = 1;
 const bar = 2;
 const obj = {
@@ -1347,7 +1335,7 @@ Enumerations are defined by adding the `@enum` annotation to an object literal. 
 
 Additional properties may not be added to an enum after it is defined. Enums must be constant. All enum values must be either a string literal or a number.
 
-```js
+```js good
 /**
  * Supported temperature scales.
  * @enum {string}
@@ -1371,7 +1359,7 @@ const Value = {
 
 For string enums, all values must be statically initialized and not computed using arithmetic operators, template literal substitution, function calls or even a variable reference.
 
-```js
+```js bad
 const ABSOLUTE_ZERO = '-273°F';
 
 /**
@@ -1401,7 +1389,7 @@ Define all of a concrete object’s fields (i.e. all properties other than metho
 
 Example:
 
-```js
+```js good
 class Foo {
   constructor() {
     /** @private @const {!Bar} */
@@ -1429,7 +1417,7 @@ Code should not rely on dynamic dispatch of static methods, because it interfere
 
 Disallowed:
 
-```js
+```js bad
 // Context for the examples below; by itself this code is allowed.
 class Base {
   /** @nocollapse */ static foo() {}
@@ -1462,7 +1450,7 @@ In all other ways the style guide still applies to this code: `let`, `const`, de
 
 `goog.defineClass` allows for a class-like definition similar to ES6 class syntax:
 
-```js
+```js good
 let C = goog.defineClass(S, {
   /**
    * @param {string} value
@@ -1485,7 +1473,7 @@ let C = goog.defineClass(S, {
 
 Alternatively, while `goog.defineClass` should be preferred for all new code, more traditional syntax is also allowed.
 
-```js
+```js good
 /**
   * @constructor @extends {S}
   * @param {string} value
@@ -1524,7 +1512,7 @@ Do not use [JavaScript getter and setter properties](https://developer.mozilla.o
 
 Disallowed:
 
-```js
+```js bad
 class Foo {
   get next() { return this.nextId++; }
 }
@@ -1544,7 +1532,7 @@ All methods on an interface must be non-static and method bodies must be empty b
 
 Example:
 
-```js
+```js good
 /**
  * Something that can frobnicate.
  * @record
@@ -1571,7 +1559,7 @@ Use abstract classes when appropriate. Abstract classes and methods must be anno
 
 Do not use container classes with only static methods or properties for the sake of namespacing.
 
-```js
+```js bad
 // container.js
 // Bad: Container is an exported class that has only static methods and fields.
 class Container {
@@ -1589,7 +1577,7 @@ exports = {Container};
 
 Instead, export individual constants and functions:
 
-```js
+```js good
 /** @return {number} */
 exports.bar = () => {
   return 1;
@@ -1659,14 +1647,14 @@ Top-level functions may be defined directly on the `exports` object, or else dec
 
 Examples:
 
-```js
+```js good
 /** @param {string} str */
 exports.processString = (str) => {
   // Process the string.
 };
 ```
 
-```js
+```js good
 /** @param {string} str */
 const processString = (str) => {
   // Process the string.
@@ -1693,7 +1681,7 @@ The right-hand side of the arrow contains the body of the function. By default t
 
 Examples:
 
-```js
+```js good
 /**
  * Arrow functions can be documented just like normal functions.
  * @param {number} numParam A number to add.
@@ -1723,7 +1711,7 @@ class CallbackExample {
 
 Disallowed:
 
-```js
+```js bad
 /**
  * A function with no params and no returned value.
  * This single expression body usage is illegal because the program logic does
@@ -1740,7 +1728,7 @@ When defining generator functions, attach the `*` to the `function` keyword when
 
 Example:
 
-```js
+```js good
 /** @return {!Iterator<number>} */
 function* gen1() {
   yield 42;
@@ -1769,7 +1757,7 @@ Optional parameters are permitted using the equals operator in the parameter lis
 
 Example:
 
-```js
+```js good
 /**
  * @param {string} required This parameter is always needed.
  * @param {string=} optional This parameter can be omitted.
@@ -1799,7 +1787,7 @@ Use a _rest_ parameter instead of accessing `arguments`. Rest parameters are typ
 
 Example:
 
-```js
+```js good
 /**
  * @param {!Array<string>} array This is an ordinary parameter.
  * @param {...number} numbers The remainder of arguments are all numbers.
@@ -1817,7 +1805,7 @@ Function calls may use the spread operator (`...`). Prefer the spread operator t
 
 Example:
 
-```js
+```js good
 function myFunction(...elements) {}
 myFunction(...array, ...iterable, ...generator());
 ```
@@ -1840,7 +1828,7 @@ If a template literal spans multiple lines, it does not need to follow the inden
 
 Example:
 
-```js
+```js good
 function arithmetic(a, b) {
   return `Here is a table of arithmetic operations:
 ${a} + ${b} = ${a + b}
@@ -1856,7 +1844,7 @@ Do not use _line continuations_ (that is, ending a line inside a string literal 
 
 Disallowed:
 
-```js
+```js bad
 const longString = 'This is a very long string that far exceeds the 80 \
     column limit. It unfortunately contains long stretches of spaces due \
     to how the continued lines are indented.';
@@ -1864,7 +1852,7 @@ const longString = 'This is a very long string that far exceeds the 80 \
 
 Instead, write
 
-```js
+```js good
 const longString = 'This is a very long string that far exceeds the 80 ' +
     'column limit. It does not contain long stretches of spaces since ' +
     'the concatenated strings are cleaner.';
@@ -1872,7 +1860,7 @@ const longString = 'This is a very long string that far exceeds the 80 ' +
 
 The same applies to template literals:
 
-```js
+```js good
 const longString = `Hello ${name}, this is a very long string that far ` +
     `exceeds the 80 column limit, so it is split into concatenated ` +
     `template literals.`;
@@ -1904,7 +1892,7 @@ Prefer throwing exceptions over ad-hoc error-handling approaches (such as passin
 
 It is very rarely correct to do nothing in response to a caught exception. When it truly is appropriate to take no action whatsoever in a catch block, the reason this is justified is explained in a comment.
 
-```js
+```js good
 try {
   return handleNumericResponse(response);
 } catch (ok) {
@@ -1915,7 +1903,7 @@ return handleTextResponse(response);
 
 Disallowed:
 
-```js
+```js bad
   try {
     shouldFail();
     fail('expected an error');
@@ -1935,7 +1923,7 @@ Within a switch block, each statement group either terminates abruptly (with a `
 
 Example:
 
-```js
+```js good
 switch (input) {
   case 1:
   case 2:
@@ -1967,7 +1955,7 @@ Use identity operators (`===`/`!==`) except in the cases documented below.
 
 Catching both `null` and `undefined` values:
 
-```js
+```js good
 if (someObjectOrPrimitive == null) {
   // Checking for null catches both null and undefined for objects and
   // primitives, but does not catch other falsy values like 0 or the empty
@@ -1999,7 +1987,7 @@ Never use `new` on the primitive object wrappers (`Boolean`, `Number`, `String`,
 
 Disallowed:
 
-```js
+```js bad
 const /** Boolean */ x = new Boolean(false);
 if (x) alert(typeof x);  // alerts 'object' - WAT?
 ```
@@ -2008,7 +1996,7 @@ The wrappers may be called as functions for coercing (which is preferred over us
 
 Example:
 
-```js
+```js good
 const /** boolean */ x = Boolean(0);
 if (!x) alert(typeof x);  // alerts 'boolean', as expected
 ```
@@ -2025,19 +2013,19 @@ Never invoke a constructor in a `new` statement without using parentheses `()`.
 
 Disallowed:
 
-```js
+```js bad
 new Foo;
 ```
 
 Use instead:
 
-```js
+```js good
 new Foo();
 ```
 
 Omitting parentheses can lead to subtle mistakes. These two lines are not equivalent:
 
-```js
+```js good
 new Foo().Bar();
 new Foo.Bar();
 ```
@@ -2050,7 +2038,7 @@ Identifiers use only ASCII letters and digits, and, in a small number of cases n
 
 Give as descriptive a name as possible, within reason. Do not worry about saving horizontal space as it is far more important to make your code immediately understandable by a new reader. Do not use abbreviations that are ambiguous or unfamiliar to readers outside your project, and do not abbreviate by deleting letters within a word.
 
-```js
+```js good
 errorCount          // No abbreviation.
 dnsConnectionIndex  // Most people know what "DNS" stands for.
 referrerUrl         // Ditto for "URL".
@@ -2059,7 +2047,7 @@ customerId          // "Id" is both ubiquitous and unlikely to be misunderstood.
 
 Disallowed:
 
-```js
+```js bad
 n                   // Meaningless.
 nErr                // Ambiguous abbreviation.
 nCompConns          // Ambiguous abbreviation.
@@ -2107,7 +2095,7 @@ Every constant is a `@const` static property or a module-local `const` declarati
 
 Examples:
 
-```js
+```js good
 // Constants
 const NUMBER = 5;
 /** @const */ exports.NAMES = goog.debug.freeze(['Ed', 'Ann']);
@@ -2140,7 +2128,7 @@ Local aliases should be used whenever they improve readability over fully-qualif
 
 Examples:
 
-```js
+```js good
 const staticHelper = importedNamespace.staticHelper;
 const CONSTANT_NAME = ImportedClass.CONSTANT_NAME;
 const {assert, assertInstanceof} = asserts;
@@ -2168,12 +2156,12 @@ Local variable names are written in `lowerCamelCase`, except for module-local (t
 
 Template parameter names should be concise, single-word or single-letter identifiers, and must be all-caps, such as `TYPE` or `THIS`.
 
-```js
+```js good
 /** @template T */
 /** @template KEY, VALUE */
 ```
 
-```js
+```js bad
 /** @template ElementType */
 /** @template KEY_TYPE */
 ```
@@ -2189,15 +2177,11 @@ Sometimes there is more than one reasonable way to convert an English phrase int
 Beginning with the prose form of the name:
 
 1. Convert the phrase to plain ASCII and remove any apostrophes. For example, "Müller's algorithm" might become "Muellers algorithm".
-
 2. Divide this result into words, splitting on spaces and any remaining punctuation (typically hyphens).
    1. Recommended: if any word already has a conventional camel case appearance in common usage, split this into its constituent parts (e.g., "AdWords" becomes "ad words"). Note that a word such as "iOS" is not really in camel case per se; it defies any convention, so this recommendation does not apply.
-
 3. Now lowercase everything (including acronyms), then uppercase only the first character of:
-
    1. … each word, to yield `UpperCamelCase`, or
    2. … each word except the first, to yield `lowerCamelCase`
-
 4. Finally, join all the words into a single identifier.
 
 Note that the casing of the original words is almost entirely disregarded.
@@ -2226,7 +2210,7 @@ Note: Some words are ambiguously hyphenated in the English language: for example
 
 The basic formatting of JSDoc blocks is as seen in this example:
 
-```js
+```js good
 /**
  * Multiple lines of JSDoc text are written here,
  * wrapped normally.
@@ -2237,7 +2221,7 @@ function doSomething(arg) { … }
 
 or in this single-line example:
 
-```js
+```js good
 /** @const @private {!Foo} A short bit of JSDoc. */
 this.foo_ = foo;
 ```
@@ -2252,7 +2236,7 @@ JSDoc is written in Markdown, though it may include HTML when necessary.
 
 Note that tools that automatically extract JSDoc (e.g. [JsDossier](https://github.com/jleyba/js-dossier)) will often ignore plain text formatting, so if you did this:
 
-```js
+```js bad
 /**
  * Computes weight based on three factors:
  *   items sent
@@ -2269,7 +2253,7 @@ Computes weight based on three factors: items sent items received last timestamp
 
 Instead, write a Markdown list:
 
-```js
+```js good
 /**
  * Computes weight based on three factors:
  *
@@ -2285,7 +2269,7 @@ Google style allows a subset of JSDoc tags. See [9.1 JSDoc tag reference](#appen
 
 Disallowed:
 
-```js
+```js bad
 /**
  * The "param" tag must occupy its own line and may not be combined.
  * @param {number} left @param {number} right
@@ -2295,7 +2279,7 @@ function add(left, right) { ... }
 
 Simple tags that do not require any additional data (such as `@private`, `@const`, `@final`, `@export`) may be combined onto the same line, along with an optional type when appropriate.
 
-```js
+```js good
 /**
  * Place more complex annotations (like "implements" and "template")
  * on their own lines. Multiple simple tags (like "export" and "final")
@@ -2324,7 +2308,7 @@ For general information about annotating types in JavaScript see [Annotating Jav
 
 Line-wrapped block tags are indented four spaces. Wrapped description text may be lined up with the description on previous lines, but this horizontal alignment is discouraged.
 
-```js
+```js good
 /**
  * Illustrates line wrapping for long param/return descriptions.
  * @param {string} foo This is a param with a description too long to fit in
@@ -2345,7 +2329,7 @@ A file may have a top-level file overview. A copyright notice, author informatio
 
 Example:
 
-```js
+```js good
 /**
  * @fileoverview Description of file, its uses and information
  * about its dependencies.
@@ -2357,7 +2341,7 @@ Example:
 
 Classes, interfaces and records must be documented with a description and any template parameters, implemented interfaces, visibility, or other appropriate tags. The class description should provide the reader with enough information to know how and when to use the class, as well as any additional considerations necessary to correctly use the class. Textual descriptions may be omitted on the constructor. When defining a class `@constructor` and `@extends` annotations are not used with the `class` keyword unless it extends a generic class. When defining an `@interface` or a `@record`, the `@extends` annotation is used when defining a subclass and the `extends` keyword is never used.
 
-```js
+```js good
 /**
  * A fancier event target that does cool things.
  * @implements {Iterable<string>}
@@ -2388,7 +2372,7 @@ class Listable {
 
 All enums and typedefs must be documented with appropriate JSDoc tags (`@typedef` or `@enum`) on the preceding line. Public enums and typedefs must also have a description. Individual enum items may be documented with a JSDoc comment on the preceding line.
 
-```js
+```js good
 /**
  * A useful type union, which is reused often.
  * @typedef {!FruitType|!FruitTypeEnum}
@@ -2419,7 +2403,7 @@ Method descriptions begin with a verb phrase that describes what the method does
 
 If a method overrides a superclass method, it must include an `@override` annotation. For overridden methods, all `@param` and `@return` annotations must be specified explicitly even if no type from the superclass method is refined. This is to align with TypeScript.
 
-```js
+```js good
 /** A class that does something. */
 class SomeClass extends SomeBaseClass {
   /**
@@ -2451,13 +2435,13 @@ function makeArray(arg) { ... }
 
 If you only need to document the param and return types of a function, you may optionally use inline JSDocs in the function's signature. These inline JSDocs specify the return and param types without tags.
 
-```js
+```js good
 function /** string */ foo(/** number */ arg) {...}
 ```
 
 If you need descriptions or tags, use a single JSDoc comment above the method. For example, methods which return values need a `@return` tag.
 
-```js
+```js good
 class MyClass {
   /**
    * @param {number} arg
@@ -2467,7 +2451,7 @@ class MyClass {
 }
 ```
 
-```js
+```js bad
 // Illegal inline JSDocs.
 
 class MyClass {
@@ -2481,7 +2465,7 @@ function /** Function description is also illegal here. */ baz() {...}
 
 In anonymous functions annotations are generally optional. If the automatic type inference is insufficient or explicit annotation improves readability, then annotate param and return types like this:
 
-```js
+```js good
 promise.then(
     /** @return {string} */
     (/** !Array<string> */ items) => {
@@ -2498,7 +2482,7 @@ Property types must be documented. The description may be omitted for private pr
 
 Publicly exported constants are commented the same way as properties.
 
-```js
+```js good
 /** My class. */
 class MyClass {
   /** @param {string=} someString */
@@ -2539,7 +2523,7 @@ Nullability modifiers have different requirements for different types, which fal
 
 Bad:
 
-```js
+```js bad
 const /** MyObject */ myObject = null; // Non-primitive types must be annotated.
 const /** !number */ someNum = 5; // Primitives are non-nullable by default.
 const /** number? */ someNullableNum = null; // ? should precede the type.
@@ -2553,7 +2537,7 @@ const /** SomeCamelCaseName */ n = ...;
 
 Good:
 
-```js
+```js good
 const /** ?MyObject */ myObject = null;
 const /** number */ someNum = 5;
 const /** ?number */ someNullableNum = null;
@@ -2566,7 +2550,7 @@ const /** ?SomeCamelCaseName */ n = ...;
 
 In cases where the compiler doesn't accurately infer the type of an expression, and the assertion functions in [goog.asserts](https://google.github.io/closure-library/api/goog.asserts.html) cannot remedy it, it is possible to tighten the type by adding a type annotation comment and enclosing the expression in parentheses. Note that the parentheses are required.
 
-```js
+```js good
 /** @type {number} */ (x)
 ```
 
@@ -2576,7 +2560,7 @@ Always specify template parameters. This way compiler can do a better job and it
 
 Bad:
 
-```js
+```js bad
 const /** !Object */ users = {};
 const /** !Array */ books = [];
 const /** !Promise */ response = ...;
@@ -2584,7 +2568,7 @@ const /** !Promise */ response = ...;
 
 Good:
 
-```js
+```js good
 const /** !Object<string, !User> */ users = {};
 const /** !Array<string> */ books = [];
 const /** !Promise<!Response> */ response = ...;
@@ -2605,7 +2589,7 @@ Where the function definition is given, do not use a function type expression. S
 
 Function type expressions are needed, for example, inside `@typedef`, `@param` or `@return`. Use it also for variables or properties of function type, if they are not immediately initialized with the function definition.
 
-```js
+```js good
   /** @private {function(string): string} */
   this.idGenerator_ = googFunctions.identity;
 ```
@@ -2614,7 +2598,7 @@ When using a function type expression, always specify the return type explicitly
 
 Bad - type error, but no warning given:
 
-```js
+```js bad
 /** @param {function()} generateNumber */
 function foo(generateNumber) {
   const /** number */ x = generateNumber();  // No compile-time type error here.
@@ -2625,7 +2609,7 @@ foo(() => 'clearly not a number');
 
 Good:
 
-```js
+```js good
 /**
  * @param {function(): *} inputFunction1 Can return any type.
  * @param {function(): undefined} inputFunction2 Definitely doesn't return
@@ -2709,7 +2693,7 @@ Warnings are suppressed at the narrowest reasonable scope, usually that of a sin
 
 Example
 
-```js
+```js good
 /** @suppress {uselessCode} Unrecognized 'use asm' declaration */
 function fn() {
   'use asm';
@@ -2770,7 +2754,7 @@ In addition to the JSDoc described in [Annotating JavaScript for the Closure Com
 
 Syntax: `@author username@google.com (First Last)`
 
-```js
+```js good
 /**
  * @fileoverview Utilities for handling textareas.
  * @author kuth@google.com (Uthur Pendragon)
@@ -2783,7 +2767,7 @@ Documents the author of a file or the owner of a test, generally only used in th
 
 Syntax: `@bug bugnumber`
 
-```js
+```js good
 /** @bug 1234567 */
 function testSomething() {
   // …
@@ -2810,7 +2794,7 @@ Syntax: `{@code ...}`
 
 Historically, `` `BatchItem` `` was written as `{@code BatchItem}`.
 
-```js
+```js good
 /** Processes pending `BatchItem` instances. */
 function processBatchItems() {}
 ```
@@ -2821,7 +2805,7 @@ Indicates that a term in a JSDoc description is code so it may be correctly form
 
 Syntax: `@desc Message description`
 
-```js
+```js good
 /** @desc Notifying a user that their account has been created. */
 exports.MSG_ACCOUNT_CREATED = goog.getMsg(
     'Your account has been successfully created.');
@@ -2833,14 +2817,14 @@ Syntax: `{@link ...}`
 
 This tag is used to generate cross-reference links within generated documentation.
 
-```js
+```js good
 /** Processes pending {@link BatchItem} instances. */
 function processBatchItems() {}
 ```
 
 **Historical note:** @link tags have also been used to create external links in generated documentation. For external links, always use Markdown's link syntax instead:
 
-```js
+```js good
 /**
  * This class implements a useful subset of the
  * [native Event interface](https://dom.spec.whatwg.org/#event).
@@ -2852,7 +2836,7 @@ class ApplicationEvent {}
 
 Syntax: `@see Link`
 
-```js
+```js good
 /**
  * Adds a single item, recklessly.
  * @see #addSafely
@@ -2867,7 +2851,7 @@ Reference a lookup to another class function or method.
 
 Syntax: `@supported Description`
 
-```js
+```js good
 /**
  * @fileoverview Event Manager
  * Provides an abstracted interface to the browsers' event systems.
@@ -2953,7 +2937,7 @@ This section describes exceptions and additional rules to be followed when moder
 
 `var` declarations are scoped to the beginning of the nearest enclosing function, script or module, which can cause unexpected behavior, especially with function closures that reference `var` declarations inside of loops. The following code gives an example:
 
-```js
+```js bad
 for (var i = 0; i < 3; ++i) {
   var iteration = i;
   setTimeout(function() { console.log(iteration); }, i*1000);
@@ -2967,7 +2951,7 @@ for (var i = 0; i < 3; ++i) {
 
 Even though `var` declarations are scoped to the beginning of the enclosing function, `var` declarations should be as close as possible to their first use, for readability purposes. However, do not put a `var` declaration inside a block if that variable is referenced outside the block. For example:
 
-```js
+```js good
 function sillyFunction() {
   var count = 0;
   for (var x in y) {
@@ -2982,7 +2966,7 @@ function sillyFunction() {
 
 For global declarations where the `const` keyword would be used, if it were available, annotate the `var` declaration with `@const` instead (this is optional for local variables).
 
-```js
+```js good
 /** @const */
 var MAX_RETRIES = 3;
 ```
@@ -2991,7 +2975,7 @@ var MAX_RETRIES = 3;
 
 Do **not** do this:
 
-```js
+```js bad
 if (x) {
   function foo() {}
 }
@@ -3001,7 +2985,7 @@ While most JavaScript VMs implemented before ECMAScript 6 support function decla
 
 To get consistent behavior, instead use a `var` initialized with a function expression to define a function within a block:
 
-```js
+```js good
 if (x) {
   var foo = function() {};
 }
@@ -3024,7 +3008,7 @@ Similar to import statements in other languages, `goog.provide` and `goog.requir
 
 The lines should be sorted alphabetically, with uppercase letters coming first:
 
-```js
+```js good
 goog.provide('namespace.MyClass');
 goog.provide('namespace.helperFoo');
 
@@ -3039,13 +3023,13 @@ All members defined on a class should be in the same file. Only top-level classe
 
 Do this:
 
-```js
+```js good
 goog.provide('namespace.MyClass');
 ```
 
 Not this:
 
-```js
+```js bad
 goog.provide('namespace.MyClass');
 goog.provide('namespace.MyClass.CONSTANT');
 goog.provide('namespace.MyClass.Enum');
@@ -3056,7 +3040,7 @@ goog.provide('namespace.MyClass.staticMethod');
 
 Members on namespaces may also be provided:
 
-```js
+```js good
 goog.provide('foo.bar');
 goog.provide('foo.bar.CONSTANT');
 goog.provide('foo.bar.method');
@@ -3076,7 +3060,7 @@ Similar to C++ namespaces, do not indent under `goog.scope` declarations. Instea
 
 Only make aliases for names that will not be re-assigned to another object (e.g., most constructors, enums, and namespaces). Do not do this (see below for how to alias a constructor):
 
-```js
+```js bad
 goog.scope(function() {
 var Button = goog.ui.Button;
 
@@ -3086,7 +3070,7 @@ Button = function() { ... };
 
 Names must be the same as the last property of the global that they are aliasing.
 
-```js
+```js good
 goog.provide('my.module.SomeType');
 
 goog.require('goog.dom');

@@ -1,6 +1,6 @@
 # Google's Haskell Style Guide
 
-Source: <https://google.github.io/styleguide/haskellguide.html> · google/styleguide@577f395ca4c3 (2026-10-23) · CC-BY-3.0
+Source: <https://google.github.io/styleguide/haskellguide.html> · google/styleguide@a9c5f82b1981 (2026-11-13) · CC-BY-3.0
 
 ## Index
 
@@ -28,17 +28,17 @@ Source: <https://google.github.io/styleguide/haskellguide.html> · google/styleg
   - L365 Abbreviations
 - L385 Formatting
   - L387 Vertical Spacing
-  - L426 Horizontal Spacing
-  - L455 Indentation
-  - L477 Comments
-  - L494 where
-  - L521 deriving
-  - L545 case…of
-  - L557 let…in
-  - L573 if…then…else
-  - L616 List Formatting
-  - L662 Operators & Punctuation
-- L694 Parting Words
+  - L425 Horizontal Spacing
+  - L454 Indentation
+  - L476 Comments
+  - L493 where
+  - L520 deriving
+  - L544 case…of
+  - L556 let…in
+  - L572 if…then…else
+  - L615 List Formatting
+  - L661 Operators & Punctuation
+- L693 Parting Words
 
 ---
 
@@ -64,7 +64,7 @@ Write proper sentences; start with a capital letter and use proper punctuation.
 
 **Exception:** Extremely simple type synonyms or other very obvious declarations need not have any Haddock.
 
-```haskell
+```haskell good
 type Forest p a = [Tree p a]    -- simple enough to not need Haddock
 
 -- | Returns values in the Forest from entries that cover the given prefix.
@@ -120,7 +120,7 @@ import qualified Data.Text.Lazy as TL
 
 Putting these all together:
 
-```haskell
+```haskell good
 import Data.Bits                             -- okay for some modules
 import Data.Maybe (mapMaybe, maybeToList)    -- better to list what you use...
 import qualified Data.Ratio as Ratio         -- ...or import qualified
@@ -142,7 +142,7 @@ GHC options and `LANGUAGE` pragmas go at the very top of the file.
 
 The `OPTIONS_GHC` directive should only be used for specific options that relate to the source file, such as `-fno-warn-orphans` for test code. General compilation options, like `-O2`, belong in the `.cabal` file.
 
-Features enabled by the `LANGUAGE` pragma should always be listed in each source file that needs them, and never turned on globally via flags in the the `.cabal` file. This is so future developers know what language extensions are in effect when reading the code.
+Features enabled by the `LANGUAGE` pragma should always be listed in each source file that needs them, and never turned on globally via flags in the `.cabal` file. This is so future developers know what language extensions are in effect when reading the code.
 
 `INLINE`, `INLINEABLE`, and similar pragmas should only be used when you've tested that they actually improve speed in cases that you care about. When used, they should follow directly the declaration they apply to.
 
@@ -212,7 +212,7 @@ Consider using guards and pattern matches over `if`…`then`…`else`.
 
 Generally, pattern matches and guards are clearer at the outer level of a function than nested `if` and `case` constructs. However, elsewhere `if` might be more clear. Use your judgement.
 
-```haskell
+```haskell bad
 nth :: Int -> [a] -> Maybe a
 nth i xs = if null xs || i < 0
     then Nothing
@@ -221,7 +221,7 @@ nth i xs = if null xs || i < 0
         else nth (i-1) (tail xs)
 ```
 
-```haskell
+```haskell good
 nth :: Int -> [a] -> Maybe a
 nth i _     | i < 0 = Nothing
 nth _ []            = Nothing
@@ -241,7 +241,7 @@ Strenuously avoid partial functions from the `Prelude` and base libraries. Commo
 
 **Exception:** In cases where pattern matching, guards, or other logic immediately nearby makes it certain that these functions are applied safely, it is acceptable to call them.
 
-```haskell
+```haskell good
 defaultChoice :: [String] -> String
 defaultChoice [] = "beige"
 defaultChoice opts = minimum opts
@@ -274,11 +274,11 @@ insert s pt = case filter (not . null . greatestCommonPrefix s) $ ptSubs pt of
 
 However, avoid over-using it. For example, do not use contorted point free just to handle multiple arguments:
 
-```haskell
+```haskell bad
 f = (g .) . h       -- makes most of us puzzle it out
 ```
 
-```haskell
+```haskell good
 f x = g . h x       -- most readers will get this immediately
 f x y = g $ h x y   -- depending on the functions, this may or may not be better
 ```
@@ -312,7 +312,7 @@ Use the common idiom of appending tick marks (`'`) to names to represent altered
 
 Use the common idiom of plural for the lists: For example, a pattern match against a list might be `(a:as)`. (See also Short Variables, below.)
 
-```haskell
+```haskell bad
 simpleMetricComputer :: Double -> Set Things -> Double
 simpleMetricComputer _ things = ...
     -- it isn't clear what the first argument is
@@ -323,7 +323,7 @@ map f (a:as) = f a : map f as
     -- no need to name _f in first clause, as it is clear from the second clause
 ```
 
-```haskell
+```haskell good
 simpleMetricComputer :: Double -> Set Things -> Double
 simpleMetricComputer _sizeHint things = ...
     -- clear what the first argument is for, and that it isn't used
@@ -340,7 +340,7 @@ Short and single letter variable names are fine.
 
 Where the scope of a variable name is over just a few lines, short or single letter variable names are acceptable and even encouraged. Generally, they help expose the structure of the code.
 
-```haskell
+```haskell bad
 nextAfter :: Eq element => element -> [element] -> Maybe element
 nextAfter match (current:next:remainder) =
     if current == match then Just next
@@ -348,7 +348,7 @@ nextAfter match (current:next:remainder) =
 nextAfter _ _ = Nothing
 ```
 
-```haskell
+```haskell good
 nextAfter :: Eq a => a -> [a] -> Maybe a
 nextAfter m (x:y:ys) =
     if x == m then Just y
@@ -366,19 +366,19 @@ Use `Data.Map` and `Data.ByteString.Internal` instead of `Data.Maps` and `Data.B
 
 Abbreviations in names should be mixed-case.
 
-```haskell
+```haskell bad
 HTTPResponse
 IPBlock
 ```
 
-```haskell
+```haskell good
 HttpResponse
 IpBlock
 ```
 
 **Exception:** There are a few cases where there is considerable precedent for a particular case usage of a term. In this case, it is acceptable to retain a specific choice. Note that this does not apply to things like `HTTP` which are all caps in common usage simply because they are an abbreviation.
 
-```haskell
+```haskell good
 GREoIPsec  -- acceptable because specific precedent for this form exists
 ```
 
@@ -390,7 +390,7 @@ Vertical white space is to be used sparingly, ensuring that more context can be 
 
 In general, one blank line is enough to separate declarations. Two blank lines should be used between the module imports and the first top level declaration, and between major sections of the file, if needed. No blank lines are required between declarations in a where clause, but are sometimes used if there are many or longer declarations.
 
-```haskell
+```haskell good
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 {-# LANGUAGE TupleSections #-}
 
@@ -406,7 +406,6 @@ module RunLength
     ) where
 
 import Data.List (replicate)
-
 
 type RunList a = [(Int, a)]
 
@@ -430,7 +429,7 @@ rleDecode = concatMap (uncurry replicate)
 
 The aim is to have horizontal spacing help show the structure of the expressions. It is acceptable, and even encouraged, to use horizontal spacing to make the structural relationship between clauses clear.
 
-```haskell
+```haskell good
 -- | Run-length encode a sequence of elements.
 rleEncode :: (Eq a) => [a] -> RunList a
 rleEncode [] = []
@@ -443,7 +442,7 @@ rleEncode (a:as) = go 1 a as
 
 Data declarations should also follow these rules:
 
-```haskell
+```haskell good
 data Tree a = Branch a (Tree a) (Tree a)
             | Leaf
 
@@ -459,9 +458,9 @@ data HttpException
 
 As indents serve an important semantic function in Haskell, the indents are on 4 space intervals.
 
-Parts of an expression that are continued on another line, are indented one indent from the indent of the preceding line, not from the construct that they are continuting. (Though see the preceding section about using alignment to make structure clear, and use your judgement.)
+Parts of an expression that are continued on another line, are indented one indent from the indent of the preceding line, not from the construct that they are continuing. (Though see the preceding section about using alignment to make structure clear, and use your judgement.)
 
-```haskell
+```haskell good
 arbitrary = arbitrary >>= \b -> if b
     then do
         cidr <- choose (0, 32)
@@ -481,7 +480,7 @@ arbitrary = arbitrary >>= \b -> if b
 
 Separate end-of-line comments from the code using 2 spaces. Align comments for data type definitions:
 
-```haskell
+```haskell good
 data CommandSummary = CommandSummary
     { ciName :: T.Text        -- ^ name and short summary on one line
     , ciSynopsis :: T.Text    -- ^ invocation template, like "foo [-f] file..."
@@ -548,7 +547,7 @@ The `of` token appears on the same line as the `case` token. Indent the cases.
 
 Align the `->` arrows when it helps readability.
 
-```haskell
+```haskell good
 foobar = case something of
     Just j  -> foo
     Nothing -> bar
@@ -558,7 +557,7 @@ foobar = case something of
 
 The `in` token appears on the line after the line with the `let` token, lined up with it.
 
-```haskell
+```haskell good
 access add = let (s,a) = add `divMod` segmentSize
                  (p,b) = a `divMod` pageSize
              in getPageByte b . getSegmentPage p <$> getSegment s
@@ -566,7 +565,7 @@ access add = let (s,a) = add `divMod` segmentSize
 
 If short, the whole `let` expression can be all on one line:
 
-```haskell
+```haskell good
 formatItem x = let (a,b) = x `divMod` 1000 in show a ++ '/' : show b
 ```
 
@@ -576,7 +575,7 @@ Indent the `then` and `else`.
 
 The `then` and `else` are indented from the indent level of the line containing the `if`, not from the `if` itself.
 
-```haskell
+```haskell good
 foo = if ....
     then ...
     else ...
@@ -594,7 +593,7 @@ foo = bar $ \qux -> if predicate qux
 
 The same rule applies to do blocks nested within:
 
-```haskell
+```haskell good
 foo = do
     instruction <- decodeInstruction
     skip <- load Memory.skip
@@ -609,7 +608,7 @@ foo = do
 
 **Exception:** If the expressions are short, it is acceptable to have the whole expression on one line:
 
-```haskell
+```haskell good
 adjective n = if odd n then "odd" else "even"
 ```
 
@@ -621,7 +620,7 @@ Lists and other constructs that are surrounded by parenthesis or braces, and are
 
 It is acceptable to have several values on a single line, "comma space" separated if they are grouped logically together.
 
-```haskell
+```haskell good
 exceptions =
     [ InvalidStatusCode
     , MissingContentHeader
@@ -629,7 +628,7 @@ exceptions =
     ]
 ```
 
-```haskell
+```haskell good
 data Person = Person
     { firstName :: !String  -- ^ First name
     , lastName  :: !String  -- ^ Last name
@@ -637,7 +636,7 @@ data Person = Person
     } deriving (Eq, Show)
 ```
 
-```haskell
+```haskell good
 module CPU
     ( CpuState(..), powerOnState
 
@@ -663,7 +662,7 @@ module CPU
 
 Use one space around all operators. Use one space after commas and semicolons. Use no space after a backslash token.
 
-```haskell
+```haskell good
 sumSqDelta = dSumSqDelta + delta' * (val' - mean)
 
 (rib', fib') = process updates rib
@@ -677,13 +676,13 @@ foldr (*) 1 list          -- treat operator in parenthesis as an identifier
 
 For operator sections, don't add a space on the "unapplied" side:
 
-```haskell
+```haskell good
 map (++ " likes noodles") people
 ```
 
 **Exception:** For tuples and common operations consisting of single character values, it is acceptable to elide the space after the comma or operator when it improves readability:
 
-```haskell
+```haskell good
 swap (a,b) = (b,a)
 
 foldl' (\v d -> 10*v + digitToInt d) 0

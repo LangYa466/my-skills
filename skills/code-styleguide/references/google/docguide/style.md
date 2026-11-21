@@ -1,40 +1,43 @@
 # Markdown style guide
 
-Source: <https://google.github.io/styleguide/docguide/style.html> · google/styleguide@780190ace581 (2026-11-03) · CC-BY-3.0
+Source: <https://google.github.io/styleguide/docguide/style.html> · google/styleguide@8bdadbb0732b (2026-11-19) · CC-BY-3.0
 
 ## Index
 
-- L49 Minimum viable documentation
-- L58 Better is better than best
-- L76 Capitalization
-- L94 Document layout
-- L126 Table of contents
-  - L128 Use a [TOC] directive
-  - L132 Place the [TOC] directive after the introduction
-- L160 80-character line limit
-  - L168 Exceptions
-- L195 Trailing whitespace
-- L210 Headings
-  - L212 ATX-style headings
-  - L227 Use unique, complete names for headings
-  - L253 Add spacing to headings
-  - L274 Use a single H1 heading
-  - L278 Capitalization of titles and headers
-- L282 Lists
-  - L302 Nested list spacing
-- L349 Code
-  - L351 Inline
-  - L367 Use code span for escaping
-  - L377 Code blocks
-- L451 Links
-  - L455 Use explicit paths for links within Markdown
-  - L469 Avoid relative paths unless within the same directory
-  - L484 Use informative Markdown link titles
-  - L508 Use reference links carefully
-- L626 Images
-- L635 Use tables wisely
-- L706 Strongly prefer Markdown to HTML
-- L714 Footnotes
+- L52 Minimum viable documentation
+- L61 Better is better than best
+- L79 Capitalization
+- L97 Document layout
+- L129 Table of contents (TOCs)
+  - L131 Use a [TOC] directive
+  - L139 Place the [TOC] directive after the introduction
+- L167 80-character line limit
+  - L175 Exceptions
+- L202 Trailing whitespace
+- L217 Headings
+  - L219 ATX-style headings
+  - L234 Use unique, complete names for headings
+  - L260 Add spacing to headings
+  - L281 Set heading targets to avoid breaking deep links
+  - L301 Use a single H1 heading
+  - L307 Capitalization of titles and headers
+- L311 Lists
+  - L313 Use real numbering, even for long lists
+  - L333 Nested list spacing
+- L369 Code
+  - L385 Inline
+  - L401 Use code span for escaping
+  - L413 Code blocks
+- L484 Links
+  - L488 Avoid relative paths unless within the same directory
+  - L503 Use informative Markdown link titles
+  - L527 Delete unnecessary parameters
+  - L531 Use reference links carefully
+- L649 Images
+- L659 Don't use self-closed iframes
+- L679 Use tables wisely
+- L750 Strongly prefer Markdown to HTML
+- L756 Arrange clauses to make sentences easy to skim
 
 ---
 
@@ -78,25 +81,25 @@ As an author:
 Use the original names of products, tools and binaries, preserving the capitalization. E.g.:
 
 ```markdown
-# Markdown style guide
+# gShoe style guide
 
-`Markdown` is a dead-simple platform for internal engineering documentation.
+`gShoe` is a dead-simple platform for your feet.
 ```
 
 and not
 
-```markdown
-# markdown bad style guide example
+```markdown bad
+# GShoe style guide
 
-`markdown` is a dead-simple platform for internal engineering documentation.
+`GShoe` is a dead-simple platform for your feet.
 ```
 
 ## Document layout
 
 In general, documents benefit from some variation of the following layout:
 
-```markdown
-# Document Title
+```markdown good
+# Document title
 
 Short introduction.
 
@@ -108,32 +111,36 @@ Content.
 
 ## See also
 
-* https://link-to-more-info
+* https://example.com/more_info
 ```
 
-1. `# Document title`: The first heading should be a level-one heading, ideally the same or nearly the same as the filename. The first level-one heading is used as the page `<title>`.
+1. `# Document title`: The first heading should be a level-one heading, ideally the same or nearly the same as the filename. The first level-one heading is used by the server as the page `<title>`.
 
 2. `author`: _Optional_. If you'd like to claim ownership of the document or if you are very proud of it, add yourself under the title. However, revision history generally suffices.
 
 3. `Short introduction.` 1–3 sentences providing a high-level overview of the topic. Imagine yourself as a complete newbie who landed on your "Extending Foo" doc and doesn't know the most basic information you take for granted. "What is Foo? Why would I extend it?"
 
-4. `[TOC]`: if you use hosting that supports table of contents, such as Gitiles, put `[TOC]` after the short introduction. See [`[TOC]` documentation](https://gerrit.googlesource.com/gitiles/+/HEAD/Documentation/markdown.md#Table-of-contents).
+4. `[TOC]`: See [`[TOC]` documentation](#toc).
 
 5. `## Topic`: The rest of your headings should start from level 2.
 
 6. `## See also`: Put miscellaneous links at the bottom for the user who wants to know more or didn't find what they needed.
 
-## Table of contents
+## Table of contents (TOCs)
 
 ### Use a `[TOC]` directive
 
-Use a [`[TOC]` directive](https://gerrit.googlesource.com/gitiles/+/HEAD/Documentation/markdown.md#Table-of-contents) unless all of your content is above the fold[1](#user-content-fn-above) on a laptop.
+Use a [`[TOC]` directive](https://gerrit.googlesource.com/gitiles/+/HEAD/Documentation/markdown.md#Table-of-contents) unless all of your content is above the fold[^above] on a laptop.
+
+Only use this directive if you use hosting that supports table of contents, such as Gitiles.
+
+[^above]: Content is "above the fold" if it is visible when the page is first displayed. Content is "below the fold" if it is hidden until the user scrolls down the page on a computer or literally unfolds a document such as a newspaper.
 
 ### Place the `[TOC]` directive after the introduction
 
 Place the `[TOC]` directive after your page's introduction and before the first H2 heading. For example:
 
-```markdown
+```markdown good
 # My Page
 
 This is my introduction **before** the TOC.
@@ -143,7 +150,7 @@ This is my introduction **before** the TOC.
 ## My first H2
 ```
 
-```markdown
+```markdown bad
 # My Page
 
 [TOC]
@@ -153,7 +160,7 @@ This is my introduction **after** the TOC where it should not be.
 ## My first H2
 ```
 
-For users who read your documentation visually, it doesn't matter where your `[TOC]` directive is placed, as Markdown always displays the TOC toward the top and to the right of the page. However, `[TOC]` placement matters a lot when screen readers or keyboard controls are involved.
+`[TOC]` placement matters a lot when screen readers or keyboard controls are involved.
 
 That's because `[TOC]` inserts the HTML for the table of contents into the DOM wherever you've included the directive in your Markdown file. If, for example, you place the directive at the very bottom of your file, screen readers won't read it until they get to the end of the document.
 
@@ -176,7 +183,7 @@ Exceptions to the 80-character rule include:
 
 This means that lines with links are allowed to extend past column 80, along with any relevant punctuation:
 
-```markdown
+```markdown good
 *   See the
     [foo docs](https://gerrit.googlesource.com/gitiles/+/HEAD/Documentation/markdown.md)
     and find the logfile.
@@ -186,7 +193,7 @@ However, note that text before and after the link gets wrapped.
 
 Tables may also run long. However, there are [best practices for creating short, readable tables](#tables).
 
-```markdown
+```markdown good
 Foo                                                                           | Bar | Baz
 ----------------------------------------------------------------------------- | --- | ---
 Somehow-unavoidable-long-cell-filled-with-content-that-simply-refuses-to-wrap | Foo | Bar
@@ -196,11 +203,11 @@ Somehow-unavoidable-long-cell-filled-with-content-that-simply-refuses-to-wrap | 
 
 Don't use trailing whitespace. Use a trailing backslash to break lines.
 
-The [CommonMark spec](http://spec.commonmark.org/0.20/#hard-line-breaks) decrees that two spaces at the end of a line should insert a `<br />` tag. However, many directories have a presubmit check for trailing whitespace, and many IDEs will clean it up anyway.
+The [CommonMark spec](https://spec.commonmark.org/0.30/#hard-line-breaks) decrees that two spaces at the end of a line should insert a `<br />` tag. However, many directories have a presubmit check for trailing whitespace, and many IDEs will clean it up anyway.
 
 Use a trailing backslash, sparingly:
 
-```markdown
+```markdown good
 For some reason I just really want a break here,\
 though it's probably not necessary.
 ```
@@ -211,7 +218,7 @@ Best practice is to avoid the need for a `<br />` altogether. A pair of newlin
 
 ### ATX-style headings
 
-```markdown
+```markdown good
 # Heading 1
 
 ## Heading 2
@@ -219,7 +226,7 @@ Best practice is to avoid the need for a `<br />` altogether. A pair of newlin
 
 Headings with `=` or `-` underlines can be annoying to maintain and don't fit with the rest of the heading syntax. An editor has to ask: Does `---` mean H1 or H2?
 
-```markdown
+```markdown bad
 Heading - do you remember what level?
 ---------
 ```
@@ -230,7 +237,7 @@ Use unique and fully descriptive names for each heading, even for sub-sections. 
 
 For example, instead of:
 
-```markdown
+```markdown bad
 ## Foo
 ### Summary
 ### Example
@@ -241,7 +248,7 @@ For example, instead of:
 
 prefer:
 
-```markdown
+```markdown good
 ## Foo
 ### Foo summary
 ### Foo example
@@ -254,7 +261,7 @@ prefer:
 
 Prefer spacing after `#` and newlines before and after:
 
-```markdown
+```markdown good
 ...text before.
 
 ## Heading 2
@@ -264,16 +271,38 @@ Text after...
 
 Lack of spacing makes it a little harder to read in source:
 
-```markdown
+```markdown bad
 ...text before.
 
 ##Heading 2
 Text after...
 ```
 
+### Set heading targets to avoid breaking deep links
+
+People will create deep links to specific points in your doc, _even if you don't do that yourself._ To prevent changes you make to your doc from breaking external links, you should always use explicit targets for headings in your doc.
+
+Do this even where the implicit target is the same as the heading, so links to the target won't break when the heading is edited. Also, when headings are long or contain punctuation marks, it can make the URL easier to read.
+
+```markdown good
+<a id="topic"></a>
+
+## Topic
+
+<a id="explicit-subtopic"></a>
+
+### Sub-Topic
+
+<a id="short-subtopic"></a>
+
+### Sub-Topic With A Super Long Name - One That Makes An Ugly Target, Maybe?
+```
+
 ### Use a single H1 heading
 
 Use one H1 heading as the title of your document. Subsequent headings should be H2 or deeper. See [Document layout](#layout) for more information.
+
+Some themes hide any H1 headings after the first.
 
 ### Capitalization of titles and headers
 
@@ -281,29 +310,31 @@ Follow the guidance for [capitalization](https://developers.google.com/style/cap
 
 ## Lists
 
-Markdown is smart enough to let the resulting HTML render your numbered lists correctly. For longer lists that may change, especially long nested lists, use "lazy" numbering:
+### Use real numbering, even for long lists
 
-```markdown
-1.  Foo.
-1.  Bar.
-    1.  Foofoo.
-    1.  Barbar.
-1.  Baz.
+Use fully numbered lists, because it's nicer to read in source:
+
+```markdown good
+1.  Foo
+2.  Bar
+    1.  Foofoo
+    2.  Barbar
+3.  Baz
 ```
 
-However, if the list is small and you don't anticipate changing it, prefer fully numbered lists, because it's nicer to read in source:
+Historically, we recommended lazy numbering to reduce the burden of keeping numbers up to date. This is no longer applicable now that the auto-formatter can keep the real numbers up to date.
 
-```markdown
-1.  Foo.
-2.  Bar.
-3.  Baz.
+```markdown bad
+1.  Foo
+1.  Bar
+1.  Baz
 ```
 
 ### Nested list spacing
 
 When nesting lists, use a 4-space indent for both numbered and bulleted lists:
 
-```markdown
+```markdown good
 1.  Use 2 spaces after the item number, so the text itself is indented 4 spaces.
     Use a 4-space indent for wrapped text.
 2.  Use 2 spaces again for the next item.
@@ -318,7 +349,7 @@ When nesting lists, use a 4-space indent for both numbered and bulleted lists:
 
 The following works, but it's very messy:
 
-```markdown
+```markdown bad
 * One space,
 with no indent for wrapped text.
      1. Irregular nesting...
@@ -326,7 +357,7 @@ with no indent for wrapped text.
 
 Even when there's no nesting, using the 4-space indent makes layout consistent for wrapped text:
 
-```markdown
+```markdown good
 *   Foo,
     wrapped with a 4-space indent.
 
@@ -335,24 +366,27 @@ Even when there's no nesting, using the 4-space indent makes layout consistent f
 2.  Back to 2 spaces.
 ```
 
-However, when lists are small, not nested, and a single line, one space can suffice for both kinds of lists:
-
-```markdown
-* Foo
-* Bar
-* Baz.
-
-1. Foo.
-2. Bar.
-```
-
 ## Code
+
+Text marked as `code` means:
+
+1. Render literally. This is a message to the Markdown renderer.
+2. Wrap with `<code>` tags. This communicates an intent to your reader.
+
+Both are valid usage, and usually overlap.
+
+The definition of "code" here is loose: learn to use `code` any time you want to show that the text should be precisely as you enter it, such as:
+
+- Code snippets
+- Command line snippets
+- File names
+- Fake example paths and URLs
 
 ### Inline
 
 \`Backticks\` designate `inline code` that will be rendered literally. Use them for short code quotations, field names, and more:
 
-```markdown
+```markdown good
 You'll want to run `really_cool_script.sh arg`.
 
 Pay attention to the `foo_bar_whammy` field in that table.
@@ -360,7 +394,7 @@ Pay attention to the `foo_bar_whammy` field in that table.
 
 Use inline code when referring to file types in a generic sense, rather than a specific existing file:
 
-```markdown
+```markdown good
 Be sure to update your `README.md`!
 ```
 
@@ -368,9 +402,11 @@ Be sure to update your `README.md`!
 
 When you don't want text to be processed as normal Markdown, like a fake path or example URL that would lead to a bad autolink, wrap it in backticks:
 
-```markdown
-An example Markdown shortlink would be: `Markdown/foo/Markdown/bar.md`
+```markdown good
+An example Markdown shortlink would be: `markdown/foo/markdown/bar.md`
+```
 
+```markdown good
 An example query might be: `https://www.google.com/search?q=$TERM`
 ```
 
@@ -378,16 +414,27 @@ An example query might be: `https://www.google.com/search?q=$TERM`
 
 For code quotations longer than a single line, use a fenced code block:
 
-````markdown
+````markdown good
 ```python
 def Foo(self, bar):
   self.bar = bar
 ```
 ````
 
+Only if you need to use three backticks in a code block, which would prematurely end the code block, enclose the backticked code block in [CommonMark tildes](https://spec.commonmark.org/0.30/#fenced-code-blocks):
+
+````markdown good
+~~~markdown
+```python
+def Foo(self, bar):
+  self.bar = bar
+```
+~~~
+````
+
 #### Declare the language
 
-It is best practice to explicitly declare the language, so that neither the syntax highlighter nor the next editor must guess.
+It is best practice to explicitly declare the language, so that neither the syntax highlighter nor the text editor must guess.
 
 #### Use fenced code blocks instead of indented code blocks
 
@@ -399,27 +446,13 @@ Indented code blocks can sometimes look cleaner in the source, but they have sev
 - The beginning and end of the code block are ambiguous.
 - Indented code blocks are harder to search for in Code Search.
 
-```markdown
-You'll need to run:
-
-    bazel run :thing -- --foo
-
-And then:
-
-    bazel run :another_thing -- --bar
-
-And again:
-
-    bazel run :yet_again -- --baz
-```
-
 #### Escape newlines
 
 Because most command-line snippets are intended to be copied and pasted directly into a terminal, it's best practice to escape any newlines. Use a single backslash at the end of the line:
 
-````markdown
+````markdown good
 ```shell
-$ bazel run :target -- --flag --foo=longlonglonglonglongvalue \
+$ some command --flag --foo=longlonglonglonglongvalue \
   --bar=anotherlonglonglonglonglonglonglonglonglonglongvalue
 ```
 ````
@@ -428,7 +461,7 @@ $ bazel run :target -- --flag --foo=longlonglonglonglongvalue \
 
 If you need a code block within a list, make sure to indent it so as to not break the list:
 
-````markdown
+````markdown good
 *   Bullet.
 
     ```c++
@@ -452,33 +485,19 @@ You can also create a nested code block with 4 spaces. Simply indent 4 additiona
 
 Long links make source Markdown difficult to read and break the 80 character wrapping. **Wherever possible, shorten your links**.
 
-### Use explicit paths for links within Markdown
-
-Use the explicit path for Markdown links. For example:
-
-```markdown
-[...](/path/to/other/markdown/page.md)
-```
-
-You don't need to use the entire qualified URL:
-
-```markdown
-[...](https://bad-full-url.example.com/path/to/other/markdown/page.md)
-```
-
 ### Avoid relative paths unless within the same directory
 
 Relative paths are fairly safe within the same directory. For example:
 
-```markdown
+```markdown good
 [...](other-page-in-same-dir.md)
 [...](/path/to/another/dir/other-page.md)
 ```
 
 Avoid relative links if you need to specify other directories with `../`:
 
-```markdown
-[...](../../bad/path/to/another/dir/other-page.md)
+```markdown bad
+[...](../../another/dir/other-page.md)
 ```
 
 ### Use informative Markdown link titles
@@ -487,33 +506,37 @@ Markdown link syntax allows you to set a link title. Use it wisely. Users often 
 
 Links catch the eye. But titling your links "here," "link," or simply duplicating the target URL tells the hasty reader precisely nothing and is a waste of space:
 
-```markdown
+```markdown bad
 See the Markdown guide for more info: [link](markdown.md), or check out the
 style guide [here](style.md).
 
 Check out a typical test result:
-[https://example.com/foo/bar](https://example.com/foo/bar).
+[https://example.com/logs/aba28c38-d9d1-4b57-9072-324cc5025ff7](https://example.com/logs/aba28c38-d9d1-4b57-9072-324cc5025ff7).
 ```
 
 Instead, write the sentence naturally, then go back and wrap the most appropriate phrase with the link:
 
-```markdown
+```markdown good
 See the [Markdown guide](markdown.md) for more info, or check out the
 [style guide](style.md).
 
 Check out a
-[typical test result](https://example.com/foo/bar).
+[typical test result](https://example.com/logs/aba28c38-d9d1-4b57-9072-324cc5025ff7).
 ```
+
+### Delete unnecessary parameters
+
+Most links generated by search queries include many parameters that aren't necessary to get the user to the right place (and many of them, such as `user=username`, will be replaced at serving time anyway).
 
 ### Use reference links carefully
 
 For long links or image URLs, you may want to split the link use from the link definition, like this:
 
-```markdown
-See the [Markdown style guide][style], which has suggestions for making docs more
-readable.
+```markdown good
+See the [markdown style guide][style], which has suggestions for making docs
+more readable.
 
-[style]: http://Markdown/corp/Markdown/docs/reference/style.md
+[style]: https://google.github.io/styleguide/docguide/style.html
 ```
 
 #### Use reference links for long links
@@ -522,22 +545,22 @@ Use reference links where the length of the link would detract from the readabil
 
 In this example, reference link usage is not appropriate, because the link is not long enough to disrupt the flow of the text:
 
-```markdown
+```markdown bad
 The [style guide][style_guide] says not to use reference links unless you have
 to.
 
-[style_guide]: https://google.com/Markdown-style
+[style_guide]: https://example.com/style
 ```
 
 Just inline it instead:
 
-```markdown
-https://google.com/Markdown-style says not to use reference links unless you have to.
+```markdown good
+https://example.com/style says not to use reference links unless you have to.
 ```
 
 In this example, the link destination is long enough that it makes sense to use a reference link:
 
-```markdown
+```markdown good
 The [style guide] says not to use reference links unless you have to.
 
 [style guide]: https://docs.google.com/document/d/13HQBxfhCwx8lVRuN2Wf6poqvAfVeEXmFVcawP5I6B3c/edit
@@ -547,7 +570,7 @@ Use reference links more often in tables. It is particularly important to keep t
 
 For example, this table's readability is worsened by inline links:
 
-```markdown
+```markdown bad
 Site                                                             | Description
 ---------------------------------------------------------------- | -----------------------
 [site 1](http://google.com/excessively/long/path/example_site_1) | This is example site 1.
@@ -556,7 +579,7 @@ Site                                                             | Description
 
 Instead, use reference links to keep the line length manageable:
 
-```markdown
+```markdown good
 Site     | Description
 -------- | -----------------------
 [site 1] | This is example site 1.
@@ -582,7 +605,7 @@ There is one exception to this rule: reference link definitions that are used in
 
 In the following example, the reference definition is far from its initial use, which makes the document harder to read:
 
-```markdown
+```markdown bad
 # Header
 
 Some text with a [link][link_def].
@@ -603,7 +626,7 @@ Some more text using a [different_link][different_link_def].
 
 Instead, put it just before the header following its first use:
 
-```markdown
+```markdown good
 # Header
 
 Some text with a [link][link_def].
@@ -625,12 +648,33 @@ Some more text using a [different_link][different_link_def].
 
 ## Images
 
-See [image syntax](https://gerrit.googlesource.com/gitiles/+/HEAD/Documentation/markdown.md#Images).
-
 Use images sparingly, and prefer simple screenshots. This guide is designed around the idea that plain text gets users down to the business of communication faster with less reader distraction and author procrastination. However, it's sometimes very helpful to show what you mean.
 
+See [image syntax](https://gerrit.googlesource.com/gitiles/+/HEAD/Documentation/markdown.md#Images).
+
 - Use images when it's easier to _show_ a reader something than to _describe it_. For example, explaining how to navigate a UI is often easier with an image than text.
-- Make sure to provide appropriate text to describe your image. Readers who are not sighted cannot see your image and still need to understand the content! See the alt text best practices below.
+
+- Make sure to provide appropriate text to describe your image. Readers who are not sighted cannot see your image and still need to understand the content!
+
+## Don't use self-closed iframes
+
+Even though it may seem that the `<iframe>` element is self-closing, similarly to `<input>` or `<img>`, it actually is not and because of the way HTML parsing works, trying to use self-closed iframe may lead to unexpected consumption of content.
+
+Consider the following example:
+
+```markdown bad
+<iframe src="https://example.com" />
+<div>Some text here</div>
+```
+
+Perhaps surprisingly, the `<iframe>` is not closed, and the `<div>` becomes a child of it. The effect is that the content is not rendered properly and the `<div>` (and everything after it as well) is not visible.
+
+The correct way is to always close the `<iframe>` explicitly, such as in the example below
+
+```markdown good
+<iframe src="https://example.com"></iframe>
+<div>Some text here</div>
+```
 
 ## Use tables wisely
 
@@ -640,11 +684,11 @@ Avoid using tables when your data could easily be presented in a list. Lists are
 
 For example:
 
-```markdown
+```markdown bad
 Fruit  | Metrics      | Grows on | Acute curvature    | Attributes                                                                                                  | Notes
 ------ | ------------ | -------- | ------------------ | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------
-Apple  | Very popular | Trees    |                    | [Juicy](http://cs/SomeReallyReallyReallyReallyReallyReallyReallyReallyLongQuery), Firm, Sweet               | Apples keep doctors away.
-Banana | Very popular | Trees    | 16 degrees average | [Convenient](http://cs/SomeDifferentReallyReallyReallyReallyReallyReallyReallyReallyLongQuery), Soft, Sweet | Contrary to popular belief, most apes prefer mangoes. Don't you? See the [design doc][banana_v2] for the newest hotness in bananiels.
+Apple  | Very popular | Trees    |                    | [Juicy](https://example.com/SomeReallyReallyReallyReallyReallyReallyReallyReallyLongQuery), Firm, Sweet               | Apples keep doctors away.
+Banana | Very popular | Trees    | 16 degrees average | [Convenient](https://example.com/SomeDifferentReallyReallyReallyReallyReallyReallyReallyReallyLongQuery), Soft, Sweet | Contrary to popular belief, most apes prefer mangoes. Don't you? See the [design doc][banana_v2] for the newest hotness in bananiels.
 ```
 
 This table illustrates a few typical problems:
@@ -657,21 +701,21 @@ This table illustrates a few typical problems:
 
 [Lists](#lists) and subheadings sometimes suffice to present the same information. Let's see this data in list form:
 
-```markdown
+```markdown good
 ## Fruits
 
 Both types are highly popular, sweet, and grow on trees.
 
 ### Apple
 
-*   [Juicy](http://SomeReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyLongURL)
+*   [Juicy](https://example.com/SomeReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyLongURL)
 *   Firm
 
 Apples keep doctors away.
 
 ### Banana
 
-*   [Convenient](http://cs/SomeDifferentReallyReallyReallyReallyReallyReallyReallyReallyLongQuery)
+*   [Convenient](https://example.com/SomeDifferentReallyReallyReallyReallyReallyReallyReallyReallyLongQuery)
 *   Soft
 *   16 degrees average acute curvature.
 
@@ -689,19 +733,19 @@ However, there are times a table is the best choice. When you have:
 
 In those cases, a table format is just the thing. In fact, a compact table can improve readability:
 
-```markdown
+```markdown good
 Transport        | Favored by     | Advantages
 ---------------- | -------------- | -----------------------------------------------
 Swallow          | Coconuts       | [Fast when unladen][airspeed]
 Bicycle          | Miss Gulch     | [Weatherproof][tornado_proofing]
 X-34 landspeeder | Whiny farmboys | [Cheap][tosche_station] since the XP-38 came out
 
-[airspeed]: http://google3/airspeed.h
-[tornado_proofing]: http://google3/kansas/
-[tosche_station]: http://google3/power_converter.h
+[airspeed]: https://example.com/airspeed.h
+[tornado_proofing]: https://example.com/kansas/
+[tosche_station]: https://example.com/power_converter.h
 ```
 
-Note that [reference links](#reference-links) are used to keep the table cells manageable.
+Note that [reference links](#reference_links) are used to keep the table cells manageable.
 
 ## Strongly prefer Markdown to HTML
 
@@ -709,8 +753,32 @@ Please prefer standard Markdown syntax wherever possible and avoid HTML hacks. I
 
 Every bit of HTML hacking reduces the readability and portability of our Markdown corpus. This in turn limits the usefulness of integrations with other tools, which may either present the source as plain text or render it. See [Philosophy](https://google.github.io/styleguide/docguide/philosophy.html).
 
-Gitiles does not render HTML.
+## Arrange clauses to make sentences easy to skim
 
-## Footnotes
+It's often easier to see:
 
-1. Content is "above the fold" if it is visible when the page is first displayed. Content is "below the fold" if it is hidden until the user scrolls down the page on a computer or literally unfolds a document such as a newspaper. [↩](#user-content-fnref-above)
+```
+If you have use case A then you should take some unfamiliar action B
+```
+
+than
+
+```
+You should take some unfamiliar action B if you have use case A
+```
+
+because readers that don't have use case A can skip reading about B.
+
+Similarly, it's often easier to see:
+
+```
+You should take action C because of reason D
+```
+
+than
+
+```
+Reason D therefore you should take action C
+```
+
+because readers that already plan to take action C don't need to read about D.

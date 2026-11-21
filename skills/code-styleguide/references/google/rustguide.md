@@ -4,87 +4,124 @@ Source: <https://google.github.io/styleguide/rustguide.html> · google/styleguid
 
 ## Index
 
-- L93 Background
-  - L95 Scope
-  - L101 Goals of the style guide
-- L127 Follow public Rust style rules
-- L145 Apply API design rules in context
-- L163 Code organization
-  - L173 Prefer small crates [chrome]
-  - L193 Use flat file layout for rust_library sources [chrome]
-  - L211 Name source files and leaf modules after the primary user-defined item
-  - L221 Don’t implement APIs in non-leaf modules
-  - L235 Don’t use glob imports
-  - L266 A use statement should import items from one module
-  - L287 Prefer locally-scoped trait imports
-  - L300 Qualify calls to top-level functions with a module name
-  - L328 Type names should be imported and used unqualified
-  - L343 Use the appropriate import mechanism [chrome]
-- L347 Code formatting and aesthetics
-  - L349 Use the appropriate formatting tool
-  - L365 Opting out of automatic formatting
-- L374 Ownership and borrowing
-  - L376 Avoid Rc and Arc
-  - L388 Prefer borrows over deep copies
-- L402 Function inputs and outputs
-  - L404 Accept flexible references for immutable data
-  - L425 Iterators vs. owned collections in return types
-  - L446 Iterators vs. slices in function parameters
-  - L462 Accepting Into
-  - L476 Prefer enum over bool in APIs
-  - L482 Reporting errors
-- L523 Types
-  - L525 Newtypes versus type aliases
-  - L534 Prefer named fields over tuples and non-newtype tuple structs
-- L543 Traits
-  - L545 Add trait implementations when they become necessary
-  - L549 Implement known standard library traits instead of custom methods
-  - L557 Use #[derive()] if possible
-  - L561 Generics versus dyn Trait
-  - L578 When to define a trait versus an inherent implementation
-  - L592 Extension traits
-  - L640 Specific guidance for important traits
-  - L661 Pair important From impls with explicit constructor methods
-  - L665 Options structs should implement Default
-- L673 Concurrency
-  - L675 Handling poison
-  - L679 Don't use async / .await [chrome]
-  - L683 Don't start new threads through the Rust standard library [chrome]
-  - L687 Use fuchsia_sync::Mutex [Fuchsia]
-- L691 Macros
-- L715 Naming
-  - L717 Naming methods
-  - L725 Naming lifetimes
-  - L735 Naming generic parameters
-  - L741 Naming extension traits
-  - L745 Naming initialization functions
-  - L753 Avoid abbreviations
-- L764 When and how to write documentation
-- L826 Other Rust features
-  - L828 Unsafe code
-  - L843 No unstable features
-  - L853 Getters and setters
-  - L901 Implement expected API sets together
-  - L905 Do not access items marked #[doc(hidden)] that you don't own
-  - L909 Use const functions responsibly
-  - L917 Avoid overloading for non-mathematical purposes
-  - L921 Apply #[non_exhaustive] to publicly-exposed enums
-  - L942 Apply #[non_exhaustive] to public structs with public fields
-  - L960 #[must_use] on functions
-  - L968 #[must_use] on types
-  - L978 Do not run code before main()
-- L982 Implementation concerns
-  - L984 Don't overuse type inference
-  - L995 Prefer pattern matching over check-then-unwrap
-  - L1014 Prefer expect over unwrap
-  - L1018 Don't omit patterns on non_exhaustive enums when matching
-  - L1067 Use context strings to clarify assertions
-  - L1121 Don't use iterator combinator chains when direct iteration is clearer
-  - L1213 Don't call panic::catch_unwind
-  - L1225 Prefer format! / write! for concatenation and substitution
-- L1237 Use the right per-codebase test framework
+- L130 Background
+  - L132 Scope
+  - L138 Goals of the style guide
+- L180 Follow public Rust style rules
+- L198 Apply API design rules in context
+- L216 Code organization
+  - L226 Prefer small crates <span class="chrome">[chrome]</span>
+  - L246 Use flat file layout for rust_library sources <span class="chrome">[chrome]</span>
+  - L264 Name source files and leaf modules after the primary user-defined item
+  - L274 Don’t implement APIs in non-leaf modules
+  - L288 Don’t use glob imports
+  - L316 A use statement should import items from one module
+  - L337 Prefer locally-scoped trait imports
+  - L350 Qualify calls to top-level functions with a module name
+  - L378 Type names should be imported and used unqualified
+  - L393 Use the appropriate import mechanism <span class="chrome">[chrome]</span>
+- L397 Code formatting and aesthetics
+  - L399 Use the appropriate formatting tool
+  - L415 Opting out of automatic formatting
+- L424 Ownership and borrowing
+  - L426 Avoid Rc and Arc
+  - L438 Prefer borrows over deep copies
+- L452 Function inputs and outputs
+  - L454 Accept flexible references for immutable data
+  - L475 Iterators vs. owned collections in return types
+  - L496 Iterators vs. slices in function parameters
+  - L512 Accepting Into
+  - L526 Prefer enum over bool in APIs
+  - L532 Reporting errors
+- L573 Types
+  - L575 Newtypes versus type aliases
+  - L584 Prefer named fields over tuples and non-newtype tuple structs
+- L593 Traits
+  - L595 Add trait implementations when they become necessary
+  - L599 Implement known standard library traits instead of custom methods
+  - L607 Use #[derive()] if possible
+  - L611 Generics versus dyn Trait
+  - L628 When to define a trait versus an inherent implementation
+  - L642 Extension traits
+  - L690 Specific guidance for important traits
+  - L711 Pair important From impls with explicit constructor methods
+  - L715 Options structs should implement Default
+- L723 Concurrency
+  - L725 Handling poison
+  - L729 Don't use async / .await <span class="chrome">[chrome]</span>
+  - L733 Don't start new threads through the Rust standard library <span class="chrome">[chrome]</span>
+  - L737 Use fuchsia_sync::Mutex <span class="fuchsia">[Fuchsia]</span>
+- L741 Macros
+- L765 Naming
+  - L767 Naming methods
+  - L775 Naming lifetimes
+  - L785 Naming generic parameters
+  - L791 Naming extension traits
+  - L795 Naming initialization functions
+  - L803 Avoid abbreviations
+- L814 When and how to write documentation
+- L876 Other Rust features
+  - L878 Unsafe code
+  - L890 No unstable features
+  - L900 Getters and setters
+  - L948 Implement expected API sets together
+  - L952 Do not access items marked #[doc(hidden)] that you don't own
+  - L956 Use const functions responsibly
+  - L964 Avoid overloading for non-mathematical purposes
+  - L968 Apply #[non_exhaustive] to publicly-exposed enums
+  - L987 Apply #[non_exhaustive] to public structs with public fields
+  - L1005 #[must_use] on functions
+  - L1013 #[must_use] on types
+  - L1023 Do not run code before main()
+- L1027 Implementation concerns
+  - L1029 Don't overuse type inference
+  - L1040 Prefer pattern matching over check-then-unwrap
+  - L1059 Prefer expect over unwrap
+  - L1063 Don't omit patterns on non_exhaustive enums when matching
+  - L1112 Use context strings to clarify assertions
+  - L1162 Don't use iterator combinator chains when direct iteration is clearer
+  - L1254 Don't call panic::catch_unwind
+  - L1266 Prefer format! / write! for concatenation and substitution
+- L1278 Use the right per-codebase test framework
 
 ---
+
+<style>
+.google3 {
+  background-color: #34A853;
+  color: white;
+  border-radius: 5px;
+  padding: 2px 6px;
+}
+
+.android {
+  background-color: #a4c639;
+  color: white;
+  border-radius: 5px;
+  padding: 2px 6px;
+}
+
+.chrome {
+  background-color: #4285F4;
+  color: white;
+  border-radius: 5px;
+  padding: 2px 6px;
+}
+
+.fuchsia {
+  background-color: #c154c1;
+  color: white;
+  border-radius: 5px;
+  padding: 2px 6px;
+}
+
+:is(h1, h2, h3, h4, h5, h6) :is(.google3, .android, .chrome, .fuchsia) {
+  font-size: large;
+  border-radius: 5px;
+  padding: 4px 8px;
+  vertical-align: 10%;
+}
+</style>
 
 This document is a _style guide_ for the usage of the Rust programming language at Google. In this context, “style” refers to more than just formatting; it includes guidance on API and implementation design.
 
@@ -104,25 +141,41 @@ By and large, we have this document for [the same reasons we have a C++ style gu
 
 Most style rules come from one or more of the goals listed below.
 
-- Style rules should prioritize readability and maintainability over writeability
+<dl>
 
-  We expect our code to be around for long periods of time, and we consider a little bit of extra effort applied during code writing to be worth it in the long run if the style rule improves readability.
+<dt>Style rules should prioritize readability and maintainability over writeability</dt>
+<dd>We expect our code to be around for long periods of time, and we
+consider a little bit of extra effort applied during code writing to be
+worth it in the long run if the style rule improves readability.
+</dd>
 
-- Style rules should favor better automation
+<dt>Style rules should favor better automation</dt>
+<dd>
+Large-Scale Changes (LSCs)
+are common at Google, and consistency helps
+make LSCs easier to carry out.
+</dd>
 
-  Large-Scale Changes (LSCs) are common at Google, and consistency helps make LSCs easier to carry out.
+<dt>Style rules should be consistent with the wider Rust ecosystem where possible</dt>
+<dd>The broader Rust ecosystem already has a pretty good amount of consistency
+in style, and we should rely on that where possible to reduce surprise and make
+it less work to learn Google's Rust style.
+</dd>
 
-- Style rules should be consistent with the wider Rust ecosystem where possible
+<dt>Style rules should pull their weight</dt>
+<dd>Every Rust developer and reviewer at Google has to keep these style rules
+in mind: as such, we should be careful to include rules that have a tangible
+benefit.
+</dd>
 
-  The broader Rust ecosystem already has a pretty good amount of consistency in style, and we should rely on that where possible to reduce surprise and make it less work to learn Google's Rust style.
+<dt>Style rules may help avoid minor style disagreements</dt>
+<dd>There are many cases where reasonable people may disagree about a style, and
+we expect that disagreement to show up often on CLs. Having a style rule helps
+avoid having to rehash this each time. Rules in this category that do not have other
+benefits should be kept to a minimum.
+</dd>
 
-- Style rules should pull their weight
-
-  Every Rust developer and reviewer at Google has to keep these style rules in mind: as such, we should be careful to include rules that have a tangible benefit.
-
-- Style rules may help avoid minor style disagreements
-
-  There are many cases where reasonable people may disagree about a style, and we expect that disagreement to show up often on CLs. Having a style rule helps avoid having to rehash this each time. Rules in this category that do not have other benefits should be kept to a minimum.
+</dl>
 
 ## Follow public Rust style rules
 
@@ -170,7 +223,7 @@ _Terminology:_
 
 The following sections convey that in Chromium, it is preferable to **not** make use of all possibilities of splitting modules across files.
 
-### Prefer small crates \[chrome]
+### Prefer small crates <span class="chrome">\[chrome]</span>
 
 Prefer small crates in Chromium; ideally, but not necessarily, a single file (focusing on one abstraction). If your code can be split up into small crates, do so.
 
@@ -190,7 +243,7 @@ Rationale
 
 Fine-grained library targets are recommended in Chromium due to the massive size of our codebase, non-local effects of adding dependencies in the build graph, and to improve performance of parallel compilation and build caching.
 
-### Use flat file layout for `rust_library` sources \[chrome]
+### Use flat file layout for `rust_library` sources <span class="chrome">\[chrome]</span>
 
 In Chromium `.rs` source files belonging to one `rust_library` (one Rust crate) must reside in a single directory.
 
@@ -237,11 +290,8 @@ This makes it easier to find things, and avoids mixing structure and contents.
 Don't use glob imports, except in the following situations where you may optionally do so at your own discretion:
 
 - `use super::*` for inline modules
-
 - `use enum::*` in method bodies of enums, and functions that are primarily dealing with that enum
-
 - `pub use submodule::*` for non-leaf modules
-
 - C++ interop: Since the same namespace (in C++) is a submodule in different Rust crates (in Rust), you may merge the namespaces into a private copy using glob imports. For example:
 
   ```rust
@@ -269,18 +319,18 @@ This rule corresponds to the rustfmt setting `imports_granularity = Module`.
 
 Basically, there should not be any `::`'s inside the `{..}` block of a `use` statement. For example:
 
-```rust
+```rust good
 use foo::Foo;
 use foo::bar::Bar;
 use foo::bar::Baz;
 ```
 
-```rust
+```rust good
 use foo::Foo;
 use foo::bar::{Bar, Baz};
 ```
 
-```rust
+```rust bad
 use foo::{Foo, bar::Bar};
 ```
 
@@ -288,7 +338,7 @@ use foo::{Foo, bar::Bar};
 
 Import traits within function bodies, unless the trait's methods are used extensively throughout the file.
 
-```rust
+```rust good
 fn foo(s: &str) -> Result<u8, std::num::ParseIntError> {
     // Import the trait within a function, not at the module scope.
     use std::str::FromStr;
@@ -301,13 +351,13 @@ fn foo(s: &str) -> Result<u8, std::num::ParseIntError> {
 
 To use top-level functions defined in other modules or crates, import their module and call them with `modulename::functionname()`. For example:
 
-```rust
+```rust good
 use std::mem;
 
 let x = mem::transmute(y);
 ```
 
-```rust
+```rust bad
 use std::mem::transmute;
 
 let x = transmute(y);
@@ -340,9 +390,9 @@ Rationale
 
 This rule largely exists to avoid reviewer disagreements.
 
-### Use the appropriate import mechanism \[chrome]
+### Use the appropriate import mechanism <span class="chrome">\[chrome]</span>
 
-- Chrome Use `chromium::import!()`.
+- <span class="chrome">Chrome</span> Use `chromium::import!()`.
 
 ## Code formatting and aesthetics
 
@@ -485,7 +535,7 @@ Choose the error reporting mechanism that fits your API contract: `Option`, `Res
 
 **Use `Option` for simple failures** where the cause is obvious and the caller would not benefit from further details. This is best for standard, anticipated outcomes like a missing value or a parsing mismatch.
 
-```rust
+```rust good
 // Good: The cause of the failure is obvious (integer overflow). No further
 // details could be reasonably provided.
 fn checked_add(a: u32, b: u32) -> Option<u32> { ... }
@@ -493,14 +543,14 @@ fn checked_add(a: u32, b: u32) -> Option<u32> { ... }
 
 **Use `Result` for recoverable failures where the caller needs context** to handle the error. These are often "unavoidable" errors caused by external factors (like I/O or network) that even correctly implemented code cannot prevent with checks ahead of time. Nevertheless, the caller can reasonably anticipate the kinds of errors (a file-related function can fail with an I/O error). The error details allow the caller to distinguish failure modes and recover appropriately.
 
-```rust
+```rust good
 // Good: The caller needs to know *why* it failed (NotFound vs PermissionDenied).
 fn open_file(path: &Path) -> Result<File, io::Error> { ... }
 ```
 
 **Use `panic!` to report bugs and violated invariants.** These errors are avoidable: the program is missing a check, and is calling an operation without fulfilling a precondition. These defects must be fixed in the code, not handled at runtime, although coarse-grained recovery might be possible with `catch_unwind`.
 
-```rust
+```rust good
 // Good: Panics if the invariant (index must be in bounds) is violated.
 // This indicates a bug in the caller's logic.
 impl<T> MyVec<T> {
@@ -676,15 +726,15 @@ This enables convenient use of struct update syntax (`Struct { a: 0, ..Default::
 
 Never reach inside a poisoned mutex to get at its insides, no matter how tempting the use case may seem.
 
-### Don't use `async` / `.await` \[chrome]
+### Don't use `async` / `.await` <span class="chrome">\[chrome]</span>
 
 Don't use `async` / `.await` in Chromium.
 
-### Don't start new threads through the Rust standard library \[chrome]
+### Don't start new threads through the Rust standard library <span class="chrome">\[chrome]</span>
 
 In Chromium, prefer to use sequences instead of threads.
 
-### Use `fuchsia_sync::Mutex` \[Fuchsia]
+### Use `fuchsia_sync::Mutex` <span class="fuchsia">\[Fuchsia]</span>
 
 Use Fuchsia’s mutex type, rather than one from `std::sync` or `parking_lot`.
 
@@ -808,7 +858,7 @@ Follow these guidelines when writing documentation comments:
 
 It is acceptable, and even encouraged, to mix doc comments (`///` and `//!`) and ordinary comments (`//`). If you have one thing you wish to document publicly, and another thing you want to note as an implementation comment, then use both! For example:
 
-```rust
+```rust good
 /// Finds the first `FooItem` with the given `name`, or `None` if not present.
 // TODO: example.com/12345 - `name` should be &str, not String.
 pub fn get_named(items: &[FooItem], name: String) -> Option<&FooItem> {...}
@@ -832,11 +882,8 @@ Don't write unsafe code unless there is no way to implement the same functionali
 If you do have to write unsafe code:
 
 - Encapsulate unsafe code in a safe abstraction and isolate it from business logic as much as possible. Ideally, unsafe code should be in a separate crate with few dependencies beyond the standard library.
-
 - Add a safety comment starting with `SAFETY:` that explains why the code is correct.
-
 - Add a technical justification for unsafe code. Depending on context, this can be a justification for an individual unsafe block or a more general justification that covers an entire file or build target. The justification should answer these questions:
-
   - Why is this code not written in an equivalent safe way?
   - If the reason is performance, are there benchmarks?
 
@@ -846,9 +893,9 @@ Don't use unstable features.
 
 Exceptions:
 
-- Android Embedded programming may require the use of certain unstable features. While review will be required to enable them (to help search for alternatives), features absolutely required to build an artifact correctly will generally be approved.
-- Chrome Style arbiters may blanket-approve a small list of features for the entire codebase. Typically, only features that have a clear path to stabilization will be approved.
-- Fuchsia See guidance [here](https://fuchsia.dev/fuchsia-src/development/languages/rust/unstable).
+- <span class="android">Android</span> Embedded programming may require the use of certain unstable features. While review will be required to enable them (to help search for alternatives), features absolutely required to build an artifact correctly will generally be approved.
+- <span class="chrome">Chrome</span> Style arbiters may blanket-approve a small list of features for the entire codebase. Typically, only features that have a clear path to stabilization will be approved.
+- <span class="fuchsia">Fuchsia</span> See guidance [here](https://fuchsia.dev/fuchsia-src/development/languages/rust/unstable).
 
 ### Getters and setters
 
@@ -925,10 +972,8 @@ If an enum is part of a public API used by other teams, mark it `#[non_exhaustiv
 Exceptions:
 
 - The enum will never change. For example:
-
   - Enums describing an existing ontology (e.g., `enum Color { Red, Green, Blue }`).
   - Enums with two states that could be Booleans (e.g., `enum Visibility { Visible, Hidden }`)
-
 - The enum _may_ change in the future, but you are committed to fixing resulting breakages via an LSC.
 
 For context, see Clippy lint [`exhaustive_enums`](https://rust-lang.github.io/rust-clippy/master/index.html#exhaustive_enums).
@@ -996,7 +1041,7 @@ Specific situations in which you should probably add types:
 
 Avoid potentially panicking operations when the input data guarantees they cannot panic. For example, instead of using `Option::unwrap` on a value known to be valid, use pattern matching to prove correctness to the compiler.
 
-```rust
+```rust good
 // Good: The match arm proves to the compiler that `x` is `Some`.
 // A panic is obviously not possible.
 if let Some(value) = option {
@@ -1004,7 +1049,7 @@ if let Some(value) = option {
 }
 ```
 
-```rust
+```rust bad
 // Bad: Correctness of `unwrap` relies on a runtime check that `option` is `Some`.
 if option.is_some() {
     use_value(option.unwrap());
@@ -1032,7 +1077,7 @@ pub enum Shape {
 }
 ```
 
-```rust
+```rust good
 fn process_shape(shape: Shape) {
   match shape {
     Shape::Circle => println!("It's a circle"),
@@ -1043,7 +1088,7 @@ fn process_shape(shape: Shape) {
 }
 ```
 
-```rust
+```rust good
 fn process_shape(shape: Shape) {
   if let Shape::Circle = shape {
     println!("It's a circle");
@@ -1051,7 +1096,7 @@ fn process_shape(shape: Shape) {
 }
 ```
 
-```rust
+```rust bad
 fn process_shape(shape: Shape) {
   match shape {
     Shape::Circle => println!("It's a circle"),
@@ -1071,13 +1116,9 @@ While some assertions are self-explanatory, many benefit from additional context
 You should always consider adding context, but particularly in the following situations:
 
 - If you're thinking of adding a comment to the assertion. Use a format string instead: It has the benefit that it will appear in logs.
-
 - If you expect failing assertions to be seen by users. In this case, a human-readable explanation is more helpful than a Rust expression.
-
 - If logging a value helps in understanding why the assertion failed.
-
 - To clarify whether a failing assertion means that
-
   - The client misused an API (i.e., they should change their use of the API), or
   - The implementation contains a bug (i.e., the client should file a bug report).
 
@@ -1085,7 +1126,7 @@ Examples
 
 **Explaining why an assertion should hold**
 
-```rust
+```rust good
     assert!(
         values.is_sorted(),
         "`values` is populated from a `PriorityQueue`, so we expect it to be sorted"
@@ -1094,13 +1135,13 @@ Examples
 
 **Logging a value to clarify why the assertion failed**
 
-```rust
+```rust good
 assert!(refund > 0, "Refund must be positive, got {refund:?}");
 ```
 
 **Flagging misuse of an API**
 
-```rust
+```rust good
 impl Database {
     ...
 
@@ -1114,7 +1155,7 @@ impl Database {
 
 **Don't use the context string merely to repeat the condition**
 
-```rust
+```rust bad
 assert!(values.is_sorted(), "values should always be sorted");
 ```
 
@@ -1134,7 +1175,7 @@ Examples
 
 Here's an example of a combinator chain that is hard to read because it involves conditionals and mutates external state:
 
-```rust
+```rust bad
 let mut error_count = 0;
 let _processed_items: Vec<_> = items
     .into_iter()
@@ -1151,7 +1192,7 @@ let _processed_items: Vec<_> = items
 
 The corresponding `for` loop is easier to read:
 
-```rust
+```rust good
 let mut error_count = 0;
 let mut processed_items = Vec::with_capacity(items.len());
 
@@ -1167,7 +1208,7 @@ for item in items {
 
 Avoid constructing a combinator chain in the header of a `for` loop:
 
-```rust
+```rust bad
 for bug in bug_descriptions
     .iter()
     .filter_map(|description| parse_bug_description(description).ok())
@@ -1179,7 +1220,7 @@ for bug in bug_descriptions
 
 Instead, assign the combinator chain to a variable. This reduces clutter, and the variable name documents what the combinator chain does:
 
-```rust
+```rust good
 let urgent_bugs = bug_descriptions
     .iter()
     .filter_map(|description| parse_bug_description(description).ok())
@@ -1194,13 +1235,13 @@ for bug in urgent_bugs {
 
 Here's an example where a combinator chain is preferable:
 
-```rust
+```rust good
 let threshold_exceeded = values.iter().any(|&v| v > threshold);
 ```
 
 The corresponding for loop is harder to read and reinvents the logic contained in `any()`:
 
-```rust
+```rust bad
 let mut threshold_exceeded = false;
 for v in values {
   if v > threshold {
@@ -1216,7 +1257,7 @@ Use of `panic::catch_unwind` is prohibited in first-party Rust code.
 
 Exceptions:
 
-- It is acceptable as a defense in depth mechanism as long as it is never _relied_ upon for any properties. A codebase that is already attempting to avoid panics may choose to wrap critical entry points with a `catch_unwind` recovery mechanism just in case a panic slips through. Code authors must convince the reviewer that the codebase is doing most of what it can to avoid panics. This exception only applies to code that has the possibility of being run with `panic=unwind` (so this does not apply to Chrome, Android, Fuchsia).
+- It is acceptable as a defense in depth mechanism as long as it is never _relied_ upon for any properties. A codebase that is already attempting to avoid panics may choose to wrap critical entry points with a `catch_unwind` recovery mechanism just in case a panic slips through. Code authors must convince the reviewer that the codebase is doing most of what it can to avoid panics. This exception only applies to code that has the possibility of being run with `panic=unwind` (so this does not apply to <span class=chrome>Chrome</span>, <span class=android>Android</span>, <span class=fuchsia>Fuchsia</span>).
 
 Rationale
 
@@ -1238,6 +1279,6 @@ Rationale
 
 Most codebases use their own specific test framework rather than `#[test]`.
 
-- Chrome Use [rust_gtest_interop](https://source.chromium.org/chromium/chromium/src/+/main:testing/rust_gtest_interop/). This makes it possible to integrate Rust tests into C++ test binaries.
+- <span class="chrome">Chrome</span> Use [rust_gtest_interop](https://source.chromium.org/chromium/chromium/src/+/main:testing/rust_gtest_interop/). This makes it possible to integrate Rust tests into C++ test binaries.
 
-- Fuchsia Use `#[fuchsia::test]`. See [here](https://fuchsia.dev/fuchsia-src/development/languages/rust/testing.md) for more details.
+- <span class="fuchsia">Fuchsia</span> Use `#[fuchsia::test]`. See [here](https://fuchsia.dev/fuchsia-src/development/languages/rust/testing.md) for more details.

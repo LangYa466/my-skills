@@ -7,34 +7,34 @@ Source: <https://google.github.io/styleguide/csharpguide.html> · google/stylegu
 - L43 Formatting guidelines
   - L45 Naming rules
   - L66 Organization
-  - L92 Whitespace rules
-  - L122 Example
-- L234 C# coding guidelines
-  - L236 Constants
-  - L242 Containers: IEnumerable vs IList vs IReadOnlyList
-  - L248 Generators vs containers
-  - L257 Property styles
-  - L262 Expression body syntax
-  - L278 Structs and classes:
-  - L291 Lambdas vs named methods
-  - L295 Field initializers
-  - L299 Extension methods
-  - L307 ref and out
-  - L315 LINQ
-  - L321 Array vs List
-  - L337 Folders and file locations
-  - L342 Use of tuple as a return type
-  - L346 String interpolation vs String.Format() vs String.Concat vs operator+
-  - L352 using
-  - L358 Object Initializer syntax
-  - L373 Namespace naming
-  - L380 Default values/null returns for structs
-  - L390 Removing from containers while iterating
-  - L397 Calling delegates
-  - L401 The var keyword
-  - L416 Attributes
-  - L421 Argument Naming
-  - L449 Comments
+  - L85 Whitespace rules
+  - L104 Example
+- L216 C# coding guidelines
+  - L218 Constants
+  - L224 Containers: IEnumerable vs IList vs IReadOnlyList
+  - L230 Generators vs containers
+  - L238 Property styles
+  - L243 Expression body syntax
+  - L259 Structs and classes:
+  - L272 Lambdas vs named methods
+  - L276 Field initializers
+  - L280 Extension methods
+  - L288 ref and out
+  - L296 LINQ
+  - L302 Array vs List
+  - L313 Folders and file locations
+  - L318 Use of tuple as a return type
+  - L322 String interpolation vs String.Format() vs String.Concat vs operator+
+  - L328 using
+  - L334 Object Initializer syntax
+  - L349 Namespace naming
+  - L356 Default values/null returns for structs
+  - L364 Removing from containers while iterating
+  - L371 Calling delegates
+  - L375 The var keyword
+  - L390 Attributes
+  - L395 Argument Naming
+  - L423 Comments
 
 ---
 
@@ -66,27 +66,20 @@ Rule summary:
 ### Organization
 
 - Modifiers occur in the following order: `public protected internal private new abstract virtual override sealed static readonly extern unsafe volatile async`.
-
 - Namespace `using` declarations go at the top, before any namespaces. `using` import order is alphabetical, apart from `System` imports which always go first.
-
 - Class member ordering:
-
   - Group class members in the following order:
-
     - Nested classes, enums, delegates and events.
     - Static, const and readonly fields.
     - Fields and properties.
     - Constructors and finalizers.
     - Methods.
-
   - Within each group, elements should be in the following order:
-
     - Public.
     - Internal.
     - Protected internal.
     - Protected.
     - Private.
-
   - Where possible, group interface implementations together.
 
 ### Whitespace rules
@@ -94,27 +87,16 @@ Rule summary:
 Developed from Google Java style.
 
 - A maximum of one statement per line.
-
 - A maximum of one assignment per statement.
-
 - Indentation of 2 spaces, no tabs.
-
 - Column limit: 100.
-
 - No line break before opening brace.
-
 - No line break between closing brace and `else`.
-
 - Braces used even when optional.
-
 - Space after `if`/`for`/`while` etc., and after commas.
-
 - No space after an opening parenthesis or before a closing parenthesis.
-
 - No space between a unary operator and its operand. One space between the operator and each operand of all other operators.
-
 - Line wrapping developed from Google C++ style guidelines, with minor modifications for compatibility with Microsoft's C# formatting tools:
-
   - In general, line continuations are indented 4 spaces.
   - Line breaks with braces (e.g. list initializers, lambdas, object initializers, etc) do not count as continuations.
   - For function definitions and calls, if the arguments do not all fit on one line they should be broken up onto multiple lines, with each subsequent line aligned with the first argument. If there is not enough room for this, arguments may instead be placed on subsequent lines with a four space indent. The code example below illustrates this.
@@ -248,7 +230,6 @@ namespace MyNamespace {                             // Namespaces are PascalCase
 ### Generators vs containers
 
 - Use your best judgement, bearing in mind:
-
   - Generator code is often less readable than filling in a container.
   - Generator code can be more performant if the results are going to be processed lazily, e.g. when not all the results are needed.
   - Generator code that is directly turned into a container via `ToList()` will be less performant than filling in a container directly.
@@ -263,11 +244,11 @@ namespace MyNamespace {                             // Namespaces are PascalCase
 
 For example:
 
-```c#
+```c# good
 int SomeProperty => _someProperty
 ```
 
-```c#
+```c# good
 void SomeMethod() => throw new NotImplementedException();
 ```
 
@@ -321,15 +302,10 @@ void SomeMethod() => throw new NotImplementedException();
 ### Array vs List
 
 - In general, prefer `List<>` over arrays for public variables, properties, and return types (keeping in mind the guidance on `IList` / `IEnumerable` / `IReadOnlyList` above).
-
 - Prefer `List<>` when the size of the container can change.
-
 - Prefer arrays when the size of the container is fixed and known at construction time.
-
 - Prefer array for multidimensional arrays.
-
 - Note:
-
   - array and `List<>` both represent linear, contiguous containers.
   - Similar to C++ arrays vs `std::vector`, arrays are of fixed capacity, whereas `List<>` can be added to.
   - In some cases arrays are more performant, but in general `List<>` is more flexible.
@@ -359,7 +335,7 @@ void SomeMethod() => throw new NotImplementedException();
 
 For example:
 
-```c#
+```c# good
 var x = new SomeClass {
   Property1 = value1,
   Property2 = value2,
@@ -380,9 +356,7 @@ var x = new SomeClass {
 ### Default values/null returns for structs
 
 - Prefer returning a ‘success’ boolean value and a struct `out` value.
-
 - Where performance isn't a concern and the resulting code significantly more readable (e.g. chained null conditional operators vs deeply nested if statements) nullable structs are acceptable.
-
 - Notes:
 
   - Nullable structs are convenient, but reinforce the general ‘null is failure’ pattern Google prefers to avoid. We will investigate a `StatusOr` equivalent in the future, if there is enough demand.
@@ -432,14 +406,14 @@ When the meaning of a method argument is nonobvious, consider one of the followi
 
 Consider the following example:
 
-```c#
+```c# bad
 // What are these arguments?
 DecimalNumber product = CalculateProduct(values, 7, false, null);
 ```
 
 versus:
 
-```c#
+```c# good
 var options = new ProductOptions();
 options.PrecisionDecimals = 7;
 options.UseCache = CacheUsage.DontUseCache;

@@ -66,7 +66,7 @@ Authored, revised and maintained by many Googlers.
 | [Features and Bugs](#s6-features-and-bugs) | [ShellCheck](#s6.1-shellcheck) - [Command Substitution](#s6.2-command-substitution) - [Test, `[… ]`, and `[[… ]]`](#s6.3-tests) - [Testing Strings](#s6.4-testing-strings) - [Wildcard Expansion of Filenames](#s6.5-wildcard-expansion-of-filenames) - [Eval](#s6.6-eval) - [Arrays](#s6.7-arrays) - [Pipes to While](#s6.8-pipes-to-while) - [Arithmetic](#s6.9-arithmetic) - [Aliases](#s6.10-aliases) |
 | [Naming Conventions](#s7-naming-conventions) | [Function Names](#s7.1-function-names) - [Variable Names](#s7.2-variable-names) - [Constants and Environment Variable Names](#s7.3-constants-and-environment-variable-names) - [Source Filenames](#s7.4-source-filenames) - [Use Local Variables](#s7.5-use-local-variables) - [Function Location](#s7.6-function-location) - [main](#s7.7-main) |
 | [Calling Commands](#s8-calling-commands) | [Checking Return Values](#s8.1-checking-return-values) - [Builtin Commands vs. External Commands](#s8.2-builtin-commands-vs-external-commands) |
-| [When in Doubt: Be Consistent](#s9-conclusion) | |
+| [When in Doubt: Be Consistent](#s9-conclusion) |
 
 ## Background
 
@@ -125,7 +125,7 @@ This makes it easier to separate normal status from actual issues.
 
 A function to print out error messages along with other status information is recommended.
 
-```shell
+```shell good
 err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
 }
@@ -146,7 +146,7 @@ Every file must have a top-level comment including a brief overview of its conte
 
 Example:
 
-```shell
+```shell good
 #!/bin/bash
 #
 # Perform hot backups of Oracle databases.
@@ -168,7 +168,7 @@ All function header comments should describe the intended API behaviour using:
 
 Example:
 
-```shell
+```shell good
 #######################################
 # Cleanup files from the backup directory.
 # Globals:
@@ -222,7 +222,7 @@ This matches the convention in the [C++ Guide](https://google.github.io/stylegui
 
 Examples:
 
-```shell
+```shell good
 # TODO(username): Handle the unlikely edge cases (bug ####)
 ```
 
@@ -246,7 +246,7 @@ If you have to write literal strings that are longer than 80 characters, this sh
 
 Words that are longer than 80 chars and can't sensibly be split are ok, but where possible these items should be on a line of their own, or factored into a variable. Examples include file paths and URLs, particularly where string-matching them (such as `grep`) is valuable for maintenance.
 
-```shell
+```shell good
 # DO use 'here document's
 cat <<END
 I am an exceptionally long
@@ -268,7 +268,7 @@ long_string_alt="i am an including an exceptionally ${long_file} in this long\
  string"
 ```
 
-```shell
+```shell bad
 # Just because a line contains an exception doesn't mean the rest of the
 # line shouldn't be wrapped like usual.
 
@@ -281,9 +281,9 @@ Pipelines should be split one per line if they don't all fit on one line.
 
 If a pipeline all fits on one line, it should be on one line.
 
-If not, it should be split at one pipe segment per line with the pipe on the newline and a 2 space indent for the next section of the pipe. `\ `should be consistently used to indicate line continuation. This applies to a chain of commands combined using `|` as well as to logical compounds using `||` and `&&`.
+If not, it should be split at one pipe segment per line with the pipe on the newline and a 2 space indent for the next section of the pipe. `\ ` should be consistently used to indicate line continuation. This applies to a chain of commands combined using `|` as well as to logical compounds using `||` and `&&`.
 
-```shell
+```shell good
 # All fits on one line
 command1 | command2
 
@@ -306,7 +306,7 @@ Control flow statements in shell are a bit different, but we follow the same pri
 
 Example:
 
-```shell
+```shell good
 # If inside a function remember to declare the loop variable as
 # a local to avoid it leaking into the global environment:
 local dir
@@ -322,7 +322,7 @@ done
 
 Although it is possible to [omit `in "$@"`](https://www.gnu.org/software/bash/manual/html_node/Looping-Constructs.html#index-for) in for loops we recommend consistently including it for clarity.
 
-```shell
+```shell good
 for arg in "$@"; do
   echo "argument: ${arg}"
 done
@@ -336,7 +336,7 @@ done
 
 The matching expressions are indented one level from the `case` and `esac`. Multiline actions are indented another level. In general, there is no need to quote match expressions. Pattern expressions should not be preceded by an open parenthesis. Avoid the `;&` and `;;&` notations.
 
-```shell
+```shell good
 case "${expression}" in
   a)
     variable="…"
@@ -352,9 +352,9 @@ case "${expression}" in
 esac
 ```
 
-Simple commands may be put on the same line as the pattern _and_ `;;` as long as the expression remains readable. This is often appropriate for single-letter option processing. When the actions don't fit on a single line, put the pattern on a line on its own, then the actions, then `;;` also on a line of its own. When on the same line as the actions, use a space after the close parenthesis of the pattern and another before the `;;`.
+Simple commands may be put on the same line as the pattern <i>and</i> `;;` as long as the expression remains readable. This is often appropriate for single-letter option processing. When the actions don't fit on a single line, put the pattern on a line on its own, then the actions, then `;;` also on a line of its own. When on the same line as the actions, use a space after the close parenthesis of the pattern and another before the `;;`.
 
-```shell
+```shell good
 verbose='false'
 aflag=''
 bflag=''
@@ -384,7 +384,7 @@ They are listed in order of precedence.
 
 Prefer brace-delimiting all other variables.
 
-```shell
+```shell good
 # Section of *recommended* cases.
 
 # Preferred style for 'special' variables:
@@ -406,7 +406,7 @@ while read -r f; do
 done < <(find /tmp)
 ```
 
-```shell
+```shell bad
 # Section of *discouraged* cases
 
 # Unquoted vars, unbraced vars, brace-delimited single letter
@@ -430,7 +430,7 @@ NOTE: Using braces in `${var}` is _not_ a form of quoting. "Double quotes" must 
 - Be aware of the quoting rules for pattern matches in `[[ … ]]`. See the [Test, `[ … ]`, and `[[ … ]]`](#tests) section below.
 - Use `"$@"` unless you have a specific reason to use `$*`, such as simply appending the arguments to a string in a message or log.
 
-```shell
+```shell good
 # 'Single' quotes indicate that no substitution is desired.
 # "Double" quotes indicate that substitution is required/tolerated.
 
@@ -515,12 +515,12 @@ Nested backticks require escaping the inner ones with `\ `. The `$(command)` for
 
 Example:
 
-```shell
+```shell good
 # This is preferred:
 var="$(command "$(command1)")"
 ```
 
-```shell
+```shell bad
 # This is not:
 var="`command \`command1\``"
 ```
@@ -531,7 +531,7 @@ var="`command \`command1\``"
 
 `[[ … ]]` reduces errors as no pathname expansion or word splitting takes place between `[[` and `]]`. In addition, `[[ … ]]` allows for pattern and regular expression matching, while `[ … ]` does not.
 
-```shell
+```shell good
 # This ensures the string on the left is made up of characters in
 # the alnum character class followed by the string name.
 # Note that the RHS should not be quoted here.
@@ -545,7 +545,7 @@ if [[ "filename" == "f*" ]]; then
 fi
 ```
 
-```shell
+```shell bad
 # This gives a "too many arguments" error as f* is expanded to the
 # contents of the current directory. It might also trigger the
 # "unexpected operator" error because `[` does not support `==`, only `=`.
@@ -562,7 +562,7 @@ Use quotes rather than filler characters where possible.
 
 Bash is smart enough to deal with an empty string in a test. So, given that the code is much easier to read, use tests for empty/non-empty strings or empty strings rather than filler characters.
 
-```shell
+```shell good
 # Do this:
 if [[ "${my_var}" == "some_string" ]]; then
   do_something
@@ -580,7 +580,7 @@ if [[ "${my_var}" == "" ]]; then
 fi
 ```
 
-```shell
+```shell bad
 # Not this:
 if [[ "${my_var}X" == "some_stringX" ]]; then
   do_something
@@ -589,14 +589,14 @@ fi
 
 To avoid confusion about what you're testing for, explicitly use `-z` or `-n`.
 
-```shell
+```shell good
 # Use this
 if [[ -n "${my_var}" ]]; then
   do_something
 fi
 ```
 
-```shell
+```shell bad
 # Instead of this
 if [[ "${my_var}" ]]; then
   do_something
@@ -605,7 +605,7 @@ fi
 
 For clarity, use `==` for equality rather than `=` even though both work. The former encourages the use of `[[` and the latter can be confused with an assignment. However, be careful when using `<` and `>` in `[[ … ]]` which performs a lexicographical comparison. Use `(( … ))` or `-lt` and `-gt` for numerical comparison.
 
-```shell
+```shell good
 # Use this
 if [[ "${my_var}" == "val" ]]; then
   do_something
@@ -620,7 +620,7 @@ if [[ "${my_var}" -gt 3 ]]; then
 fi
 ```
 
-```shell
+```shell bad
 # Instead of this
 if [[ "${my_var}" = "val" ]]; then
   do_something
@@ -639,7 +639,7 @@ Use an explicit path when doing wildcard expansion of filenames.
 
 As filenames can begin with a `-`, it's a lot safer to expand wildcards with `./*` instead of `*`.
 
-```shell
+```shell bad
 # Here's the contents of the directory:
 # -f  -r  somedir  somefile
 
@@ -649,7 +649,7 @@ removed directory: `somedir'
 removed `somefile'
 ```
 
-```shell
+```shell good
 # As opposed to:
 psa@bilby$ rm -v ./*
 removed `./-f'
@@ -664,7 +664,7 @@ removed `./somefile'
 
 Eval munges the input when used for assignment to variables and can set variables without making it possible to check what those variables were.
 
-```shell
+```shell bad
 # What does this set?
 # Did it succeed? In part or whole?
 eval $(set_my_variables)
@@ -681,7 +681,7 @@ Arrays store an ordered collection of strings, and can be safely expanded into i
 
 Using a single string for multiple command arguments should be avoided, as it inevitably leads to authors using `eval` or trying to nest quotes inside the string, which does not give reliable or readable results and leads to needless complexity.
 
-```shell
+```shell good
 # An array is assigned using parentheses, and can be appended to
 # with +=( … ).
 declare -a flags
@@ -690,14 +690,14 @@ flags+=(--greeting="Hello ${name}")
 mybinary "${flags[@]}"
 ```
 
-```shell
+```shell bad
 # Don’t use strings for sequences.
 flags='--foo --bar=baz'
 flags+=' --greeting="Hello world"'  # This won’t work as intended.
 mybinary ${flags}
 ```
 
-```shell
+```shell bad
 # Command expansions return single strings, not arrays. Avoid
 # unquoted expansion in array assignments because it won’t
 # work correctly if the command output contains special
@@ -733,7 +733,7 @@ Use process substitution or the `readarray` builtin (bash4+) in preference to pi
 
 The implicit subshell in a pipe to `while` can introduce subtle bugs that are hard to track down.
 
-```shell
+```shell bad
 last_line='NULL'
 your_command | while read -r line; do
   if [[ -n "${line}" ]]; then
@@ -747,7 +747,7 @@ echo "${last_line}"
 
 Using process substitution also creates a subshell. However, it allows redirecting from a subshell to a `while` without putting the `while` (or any other command) in a subshell.
 
-```shell
+```shell good
 last_line='NULL'
 while read line; do
   if [[ -n "${line}" ]]; then
@@ -761,7 +761,7 @@ echo "${last_line}"
 
 Alternatively, use the `readarray` builtin to read the file into an array, then loop over the array's contents. Notice that (for the same reason as above) you need to use a process substitution with `readarray` rather than a pipe, but with the advantage that the input generation for the loop is located before it, rather than after.
 
-```shell
+```shell good
 last_line='NULL'
 readarray -t lines < <(your_command)
 for line in "${lines[@]}"; do
@@ -786,7 +786,7 @@ It is recommended to avoid using `(( … ))` as a standalone statement, and othe
 
 - particularly with `set -e` enabled. For example, `set -e; i=0; (( i++ ))` will cause the shell to exit.
 
-```shell
+```shell good
 # Simple calculation used as text - note the use of $(( … )) within
 # a string.
 echo "$(( 2 + 2 )) is 4"
@@ -800,7 +800,7 @@ fi
 (( i = 10 * j + 400 ))
 ```
 
-```shell
+```shell bad
 # This form is non-portable and deprecated
 i=$[2 * 10]
 
@@ -820,7 +820,7 @@ Stylistic considerations aside, the shell's built-in arithmetic is many times fa
 
 When using variables, the `${var}` (and `$var`) forms are not required within `$(( … ))`. The shell knows to look up `var` for you, and omitting the `${…}` leads to cleaner code. This is slightly contrary to the previous rule about always using braces, so this is a recommendation only.
 
-```shell
+```shell good
 # N.B.: Remember to declare your variables as integers when
 # possible, and to prefer local variables over globals.
 local -i hundred="$(( 10 * 10 ))"
@@ -851,7 +851,7 @@ Although commonly seen in `.bashrc` files, aliases should be avoided in scripts.
 
 Aliases are cumbersome to work with because they require carefully quoting and escaping their contents, and mistakes can be hard to notice.
 
-```shell
+```shell bad
 # this evaluates $RANDOM once when the alias is defined,
 # so the echo'ed string will be the same on each invocation
 alias random_name="echo some_prefix_${RANDOM}"
@@ -859,7 +859,7 @@ alias random_name="echo some_prefix_${RANDOM}"
 
 Functions provide a superset of alias' functionality and should always be preferred. .
 
-```shell
+```shell good
 random_name() {
   echo "some_prefix_${RANDOM}"
 }
@@ -882,7 +882,7 @@ Parentheses are required after the function name. The keyword `function` is opti
 
 Braces must be on the same line as the function name (as with other languages at Google) and no space between the function name and the parenthesis.
 
-```shell
+```shell good
 # Single function
 my_func() {
   …
@@ -902,7 +902,7 @@ Same as for function names.
 
 Variables names for loops should be similarly named for any variable you're looping through.
 
-```shell
+```shell good
 for zone in "${zones[@]}"; do
   something_with "${zone}"
 done
@@ -912,7 +912,7 @@ done
 
 Constants and anything exported to the environment should be capitalized, separated with underscores, and declared at the top of the file.
 
-```shell
+```shell good
 # Constant
 readonly PATH_TO_FILES='/some/path'
 
@@ -922,7 +922,7 @@ declare -xr ORACLE_SID='PROD'
 
 For the sake of clarity `readonly` or `export` is recommended vs. the equivalent `declare` commands. You can do one after the other, like:
 
-```shell
+```shell good
 # Constant
 readonly PATH_TO_FILES='/some/path'
 export PATH_TO_FILES
@@ -930,7 +930,7 @@ export PATH_TO_FILES
 
 It's OK to set a constant at runtime or in a conditional, but it should be made readonly immediately afterwards.
 
-```shell
+```shell good
 ZIP_VERSION="$(dpkg --status zip | sed -n 's/^Version: //p')"
 if [[ -z "${ZIP_VERSION}" ]]; then
   ZIP_VERSION="$(pacman -Q --info zip | sed -n 's/^Version *: //p')"
@@ -955,7 +955,7 @@ Ensure that local variables are only seen inside a function and its children by 
 
 Declaration and assignment must be separate statements when the assignment value is provided by a command substitution; as the `local` builtin does not propagate the exit code from the command substitution.
 
-```shell
+```shell good
 my_func2() {
   local name="$1"
 
@@ -968,7 +968,7 @@ my_func2() {
 }
 ```
 
-```shell
+```shell bad
 my_func2() {
   # DO NOT do this:
   # $? will always be zero, as it contains the exit code of 'local', not my_func
@@ -991,7 +991,7 @@ A function called `main` is required for scripts long enough to contain at least
 
 In order to easily find the start of the program, put the main program in a function called `main` as the bottom-most function. This provides consistency with the rest of the code base as well as allowing you to define more variables as `local` (which can't be done if the main code is not a function). The last non-comment line in the file should be a call to `main`:
 
-```shell
+```shell good
 main "$@"
 ```
 
@@ -1007,7 +1007,7 @@ For unpiped commands, use `$?` or check directly via an `if` statement to keep i
 
 Example:
 
-```shell
+```shell good
 if ! mv "${file_list[@]}" "${dest_dir}/"; then
   echo "Unable to move ${file_list[*]} to ${dest_dir}" >&2
   exit 1
@@ -1023,7 +1023,7 @@ fi
 
 Bash also has the `PIPESTATUS` variable that allows checking of the return code from all parts of a pipe. If it's only necessary to check success or failure of the whole pipe, then the following is acceptable:
 
-```shell
+```shell good
 tar -cf - ./* | ( cd "${dir}" && tar -xf - )
 if (( PIPESTATUS[0] != 0 || PIPESTATUS[1] != 0 )); then
   echo "Unable to tar files to ${dir}" >&2
@@ -1032,7 +1032,7 @@ fi
 
 However, as `PIPESTATUS` will be overwritten as soon as you do any other command, if you need to act differently on errors based on where it happened in the pipe, you'll need to assign `PIPESTATUS` to another variable immediately after running the command (don't forget that `[` is a command and will wipe out `PIPESTATUS`).
 
-```shell
+```shell good
 tar -cf - ./* | ( cd "${DIR}" && tar -xf - )
 return_codes=( "${PIPESTATUS[@]}" )
 if (( return_codes[0] != 0 )); then
@@ -1051,7 +1051,7 @@ We prefer the use of builtins such as the [_Parameter Expansion_](https://www.gn
 
 Examples:
 
-```shell
+```shell good
 # Prefer this:
 addition="$(( X + Y ))"
 substitution="${string/#foo/bar}"
@@ -1060,7 +1060,7 @@ if [[ "${string}" =~ foo:(\d+) ]]; then
 fi
 ```
 
-```shell
+```shell bad
 # Instead of this:
 addition="$(expr "${X}" + "${Y}")"
 substitution="$(echo "${string}" | sed -e 's/^foo/bar/')"

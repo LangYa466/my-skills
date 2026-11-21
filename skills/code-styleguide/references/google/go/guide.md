@@ -131,7 +131,7 @@ When considering multiple ways to structure code, it is worth considering which 
 
 Understanding and using common code constructions and idioms are also important for maintaining a high signal-to-noise ratio. For example, the following code block is very common in [error handling](https://go.dev/blog/errors-are-values), and the reader can quickly understand the purpose of this block.
 
-```go
+```go good
 if err := doSomething(); err != nil {
     // ...
 }
@@ -139,7 +139,7 @@ if err := doSomething(); err != nil {
 
 If code looks very similar to this but is subtly different, a reader may not notice the change. In cases like this, it is worth intentionally ["boosting"](https://google.github.io/styleguide/go/best-practices#signal-boost) the signal of the error check by adding a comment to call attention to it.
 
-```go
+```go good
 if err := doSomething(); err == nil { // if NO error
     // ...
 }
@@ -161,21 +161,21 @@ When using abstractions like interfaces and types which by definition remove inf
 
 Maintainable code also avoids hiding important details in places that are easy to overlook. For example, in each of the following lines of code, the presence or lack of a single character is critical to understand the line:
 
-```go
+```go bad
 // The use of = instead of := can change this line completely.
 if user, err = db.UserByID(userID); err != nil {
     // ...
 }
 ```
 
-```go
+```go bad
 // The ! in the middle of this line is very easy to miss.
 leap := (year%4 == 0) && (!(year%100 == 0) || (year%400 == 0))
 ```
 
 Neither of these are incorrect, but both could be written in a more explicit fashion, or could have an accompanying comment that calls attention to the important behavior:
 
-```go
+```go good
 u, err := db.UserByID(userID)
 if err != nil {
     return fmt.Errorf("invalid origin user: %s", err)
@@ -183,7 +183,7 @@ if err != nil {
 user = u
 ```
 
-```go
+```go good
 // Gregorian leap years aren't just year%4 == 0.
 // See https://en.wikipedia.org/wiki/Leap_year#Algorithm.
 var (
