@@ -1,0 +1,39 @@
+name: Sync upstream
+
+on:
+  schedule:
+    - cron: "23 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: oven-sh/setup-bun@v2
+
+      - run: bun install --frozen-lockfile
+
+      - run: bun run sync
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Commit changes
+        run: |
+          git add -A skills rules
+          if git diff --cached --quiet; then
+            echo "Already up to date."
+            exit 0
+          fi
+          git -c user.name=LangYa466 -c user.email=langya466@gmail.com \
+            commit -m "chore: sync upstream skills"
+          git push

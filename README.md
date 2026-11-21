@@ -32,7 +32,25 @@ cp -r skills/code-styleguide ~/.claude/skills/
 
 `i-have-adhd` 在 Claude Code 上建議直接裝原作者的 plugin（見下方來源）。
 
+## 上游同步
+
+[`.github/workflows/sync-upstream.yml`](.github/workflows/sync-upstream.yml) 每天 02:23 UTC 跑一次（也可在 Actions 頁手動觸發），有變更就直接 commit 到 `main`。
+
+| 腳本 | 上游 | 產出 |
+| --- | --- | --- |
+| [`scripts/sync-code-styleguide.ts`](scripts/sync-code-styleguide.ts) | `sources.json` 列的每份 guide | `references/*.md`（含行號索引）、`sources.json` 的 revision、`SKILL.md` 表格 |
+| [`scripts/sync-i-have-adhd.ts`](scripts/sync-i-have-adhd.ts) | `ayghri/i-have-adhd` 的 `skills/i-have-adhd/SKILL.md` | `rules/i-have-adhd.md` 本文（保留本地 frontmatter）、`rules/i-have-adhd.LICENSE` |
+
+本機手動同步：
+
+```sh
+bun install
+GITHUB_TOKEN=$(gh auth token) bun run sync
+```
+
+新增 guide：在 `skills/code-styleguide/sources.json` 加一筆（`revision` 隨便填）再跑 `bun run sync`，`SKILL.md` 表格會照 `sources.json` 順序重建。新的 GitHub repo 要先加進腳本裡的 `BRANCHES`。
+
 ## 來源與授權
 
 - `code-styleguide`：[google/styleguide](https://github.com/google/styleguide)（CC-BY-3.0）、[angular/angular](https://github.com/angular/angular)（CC-BY-4.0）、[developer.android.com](https://developer.android.com/kotlin/style-guide)（Apache-2.0）。各檔版權歸原作者。
-- `i-have-adhd`：[ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd) v0.3.0。
+- `i-have-adhd`：[ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd)（MIT，見 [`rules/i-have-adhd.LICENSE`](rules/i-have-adhd.LICENSE)）。
