@@ -8,6 +8,7 @@
 | --- | --- | --- | --- |
 | `code-styleguide` | skill | [`skills/code-styleguide/`](skills/code-styleguide/SKILL.md) | 程式碼風格規則：Google、Angular、Android Kotlin 官方 style guide 轉成 Markdown，寫 / review / 格式化程式碼時按語言載入 |
 | `i-have-adhd` | rule（`alwaysApply`） | [`rules/i-have-adhd.md`](rules/i-have-adhd.md) | 回覆格式規則：先給下一步動作、步驟編號、每輪重述進度、壓掉離題內容、具體時間估計 |
+| `original-ui-craft` | skill | [`skills/original-ui-craft/`](skills/original-ui-craft/SKILL.md) | 原創 UI/UX 藝術指導與前端工藝：從對象本質推導佈局、材質與互動，避開 AI 模板慣性。自製（Gemini 4 Neon xhigh 協作） |
 
 ### code-styleguide 涵蓋語言
 
@@ -21,6 +22,7 @@ omp：
 
 ```sh
 cp -r skills/code-styleguide ~/.omp/agent/skills/
+cp -r skills/original-ui-craft ~/.omp/agent/skills/
 cp rules/i-have-adhd.md ~/.omp/agent/rules/
 ```
 
@@ -28,6 +30,7 @@ Claude Code：
 
 ```sh
 cp -r skills/code-styleguide ~/.claude/skills/
+cp -r skills/original-ui-craft ~/.claude/skills/
 ```
 
 `i-have-adhd` 在 Claude Code 上建議直接裝原作者的 plugin（見下方來源）。
