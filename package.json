@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "sync": "bun scripts/sync-code-styleguide.ts && bun scripts/sync-i-have-adhd.ts"
+    "sync": "bun scripts/sync-code-styleguide.ts && bun scripts/sync-i-have-adhd.ts && bun scripts/sync-jimmer-skills.ts"
   },
   "dependencies": {
     "mdast-util-to-string": "^4.0.0",
