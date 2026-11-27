@@ -38,6 +38,8 @@ cp -r skills/original-ui-craft ~/.claude/skills/
 
 `i-have-adhd` 在 Claude Code 上建議直接裝原作者的 plugin（見下方來源）。
 
+同一個 skill 只裝一處。omp 有啟用 Claude 匯入（`enabledProviders` 含 `claude`）時也會讀 `~/.claude/skills/`；兩處內容完全相同會自動去重，但只要一邊改了沒同步，omp 就會出現 `name collision` 警告，並把其中一份改名成 `<namespace>/<name>~2` 掛著。
+
 ## 上游同步
 
 [`.github/workflows/sync-upstream.yml`](.github/workflows/sync-upstream.yml) 每天 02:23 UTC 跑一次（也可在 Actions 頁手動觸發），有變更就直接 commit 到 `main`。
