@@ -13,7 +13,7 @@
 | `i-have-adhd` | rule（`alwaysApply`） | [`rules/i-have-adhd.md`](rules/i-have-adhd.md) | 回复格式规则：先给下一步动作、步骤编号、每轮重述进度、压掉跑题内容、具体时间估计 |
 | `jimmer-java` | skill | [`skills/jimmer-java/`](skills/jimmer-java/SKILL.md) | Jimmer ORM（Java API）：`JSqlClient`、实体映射、DTO 语言、save command、查询 DSL、Spring Boot。镜像自 [jimmer-skills](https://github.com/LangYa466/jimmer-skills) |
 | `jimmer-kotlin` | skill | [`skills/jimmer-kotlin/`](skills/jimmer-kotlin/SKILL.md) | Jimmer ORM（Kotlin API）：`KSqlClient`、KSP、`fetchBy { }`、扩展属性 DSL。镜像自 [jimmer-skills](https://github.com/LangYa466/jimmer-skills) |
-| `original-ui-craft` | skill | [`skills/original-ui-craft/`](skills/original-ui-craft/SKILL.md) | 原创 UI/UX 艺术指导与前端工艺：从对象本质推导布局、材质与交互，避开 AI 模板惯性 |
+| `original-ui-craft` | skill | [`skills/original-ui-craft/`](skills/original-ui-craft/SKILL.md) | 原创 UI/UX 艺术指导与前端工艺：从对象本质推导布局、材质与交互，避开 AI 模板惯性。自制（Gemini 4 Neon xhigh 协作） |
 
 ## 安装
 

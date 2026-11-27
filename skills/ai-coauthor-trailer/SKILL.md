@@ -43,6 +43,8 @@ Co-Authored-By: <Model Name> <email from the table>
 
 Same-name personal accounts are squatters, not vendors: `github.com/Anthropic` (Marcel J Bennett), `kimi`, `grok`, `glm`, `qwen`. `gemini` and `deepseek` are unrelated organizations.
 
+DeepSeek decision (2026-11-27): a self-owned machine account (GitHub allows one free machine account per person; `langya-deepseek` and `deepseek-coauthor` were unregistered) would give DeepSeek commits an avatar, but the owner chose to skip it for now. DeepSeek commits carry no trailer. Never register or invent such an account on the user's behalf.
+
 ## Agent products
 
 Use these only when the commit was actually produced by that product; they identify the tool, not the model.

@@ -13,7 +13,7 @@ Personal skills and rules for AI coding agents (omp / Claude Code).
 | `i-have-adhd` | rule (`alwaysApply`) | [`rules/i-have-adhd.md`](rules/i-have-adhd.md) | Reply shape: next action first, numbered steps, restated progress, no tangents, concrete time estimates |
 | `jimmer-java` | skill | [`skills/jimmer-java/`](skills/jimmer-java/SKILL.md) | Jimmer ORM (Java API): `JSqlClient`, entity mapping, DTO language, save commands, query DSL, Spring Boot. Mirrored from [jimmer-skills](https://github.com/LangYa466/jimmer-skills) |
 | `jimmer-kotlin` | skill | [`skills/jimmer-kotlin/`](skills/jimmer-kotlin/SKILL.md) | Jimmer ORM (Kotlin API): `KSqlClient`, KSP, `fetchBy { }`, extension-property DSL. Mirrored from [jimmer-skills](https://github.com/LangYa466/jimmer-skills) |
-| `original-ui-craft` | skill | [`skills/original-ui-craft/`](skills/original-ui-craft/SKILL.md) | Original UI/UX art direction and front-end craft: derive layout, material, and interaction from the subject instead of AI templates |
+| `original-ui-craft` | skill | [`skills/original-ui-craft/`](skills/original-ui-craft/SKILL.md) | Original UI/UX art direction and front-end craft: derive layout, material, and interaction from the subject instead of AI templates. Self-made (with Gemini 4 Neon xhigh) |
 
 ## Install
 
